@@ -1,0 +1,43 @@
+---
+layout: default
+---
+
+
+<section>
+  <div class="container-fluid px-4 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+      <div class="col-10 col-sm-8 col-lg-6">
+
+      {% if page.image.feature %}
+
+	<img src="{{site.baseurlurl}}/assets/images/{{page.image.feature}}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" loading="lazy">
+
+      {% endif %}
+	
+      </div>
+      <div class="col-6">
+	<h1 class="display-1 fw-bold lh-5 mb-3">
+
+	  {{ page.title }}<br>
+
+	</h1>
+
+
+	</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+
+  <br>
+  <hr>
+<article>
+  {{ content }}
+</article>
+
+</div>
+
+

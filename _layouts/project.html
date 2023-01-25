@@ -1,0 +1,74 @@
+---
+layout: default
+---
+
+
+<section>
+  <div class="container-fluid px-0 pt-5">
+    <div class="row align-items-center py-5">
+      <div class="col-md-6 contain-img">
+	<img src="{{site.baseurlurl}}/assets/images/{{page.image}}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+      </div>
+      <div class="col-md-6">
+	<h1 class="
+		   {% if page.name.size < 15 %}
+		   display-1
+		   {% else %}
+		   display-5
+		   {% endif %}
+		   fw-bold lh-5 mb-3">
+	  {{ page.name }}
+	</h1>
+	<p class="lead">
+
+	  <div class="d-grid gap-2 d-md-flex justify-content-start">
+	    <div class="row">
+	      <div class="col">
+		<p class="text-secondary">
+		  {% if page.description-short %}
+		  {{ page.description-short }}
+		  {% else %}
+		  {{ page.description }}
+		  {% endif %}
+		</p>
+	      </div>
+	    </div>
+	    </div>
+	  </div>
+
+	</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<section class="pb-5">
+  
+  <div class="d-grid gap-2 d-md-flex justify-content-start">
+  <div class="row">
+    <div class="col">
+
+      <a class="btn  btn-primary btn-lg"
+	 href="{{ page.link }}">
+	View Project
+      </a>
+
+      {% for resource in page.resources %}
+      <a class="btn btn-outline-primary btn-lg"
+	href="{{ resource.link }}">
+	{{ resource.text }}
+      </a>
+      {% endfor %}
+    </div>
+    
+  </div>
+  </div>
+</section>
+
+
+
+<section class="mx-5">
+  {{ content }}
+</section>
+

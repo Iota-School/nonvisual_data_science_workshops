@@ -1,0 +1,38 @@
+docs_list_title: Site Navigation
+current:
+- name: Iota School
+  link: https://iotaschool.com/
+  role: Chief Learner
+  image: Iota Logotype.svg
+  description: Iota School provides accessible technical training to those with backgrounds not traditionally represented in technology. 
+
+- name: Eloud
+  link: https://github.com/smythp/eloud
+  role: Maintainer
+  image: eloud.png
+  description: A lightweight, interactive screen reader for the Emacs text editor. View <a href="https://www.youtube.com/watch?v=k5BLXMGSTJs">the demo</a>.
+
+past:
+- name: Foundations for Research Computing
+  link: "https://rcfoundations.research.columbia.edu/"
+  image: foundations_Logo.jpg
+  role: Program Coordinator
+  description: "Foundations builds community and skills around research computing at Columbia University, and in its first three years trained over 3,0000 graduate student and postdoctoral researchers at over 85 events."
+
+- name: NEH Impact Index
+  link: http://www.nehimpact.org/
+  image: neh-impact.jpg
+  role: Creator
+  description: The NEH Impact Index makes visible the impact of the <a href="https://www.neh.gov/">National Endowment for the Humanities</a> on local communities and cultural institutions. Enter a zip code and search radius to find projects funded by the NEH in that region. Projects are color-coded by category to show their impact in areas such as education, preservation, and public programs. Covered in <a href="https://www.pcmag.com/g00/commentary/353904/trump-budget-slashes-neh-funding-why-you-should-care">PC Magazine</a>.
+
+- name: Digital Research Institute
+  link: http://gcdigitalfellows.github.io/
+  image: dri.png
+  role: Curriculum design
+  description: The DRI is a week-long course in digital research methods at the Graduate Center at the City University of New York. Over five days, graduate students and faculty learn programming, computing, and project management fundamentals that they can apply to their own research in the sciences, social sciences, and humanities.
+
+- name: DH Box
+  link: http://dhbox.org/
+  image: dhbox.jpg
+  role: Developer
+  description: Setting up an environment for digital humanities computational work can be time-consuming and difficult. DH Box addresses this problem by streamlining installation processes and providing a digital humanities laboratory in the cloud through simple sign-in via a web browser. Check out <a href="http://acrl.ala.org/dh/2017/06/21/dh-box-and-access-in-the-digital-humanities/">this conversation about the project</a>
