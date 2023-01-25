@@ -1,6 +1,6 @@
-url: "https://iota-school.github.io/accessibility_hackathon/
-" # the base hostname & protocol for your site, e.g. http://example.com
-baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://iota-school.github.io/accessibility_hackathon" # the base hostname & protocol for your site, e.g. http://example.com
+root: /
+baseurl: "/" # the subpath of your site, e.g. /blog
 title: "Space Telescope Science Institute Accessibility Hackathon, March 2023" # the name of your site, e.g. ACME Corp.
 
 
