@@ -1,7 +1,7 @@
-url: "https://iota-school.github.io/day_accessibility" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://iota-school.github.io/nonvisual_data_science_workshops/" # the base hostname & protocol for your site, e.g. http://example.com
 root: /
-baseurl: "/day_accessibility" # the subpath of your site, e.g. /blog
-title: "STScI Day of Accessibility" # the name of your site, e.g. ACME Corp.
+baseurl: "/" # the subpath of your site, e.g. /blog
+title: "Nonvisual Data Science Workshops Series"
 
 
 collections:
