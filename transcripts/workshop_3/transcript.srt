@@ -1,0 +1,4635 @@
+1
+00:00:00,000 --> 00:00:08,060
+So this is the third workshop in the non-visual data science workshop series, welcome all.
+
+2
+00:00:09,340 --> 00:00:17,340
+This one is, you know, it has kind of almost like two names, but I've kind of just updated it to a
+
+3
+00:00:17,340 --> 00:00:25,860
+slightly more descriptive name, which is exploring and representing data, but originally I called it,
+
+4
+00:00:25,900 --> 00:00:29,200
+which is a more exciting title, talking to your data, which I think is still irrelevant.
+
+5
+00:00:29,980 --> 00:00:37,420
+I'm able to hear, and in this workshop we will be exploring ways to represent different types
+
+6
+00:00:37,420 --> 00:00:42,840
+of data, such as, we'll get to it in a minute, but categorical data, different kinds of data,
+
+7
+00:00:43,560 --> 00:00:51,920
+time data, accounts data, and binary data, all different kinds of data, and we'll be thinking
+
+8
+00:00:51,920 --> 00:00:57,520
+about different ways to represent those non-visually, you know, traditionally our
+
+9
+00:00:58,140 --> 00:01:03,660
+most, you know, in data science in general, often people will resort to visualizations
+
+10
+00:01:03,660 --> 00:01:07,920
+to represent these kinds of data.  We'll be trying to, we'll be doing it non-visually, and we'll also
+
+11
+00:01:07,920 --> 00:01:16,700
+be talking a little bit about how to replace visual, specific visualizations. So we'll kind of
+
+12
+00:01:16,700 --> 00:01:21,860
+be trying to stay primarily in this non-visual realm, but I will speak sometimes to the practical
+
+13
+00:01:21,860 --> 00:01:26,020
+elements of like, well, what if my colleagues ask for a bar chart, what if my colleagues ask for a
+
+14
+00:01:26,020 --> 00:01:33,220
+line chart, something like that. I want to get a few administrative items out of the way.  This is
+
+15
+00:01:33,220 --> 00:01:38,740
+the midpoint in the workshop series. This is the third workshop. This is the last workshop that
+
+16
+00:01:38,740 --> 00:01:47,600
+will be taught by me, and my colleague Sarah Kane, who's a Marshall Fellow at Cambridge in astronomy,
+
+17
+00:01:47,780 --> 00:01:55,440
+will be taking over for the next two sessions to show you all sonification, which I'm very
+
+18
+00:01:55,440 --> 00:02:00,120
+excited about.  So we'll be switching gears a little, but we'll still be drawing on a lot of what
+
+19
+00:02:00,120 --> 00:02:05,560
+we've learned in these first three workshops, and using, you know, IPython and some of these
+
+20
+00:02:05,560 --> 00:02:12,720
+other tools that we have kind of been using all along. Okay, let me go through there. Since it's
+
+21
+00:02:12,720 --> 00:02:16,900
+kind of the midpoint, I want to go a little more in depth in some of the administrative
+
+22
+00:02:17,660 --> 00:02:20,780
+stuff.  There's been some questions that have come up a couple of times from people,
+
+23
+00:02:24,390 --> 00:02:30,130
+so I have a list here. Okay, yeah, so first of all, I'd like to thank those of you,
+
+24
+00:02:30,690 --> 00:02:33,730
+or those, you know, you've kind of maybe come to know them a little bit, the helpers
+
+25
+00:02:33,730 --> 00:02:39,530
+who are hanging out in the chat answering questions. So I just want to thank again
+
+26
+00:02:40,930 --> 00:02:51,090
+Alex, Elizabeth, Sarah, Stephen, and also Paul and Monica, who I think Steve,
+
+27
+00:02:51,090 --> 00:02:56,670
+Paul, and Monica aren't here today, but, you know, they really help things run smoothly and
+
+28
+00:02:56,670 --> 00:03:01,930
+keep things humming along in the chat while people have questions.  So thank you so much to the helpers.
+
+29
+00:03:04,010 --> 00:03:07,710
+I'd also like to thank, there's been some participants who have been sort of very
+
+30
+00:03:07,710 --> 00:03:16,090
+actively contributing, and I'd like to thank Nikhil Vohra, who made some pretty extensive
+
+31
+00:03:16,090 --> 00:03:23,110
+contributions to the first of the workshop series, the first curriculum for the workshop series,
+
+32
+00:03:23,650 --> 00:03:31,070
+and he did that using GitHub, so he contributed using GitHub. He, you know, GitHub is basically,
+
+33
+00:03:31,210 --> 00:03:37,410
+you can think of it as a social media site for programmers, but where people store their
+
+34
+00:03:37,410 --> 00:03:43,770
+source code, download source code.  It's sort of social media meets infrastructure, and he used
+
+35
+00:03:43,770 --> 00:03:49,290
+features on GitHub to collaborate and contributed to the workshops, and that's something you can do.
+
+36
+00:03:49,410 --> 00:03:54,090
+You can just sort of do open source contributions to the curriculum that is currently hosted on
+
+37
+00:03:54,090 --> 00:04:01,290
+GitHub if that interests you. You can also send ideas or updates or anything like that by email.
+
+38
+00:04:01,710 --> 00:04:06,510
+I will say that, you know, if you're interested in entering this field, it can be really useful
+
+39
+00:04:06,510 --> 00:04:12,230
+to have a bit of a history of contributions on GitHub, and so this is one way to kind of get
+
+40
+00:04:12,230 --> 00:04:16,950
+started with that, so you can either create an issue, which is basically like you telling me
+
+41
+00:04:17,930 --> 00:04:22,730
+that there's something that could be changed, and then I'll change it, or you can even do what's
+
+42
+00:04:22,730 --> 00:04:26,370
+called a pull request, which is a little bit more complicated, but basically where you write up your
+
+43
+00:04:26,370 --> 00:04:31,430
+own suggestions for how things should be changed, and I can accept it, pull it in, and then once,
+
+44
+00:04:31,550 --> 00:04:35,970
+if you do that, you'll actually be a contributor on the curriculum, just like Nikhil is now, so
+
+45
+00:04:35,970 --> 00:04:39,930
+that's something, an option for you. If you're interested in that, you can drop me a line at
+
+46
+00:04:39,930 --> 00:04:45,250
+Patrick at IotaSchool.com, just if you wanted a little information on how to get started with
+
+47
+00:04:45,250 --> 00:04:50,650
+those kinds of contributions, or just have an interesting view. Okay, and then we also had
+
+48
+00:04:50,650 --> 00:04:57,830
+another contributor, Peter Zigmund, who is following along asynchronously, so probably
+
+49
+00:04:57,830 --> 00:05:05,730
+not in the room, and Peter has been translating the curriculum to Hungarian, which is really
+
+50
+00:05:05,730 --> 00:05:10,790
+exciting, and I'm excited to post that when he's completed it, so that's a very cool contribution
+
+51
+00:05:10,790 --> 00:05:16,330
+as well, and I'd also just like, I think, to thank Chancey here, because I think, Chancey, you've
+
+52
+00:05:16,330 --> 00:05:22,750
+helped me out with some of the ins and outs of using Zoom, and you just pointed out that I have
+
+53
+00:05:22,750 --> 00:05:28,850
+a broken link on the curriculum and everything, so I really do appreciate everyone who's
+
+54
+00:05:28,850 --> 00:05:36,810
+contributed so far.  Let's see, one thing people have asked us about a lot is a mailing list
+
+55
+00:05:36,810 --> 00:05:42,930
+for VI data scientists and people looking to get into data science or learning it,
+
+56
+00:05:43,490 --> 00:05:48,790
+and I think that's a great idea. We have some, a lot of people signed up for this workshop series,
+
+57
+00:05:48,850 --> 00:05:55,870
+and I think it's the basis of a good mailing list, you know, so I am looking into setting up a, or
+
+58
+00:05:55,870 --> 00:06:00,830
+self-hosting a mailing list. If that doesn't go well, I guess I'll use free lists or something, but
+
+59
+00:06:01,710 --> 00:06:06,050
+that, you know, it's a little bit technically involved, but I'm hoping to set it up this week,
+
+60
+00:06:07,170 --> 00:06:11,670
+so since a bunch of people have asked for that, I do think it's a good idea, and I think we're
+
+61
+00:06:11,670 --> 00:06:18,390
+going to go ahead and set that up, so excited for that, and I will send an email to the, to everyone
+
+62
+00:06:18,390 --> 00:06:23,470
+who registered for this workshop when that is live, and also post on some of the main mailing
+
+63
+00:06:23,470 --> 00:06:30,910
+lists, like Python Viz and so on.  Something else people have asked about is, I think there are
+
+64
+00:06:30,910 --> 00:06:35,790
+some frustrations with GitHub, I think maybe rightfully so, and some people would find
+
+65
+00:06:35,790 --> 00:06:41,370
+the raw Markdown files that the curriculum is based on to be more useful. Some people would
+
+66
+00:06:41,370 --> 00:06:45,350
+also kind of prefer to download the videos directly onto their computers, which I totally get,
+
+67
+00:06:47,470 --> 00:06:52,990
+so we're going to try to facilitate that all by making, we're going to basically make sure the
+
+68
+00:06:52,990 --> 00:07:00,050
+home that is a little more user-friendly, we're going to do that toward the end of this workshop
+
+69
+00:07:00,050 --> 00:07:04,470
+series, or right after the series concludes, and we also, I also want to talk with the folks at
+
+70
+00:07:04,470 --> 00:07:09,650
+Pandas to see if they want to host the curriculum, or if we should create a new website for it, but
+
+71
+00:07:09,650 --> 00:07:13,690
+basically there will be a website for it, and there will be, you know, it will make it very
+
+72
+00:07:13,690 --> 00:07:17,870
+easy for you to download the whole curriculum all at once if you prefer to have it on your computer,
+
+73
+00:07:17,870 --> 00:07:23,850
+and also the videos to download directly, okay? So, that's not going to be right away, but it'll
+
+74
+00:07:23,850 --> 00:07:31,080
+be probably shortly after this workshop series concludes in early March. Creating other tutorials,
+
+75
+00:07:31,380 --> 00:07:36,520
+this is something I wanted to mention.  We have a lot of stakeholders, you know, stakeholders is a
+
+76
+00:07:36,520 --> 00:07:43,340
+stupid word, but people who are very involved in various blind and visually impaired organizations
+
+77
+00:07:44,060 --> 00:07:48,800
+registered for this, and people who are parts of other major organizations, whether it be
+
+78
+00:07:48,800 --> 00:07:55,500
+academia, science, the, you know, the blindness community. I'd just like to say, you know, I think this has
+
+79
+00:07:55,500 --> 00:08:01,480
+been a great partnership, and that NumFocus has allowed us to create this very cool curriculum,
+
+80
+00:08:01,900 --> 00:08:07,200
+make it open to the public. I just want, you know, I haven't pestered you guys that much about
+
+81
+00:08:07,200 --> 00:08:14,940
+my own organization, IOTA, but I will say I would love the chance to create more resources like
+
+82
+00:08:14,940 --> 00:08:18,800
+this for the blind community, to teach the blind community some more of these technical
+
+83
+00:08:19,680 --> 00:08:27,180
+skills, and to create new curriculum, you know, workshop series like this, recordings.
+
+84
+00:08:28,000 --> 00:08:33,419
+If you're part of an organization where you think they might be interested in collaborating to
+
+85
+00:08:33,419 --> 00:08:40,940
+create these kinds of materials, reach out. It can be a, you know, I like, you know, in the best
+
+86
+00:08:40,940 --> 00:08:45,520
+case scenario, it would be for the public. That's kind of where I like to be, but also, you know,
+
+87
+00:08:45,820 --> 00:08:51,560
+I do work with organizations to create trainings specifically for your organization or resources
+
+88
+00:08:51,560 --> 00:08:57,480
+specifically for your organization, too.  So, you know, drop me a line if you think your organization would
+
+89
+00:08:57,480 --> 00:09:03,860
+be interested in working with IOTA, and I'll just say, like, two sentences about IOTA. So, IOTA is
+
+90
+00:09:04,580 --> 00:09:10,860
+consultancy. I'm the head of principal consultant, and we do various things, including creating
+
+91
+00:09:10,860 --> 00:09:17,300
+curriculum like this, teaching workshops, but also we consult on what I would say some
+
+92
+00:09:17,300 --> 00:09:22,340
+tricky intersections between accessibility, writing, you know, like creating a curriculum,
+
+93
+00:09:23,600 --> 00:09:27,980
+and technology, so programming, okay? So, anything that kind of fits into those things, making web
+
+94
+00:09:27,980 --> 00:09:32,740
+applications that have some connection to those things, stuff like that.  That's where we kind of
+
+95
+00:09:32,740 --> 00:09:39,240
+live. So, reach out, and if you have any projects in mind, okay? And that's probably the only
+
+96
+00:09:40,860 --> 00:09:45,440
+that's probably the only I mean, one more little plug at the end of this whole workshop series,
+
+97
+00:09:45,620 --> 00:09:52,960
+but please, you know, let other people know about this IOTA or the kind of work we do,
+
+98
+00:09:53,140 --> 00:09:57,620
+if it comes up in conversation, because that's very helpful. It allows us to create things like
+
+99
+00:09:57,620 --> 00:10:05,500
+this.  That's just it. That's everything. Okay.  And then I would just finally like to thank
+
+100
+00:10:06,720 --> 00:10:14,240
+Pandas, Numfocus, and Patrick Hoefler, core developer at Pandas or with Pandas,
+
+101
+00:10:14,700 --> 00:10:20,340
+to, you know, for taking a chance on this workshop series and creating these materials,
+
+102
+00:10:22,100 --> 00:10:26,760
+and they're really the reason that, you know, this is all that possible. So, all right. So,
+
+103
+00:10:26,760 --> 00:10:32,040
+that's more administrative stuff than usual, but we'll, you know, it's the midpoint of this
+
+104
+00:10:32,040 --> 00:10:41,920
+workshop series.  Okay. Let's go ahead and get started with the workshops. We are first I'm
+
+105
+00:10:41,920 --> 00:10:48,220
+going to share my screen, and then we'll open up our IPython environment, and we will do a little
+
+106
+00:10:48,220 --> 00:10:55,900
+discussion about different kinds of data.  Okay? So, I'm going to go ahead and share.
+
+107
+00:11:11,980 --> 00:11:20,740
+Okay. I'm opening Anaconda prompt.  I'm pressing the Windows button. I'm going to type Anaconda
+
+108
+00:11:20,740 --> 00:11:29,820
+prompt. I typed A and A, and that was a note, but you may need to type a little more in your case.
+
+109
+00:11:29,820 --> 00:11:37,680
+Remember, you want Anaconda prompt, not Anaconda navigator. And then, when you open Anaconda prompt,
+
+110
+00:11:37,800 --> 00:11:42,580
+you have your command line. In Windows, we call this command line environment CMD.
+
+111
+00:11:43,700 --> 00:11:47,780
+There's also another one that some of you have been using called PowerShell, which will more or
+
+112
+00:11:47,780 --> 00:11:52,660
+less work with this, but I find that the CMD environment is a little more stable for applications
+
+113
+00:11:52,660 --> 00:12:00,400
+like IPython, and I'm going to maximize the screen. I'm also going to remove the title bar
+
+114
+00:12:00,400 --> 00:12:12,180
+by pressing alt enter. Okay? So, now I have a nice just the command line.  And then,
+
+115
+00:12:12,980 --> 00:12:32,260
+um, we need to start IPython. So, let's type IPython. That didn't update.  So, that probably
+
+116
+00:12:32,260 --> 00:12:41,660
+means my review is off. So, let's double check that. Okay.  So, it didn't it didn't say the usual
+
+117
+00:12:41,660 --> 00:12:47,020
+version. Let's just do it again. I quit IPython.  I'm typing the word exit to quit.
+
+118
+00:12:48,160 --> 00:12:52,120
+And I'm running IPython again. So, you can hear how it sounds when you start it.
+
+119
+00:12:55,920 --> 00:12:58,980
+So, you'll hear and there's a whole bunch of other information, but you'll hear the version.
+
+120
+00:12:59,340 --> 00:13:02,060
+Just a little review and sort of make sure you're all in the right environment.
+
+121
+00:13:02,060 --> 00:13:13,000
+Um, so, what are we doing today? So, a big part of data science is taking data in certain
+
+122
+00:13:13,800 --> 00:13:22,200
+that takes certain forms and then representing it in various ways.  Okay? And we'll talk about
+
+123
+00:13:22,200 --> 00:13:29,700
+the different forms and so on in a second. But I, you know, so, what are the ways you can present
+
+124
+00:13:29,700 --> 00:13:36,360
+data? So, we'll talk if you follow another data science tutorial, chances are the main way that
+
+125
+00:13:36,360 --> 00:13:41,680
+they will represent data is through a visualization. And I looked up visual definition of
+
+126
+00:13:41,680 --> 00:13:47,200
+visualization on Wikipedia, and it was the most general sort of definition of all time.  It was
+
+127
+00:13:47,200 --> 00:13:52,340
+basically like everything in the way they define everything as a visualization, like every picture,
+
+128
+00:13:52,520 --> 00:13:57,500
+everything is a visualization. But basically, my definition is a visualization would be a it's a
+
+129
+00:13:57,500 --> 00:14:03,640
+way to represent some kind of data visually. Okay? And the most common visualizations are
+
+130
+00:14:03,640 --> 00:14:09,280
+things like charts and graphs, though there are other kinds of more complicated visualizations.
+
+131
+00:14:10,580 --> 00:14:15,960
+And we'll get into some of the, but, you know, the most common charts and graphs would be things
+
+132
+00:14:15,960 --> 00:14:22,460
+like bar charts, pie charts, line graphs, and scatter plots. Okay? There's a whole bunch of
+
+133
+00:14:22,460 --> 00:14:30,540
+other kinds. I would say maybe 15 to 25 common visualization types, and then a more, a bunch more
+
+134
+00:14:30,540 --> 00:14:34,540
+esoteric ones.  But, you know, those are the ones you're going to encounter most frequently in the
+
+135
+00:14:34,540 --> 00:14:40,380
+wild. And that's kind of the ones that people reach for most quickly. Okay? Now, what other
+
+136
+00:14:40,380 --> 00:14:47,020
+ways are there to represent data? Since, you know, you and I and many people on this call don't,
+
+137
+00:14:47,560 --> 00:14:51,800
+don't, you know, maybe we use visualizations, but we don't really benefit from them in the same way
+
+138
+00:14:51,800 --> 00:14:56,840
+that sighted people do.  Maybe we have to use them to share with our colleagues or something like
+
+139
+00:14:56,840 --> 00:15:03,040
+that, but we don't benefit the same way. You can use a sonification. So, we're going to talk about
+
+140
+00:15:03,040 --> 00:15:12,140
+that next week with Sarah's workshop on an introduction to sonification.  Basically, it's a
+
+141
+00:15:12,140 --> 00:15:18,900
+way to represent data through changes in sound, in qualities of sound. So, a quality of sound would
+
+142
+00:15:18,900 --> 00:15:23,740
+be something like the pitch. Sarah might have her own definition, but that's my probably not as good
+
+143
+00:15:23,740 --> 00:15:32,340
+definition.  Other ways to represent data might be text descriptions. So, I mean, we sometimes say
+
+144
+00:15:32,340 --> 00:15:36,980
+alt text in certain contexts, but I would also, the more general term would be a text description.
+
+145
+00:15:37,240 --> 00:15:42,760
+So, maybe the data is in some ways described in natural language, you know? So, if I say to you,
+
+146
+00:15:42,760 --> 00:15:49,160
+oh, the data is two columns, and it's times, one column is times, one column is
+
+147
+00:15:50,260 --> 00:15:56,340
+integers, and the integers are between five and 100, and they represent people's grades.  You know,
+
+148
+00:15:56,400 --> 00:16:00,280
+like that's, you know, that's a way to represent data, right? I'm telling you what the data is,
+
+149
+00:16:00,560 --> 00:16:04,860
+gives you a general idea of the data. Maybe it's not quite as specific, but, you know.
+
+150
+00:16:06,840 --> 00:16:12,480
+Then there are other ways to represent data, but those are, I would say, are some of the big ones.
+
+151
+00:16:12,480 --> 00:16:17,900
+The other one that I really want to mention is tactile graphics, which is a really cool direct
+
+152
+00:16:17,900 --> 00:16:28,400
+way to experience forms similar to visualizations, but they're really, you access them through
+
+153
+00:16:28,960 --> 00:16:36,020
+raised surfaces or other kinds of tactile interfaces, such as, you know, dots raised
+
+154
+00:16:36,020 --> 00:16:42,060
+in a digital, you know, some kind of refreshable braille display, and basically it lets you use
+
+155
+00:16:42,060 --> 00:16:48,180
+your hands or, if you don't have hands, another one of your, another part of your body to
+
+156
+00:16:48,180 --> 00:16:53,320
+experience the data manually or through tactician, you know, through feeling.
+
+157
+00:16:54,540 --> 00:16:57,500
+You know, so, you know, for example, you might feel a line chart. I know,
+
+158
+00:16:58,440 --> 00:17:01,660
+I'm chanting not to call you out again, but I know you did a bunch of work with tactile
+
+159
+00:17:01,660 --> 00:17:05,579
+graphics early in the pandemic, and once people are flattening the curve, so,
+
+160
+00:17:06,400 --> 00:17:12,160
+the, you know, and when you have that available to you, you can feel things like a line chart,
+
+161
+00:17:12,660 --> 00:17:17,380
+which is pretty cool, and a very direct way to experience something like people usually use with
+
+162
+00:17:17,380 --> 00:17:22,180
+the visualization.  Now, today we're going to do something completely different, really,
+
+163
+00:17:22,660 --> 00:17:28,820
+and this is, there's not really a word for this. I call it talking to your data, okay, and I would
+
+164
+00:17:28,820 --> 00:17:33,860
+also say it's an interactive data representation is another, maybe, that would be a more fancy way
+
+165
+00:17:33,860 --> 00:17:39,400
+to say it. I kind of like talking to your data, okay, or a data conversation, and basically what
+
+166
+00:17:39,400 --> 00:17:47,640
+that is is we load our data into a manipulatable structure, you know, like our data frame in
+
+167
+00:17:47,640 --> 00:17:55,860
+Pandas, like a series in Pandas, and then we use programming to query the data, poke the data,
+
+168
+00:17:56,040 --> 00:18:01,300
+transform the data, explore the data, and represent the data, do all sorts of things with the data,
+
+169
+00:18:01,300 --> 00:18:06,500
+and clean the data is also another thing that you can do, and do all sorts of stuff with the data,
+
+170
+00:18:06,920 --> 00:18:10,940
+and it has, there is pluses and minuses.  We'll talk at the end about some of the advantages and
+
+171
+00:18:10,940 --> 00:18:17,420
+disadvantages of this approach. I think, in many ways, it's a very exciting approach, and we're
+
+172
+00:18:17,420 --> 00:18:23,000
+going to jump in with that now. So, what are we going to be representing in this workshop? So,
+
+173
+00:18:23,080 --> 00:18:27,960
+let's just really quickly talk about types of data that we'll be working with, okay, and these are not
+
+174
+00:18:27,960 --> 00:18:33,360
+formal types.  Remember, in the first workshop, we talked about Python data types, so those were like
+
+175
+00:18:33,360 --> 00:18:41,380
+things like a string, a list, an integer, which is a number, a float, which is a number, things like
+
+176
+00:18:41,380 --> 00:18:46,540
+that, okay. Those are formalized because there's only a certain number of them. They exist in
+
+177
+00:18:46,540 --> 00:18:51,460
+Python.  They have certain formal ways that you interact with them, okay, through programming.
+
+178
+00:18:51,840 --> 00:18:55,940
+These categories I'm going to explain to you now, that I'm going to say types of data, which sounds
+
+179
+00:18:55,940 --> 00:19:00,820
+a lot like data types. I'm talking about something different.  I'm talking about very general ideas,
+
+180
+00:19:01,260 --> 00:19:07,380
+okay. So, things like saying, if I say time data, that's, there's nothing formalized about that. It
+
+181
+00:19:07,380 --> 00:19:15,500
+can take a lot of different forms.  It could be anything from a string telling you January 6,
+
+182
+00:19:15,660 --> 00:19:23,160
+1995, with a comma and everything in it, to a number, which is the number of seconds since 1970,
+
+183
+00:19:23,160 --> 00:19:28,620
+which is, surprisingly, that is actually something programmers do. They'll represent time as a number
+
+184
+00:19:28,620 --> 00:19:35,460
+of seconds since a very specific moment in 1970, and that moment is called the epoch,
+
+185
+00:19:36,100 --> 00:19:40,920
+which is pretty wild. Basically, it's almost like computer history started in a particular second
+
+186
+00:19:40,920 --> 00:19:45,780
+in 1978.  It can't from that point. It's one way to represent time. So, that could be an integer,
+
+187
+00:19:46,360 --> 00:19:50,040
+and the other one could be a string, and other ones could be, there's other ways to represent it,
+
+188
+00:19:50,040 --> 00:19:55,680
+more specific data types that are specifically for date and time.  However, when we say time data,
+
+189
+00:19:56,020 --> 00:19:59,880
+we mean data that represent points in time. So, it's a more general concept, okay.
+
+190
+00:20:00,680 --> 00:20:07,020
+What are the ones we're going to work with today? The main ones are numeric, which you've already
+
+191
+00:20:07,020 --> 00:20:13,500
+worked with before in this workshop series.  So, for example, our prices of the Airbnb listings
+
+192
+00:20:13,500 --> 00:20:21,540
+from last time were numeric data. What else is there? There's the other really big one
+
+193
+00:20:21,540 --> 00:20:28,480
+that you'll hear a lot about, and this is as close to a formalized one as you'll get,
+
+194
+00:20:28,660 --> 00:20:37,340
+is categorical data, okay. Categorical data represents a sorting into various categories,
+
+195
+00:20:37,480 --> 00:20:42,940
+or kind of like buckets.  It will sort each entity in a data set into one of a small set
+
+196
+00:20:42,940 --> 00:20:48,720
+of categories, okay. And we will talk, we will make that a little less abstract in a minute when
+
+197
+00:20:48,720 --> 00:20:54,440
+we work with it, okay. There is also time data.  I just discussed that as representation of points
+
+198
+00:20:54,440 --> 00:21:02,340
+in time. And one other useful one to keep an eye out for is descriptive, or if you want to use a
+
+199
+00:21:02,340 --> 00:21:07,720
+fancy word, nominative data. Basically, that's data that is a little more like a unique value.
+
+200
+00:21:07,720 --> 00:21:14,420
+So, something like someone's email address in a data set, or Airbnb listings that we have,
+
+201
+00:21:14,540 --> 00:21:19,900
+or an ID number, something like that. Those things, they tend to be unique, or a little
+
+202
+00:21:19,900 --> 00:21:27,820
+closer to being unique, and they're usually used to identify things, okay. And for it, it doesn't
+
+203
+00:21:27,820 --> 00:21:32,000
+usually make sense to order it, and it doesn't usually make sense to do things like get a mean
+
+204
+00:21:32,000 --> 00:21:36,280
+or a median.  Like, if you get a mean or a median of ID numbers, that is literally, it's mean,
+
+205
+00:21:36,280 --> 00:21:43,140
+right, okay. So, basically, it's just descriptive of an entity, but not useful in the same way,
+
+206
+00:21:43,200 --> 00:21:50,600
+like number, numeric data, or time data, or something like this, okay. Then I will throw
+
+207
+00:21:50,600 --> 00:21:56,080
+in two other ones, and these are a little bit different because you will most often use these
+
+208
+00:21:56,080 --> 00:22:01,900
+as an intermediate step when you work with data.  And these, but you will sometimes find them in a
+
+209
+00:22:01,900 --> 00:22:07,280
+data set directly, and those are, the ones we're going to talk about today are count,
+
+210
+00:22:07,460 --> 00:22:16,020
+so when you count things up, and then also binary data, so whether something, whether a thing about
+
+211
+00:22:16,020 --> 00:22:20,640
+the entities is true or false. So, for example, if we were to say in our Airbnb data set,
+
+212
+00:22:22,640 --> 00:22:27,520
+it is underscore Brooklyn. We could make a new column called is Brooklyn, and that would be to
+
+213
+00:22:27,520 --> 00:22:32,740
+either say true if the listing was in Brooklyn, and false if it was anywhere else, okay.  That
+
+214
+00:22:32,740 --> 00:22:38,160
+would be binary data, all right. And we'll work with most of these. We might not do so much with
+
+215
+00:22:38,160 --> 00:22:41,920
+descriptive or nominative data in this workshop, but I wanted you to keep an eye out for it.
+
+216
+00:22:42,980 --> 00:22:47,040
+But we will work with the other ones pretty directly in this workshop. Hopefully,
+
+217
+00:22:47,120 --> 00:22:53,020
+we can get to most of this. There's definitely a lot.  All right. So,
+
+218
+00:22:56,720 --> 00:23:01,620
+let's jump right in and say, let's work with categorical data a little bit, because this is one
+
+219
+00:23:02,520 --> 00:23:07,300
+that I would say it's probably the most, one of the most important to wrap your head around
+
+220
+00:23:07,300 --> 00:23:11,540
+outside of straight numeric data, which we worked with last week and doing things like the mean and
+
+221
+00:23:11,540 --> 00:23:16,180
+the median. And so, knowing how to work with categorical data, categorical data is really
+
+222
+00:23:16,180 --> 00:23:23,360
+critical for data science.  And even, especially when you're like starting an analysis or something
+
+223
+00:23:23,360 --> 00:23:29,100
+like that. So, you may be like, okay, I didn't really get your explanation of categorical data.
+
+224
+00:23:29,460 --> 00:23:36,100
+Let's actually pull some categorical data from our data set, and then we will talk about what
+
+225
+00:23:36,100 --> 00:23:39,980
+categorical data it is.  Again, when we actually have an example in front of us, so it won't be as
+
+226
+00:23:39,980 --> 00:23:43,540
+confusing and abstract. We'll actually have an example in front of us, okay.
+
+227
+00:23:44,240 --> 00:23:51,980
+So, the first thing we'll do is we will pull in our data set.  And it's going to be the same as last
+
+228
+00:23:51,980 --> 00:23:57,220
+week. So, I'll tell you exactly what to type. I will give you instructions for people who participated
+
+229
+00:23:57,220 --> 00:24:03,300
+last week.  I'll give you a little bit of a shortcut, okay. So, you can type, you may be able to do this.
+
+230
+00:24:04,880 --> 00:24:13,560
+df = pandas And then you can type a little bit of pandas,
+
+231
+00:24:13,780 --> 00:24:21,340
+P-A-N. "P-A-N." And you can, if you press the up arrow, it may fill in our URL and everything
+
+232
+00:24:21,340 --> 00:24:25,000
+that we had before.  So, we fill in a bit of what you wrote before, and then you can press the up
+
+233
+00:24:25,000 --> 00:24:48,220
+arrow. So, it did fill it all. I'll go through that.  Don't worry if you didn't catch that.
+
+234
+00:24:48,600 --> 00:24:54,420
+I'm going to press enter. Sorry, I skipped a step.  You need to first
+
+235
+00:24:54,420 --> 00:25:07,280
+import pandas. So,"I-M-P-O-R-T. Space. P-A-N-D-A-S."
+
+236
+00:25:07,620 --> 00:25:24,400
+P-A-N-D-A-S. Okay. And then we'll run our DF equals.  And I will go through it again. So,
+
+237
+00:25:24,400 --> 00:25:31,460
+in left. Okay.  It worked for me. So, what you want to type, if you don't have it stored in
+
+238
+00:25:31,460 --> 00:25:37,580
+your history, I tried to tell you a way to access this line from your history from last week. If
+
+239
+00:25:37,580 --> 00:25:41,060
+you don't have it in your history, maybe you're doing this for the first time.  Maybe you can't
+
+240
+00:25:41,060 --> 00:25:52,880
+detect it for some reason. Go ahead and type this. DF space.  That's D as in dog, F as in foxtrot.
+
+241
+00:25:54,400 --> 00:26:10,820
+And then space equals space pandas, P-A-N-D-A-S, dot read underscore CSV. Open parenthesis.
+
+242
+00:26:11,520 --> 00:26:19,120
+And now you want to pin in a URL as a string. So, we do a double quote. Then do HTTP
+
+243
+00:26:19,120 --> 00:26:34,080
+colon forward slash forward slash bit.ly, B-I-T, period, L-Y, forward slash NYC
+
+244
+00:26:36,140 --> 00:26:42,540
+BNB.  So, that's Bravo November Bravo, you know?
+
+245
+00:26:44,400 --> 00:26:52,920
+New NYC for New York City. And then BNB. Bravo November Bravo.  B as in boy, N as in Nancy.
+
+246
+00:26:54,100 --> 00:26:59,580
+And then finish the double quotes, do a right parenthesis, and then run it.
+
+247
+00:27:00,660 --> 00:27:05,400
+Hopefully, helpers, maybe you can also paste it in so people have the option to copy it.
+
+248
+00:27:05,760 --> 00:27:09,060
+And it's also present in the written curriculum that we're going to follow along.
+
+249
+00:27:09,060 --> 00:27:15,800
+Okay. Once you have it loaded in, you should be able to do DF.  Just type DF by itself,
+
+250
+00:27:15,980 --> 00:27:30,080
+and you have your data. That's enough. It's staying the number of rows, and there's a
+
+251
+00:27:30,080 --> 00:27:34,340
+whole lot of information.  It's probably read for like 20 minutes if we, there's a ton of
+
+252
+00:27:34,340 --> 00:27:40,560
+information. But basically, it's our big data set. We could do, you know, you could do things
+
+253
+00:27:40,560 --> 00:27:47,120
+like on it like we did last week.  We can do len on it to see how many rows. DF.shape to see how
+
+254
+00:27:47,120 --> 00:27:53,180
+many columns and rows. You could do all the things that we did before.  DF.columns to see the columns.
+
+255
+00:27:54,140 --> 00:28:00,060
+These are things we all did in the last workshop. You could do them, this is the same data as we
+
+256
+00:28:00,060 --> 00:28:09,840
+used last week in this data frame object.  Okay. Now we have our data in front of us.
+
+257
+00:28:10,520 --> 00:28:16,200
+Let's pull out some categorical data and think about it.  Okay. And explore it. So, I'm going to
+
+258
+00:28:16,200 --> 00:28:22,560
+clear my screen because it helps me out cognitively to clear my screen before I do something new.
+
+259
+00:28:24,020 --> 00:28:31,920
+So, I did control L, and I heard, you know, in left bracket, five, right bracket. We're entering
+
+260
+00:28:31,920 --> 00:28:51,380
+the fifth line that we've entered so far. Let's do "DF.neig." And I'm going to let it fill it in
+
+261
+00:28:51,380 --> 00:28:59,460
+by pressing tab. So, go ahead and press tab. Neighbourhood. Because it was filling in the
+
+262
+00:28:59,460 --> 00:29:04,700
+rest of the word neighborhood.  I say to do this because for some reason this data set, it spells,
+
+263
+00:29:05,440 --> 00:29:11,400
+which is fine, but some of us are Americans, we don't use the U in neighborhood. Okay.
+
+264
+00:29:12,660 --> 00:29:20,420
+So, in British English, they say a neighborhood with a U. In American English, we don't do the U.
+
+265
+00:29:20,420 --> 00:29:24,680
+So, this is a point of confusion.  But in this data set, it's spelled the British way. Okay.
+
+266
+00:29:25,360 --> 00:29:30,680
+So, I recommend using the tab and just letting the computer fill it in.  There will be no confusion,
+
+267
+00:29:30,800 --> 00:29:37,060
+no problems. Okay. I recommend to do that whenever you can. Okay. So, we want to do DF.neighbourhood,
+
+268
+00:29:37,580 --> 00:29:44,820
+and then I'm going to do a period. So, remember, it's neighborhood with U, dot, dot, head,
+
+269
+00:29:44,820 --> 00:29:53,400
+"in left bracket, H, E, A, D, head, left paren, right paren." So, I did head, left parenthesis,
+
+270
+00:29:53,540 --> 00:29:59,520
+right parenthesis. So, it's got DF.neighborhood.head. Okay. And we should get the first five items from
+
+271
+00:29:59,520 --> 00:30:04,480
+this column.  Okay. The neighborhood column in our Airbnb data set. All right.  We're getting
+
+272
+00:30:04,480 --> 00:30:11,920
+"the first five items. Out left bracket, five, right bracket, colon, zero, Kensington, one,
+
+273
+00:30:11,920 --> 00:30:22,680
+Midtown." Oh, I'm sorry. I meant to do a... This is fine, actually. So, this is our data for
+
+274
+00:30:23,540 --> 00:30:27,040
+individual neighborhoods. What I actually wanted to use is neighborhood group,
+
+275
+00:30:27,400 --> 00:30:32,920
+which will tell us something a little more specific about this categorical data.  So,
+
+276
+00:30:32,980 --> 00:30:36,760
+if you want, you can type it again. That's probably the easiest way. You can also press
+
+277
+00:30:36,760 --> 00:30:47,700
+up and backspace your answer. I'll type it again. So, I'll do DF.neighbourhood. I'm letting it fill
+
+278
+00:30:47,700 --> 00:30:55,360
+it in. And then I'm just going to go to underscore and tap in and then fill in group.  So, it's
+
+279
+00:30:55,360 --> 00:31:01,500
+neighbourhood underscore group. DF.neighbourhood underscore group. That's what we want. And
+
+280
+00:31:01,500 --> 00:31:06,080
+essentially, you'll see in a second what this corresponds to if you're familiar with New York
+
+281
+00:31:06,080 --> 00:31:11,900
+City, the different boroughs in New York City. So, Manhattan, Queens, Staten Island, the Bronx,
+
+282
+00:31:12,680 --> 00:31:18,800
+and Brooklyn. Okay? So, let's... And that's our column.  Let's do head so we only get the first
+
+283
+00:31:18,800 --> 00:31:30,900
+five. So, it should be DF.neighborhood underscore group dot... Open parenthesis. Okay.  So,
+
+284
+00:31:30,900 --> 00:31:35,720
+open parenthesis, close parenthesis. DF.neighborhood underscore group dot head open parenthesis,
+
+285
+00:31:35,880 --> 00:31:55,320
+close parenthesis. You'll notice something.  And this is what I wanted to show you. And this is
+
+286
+00:31:55,320 --> 00:32:01,760
+why the neighborhood wouldn't really help us with this. This is the main characteristic
+
+287
+00:32:01,760 --> 00:32:07,960
+of categorical data is that the values are repeated.  Okay? So, this column consists of a
+
+288
+00:32:07,960 --> 00:32:14,080
+relatively small set of values. So, Manhattan, the Bronx, Queens, Brooklyn, and Staten Island.
+
+289
+00:32:14,340 --> 00:32:20,780
+And they're repeated over and over again.  And when they appear in this column, they tell us that
+
+290
+00:32:20,780 --> 00:32:27,560
+the item in the row, the entity, which in our case, it represents an Airbnb listing from 2019.
+
+291
+00:32:28,100 --> 00:32:33,500
+Okay? Each row in this data set is an Airbnb listing from 2019. And when one of these items
+
+292
+00:32:33,500 --> 00:32:38,540
+appears in this column, it tells us, hey, that listing is from the Bronx.  It's from Queens. It's
+
+293
+00:32:38,540 --> 00:32:43,460
+from Manhattan. Okay? And you'll notice the two here that are appearing most frequently are
+
+294
+00:32:43,460 --> 00:32:49,920
+Manhattan and Brooklyn.  Okay? We can confirm that in a minute. But when you see repeated data like
+
+295
+00:32:49,920 --> 00:32:56,660
+this, when you see repeated information, and it could be numbers too, but if it's a small number
+
+296
+00:32:56,660 --> 00:33:01,760
+of items that are repeated, then that gives you an indication that it's categorical data. Okay?
+
+297
+00:33:01,840 --> 00:33:05,700
+Also, if you think about, hey, this could basically be considered a category.  So,
+
+298
+00:33:05,740 --> 00:33:08,600
+something like neighborhood group, that sounds like a category. And neighborhood sounds like
+
+299
+00:33:08,600 --> 00:33:15,440
+a category. Okay? Then it's going to be categorical data.  It sorts the data, the entities in the data
+
+300
+00:33:15,440 --> 00:33:22,080
+set into various little buckets. Okay? Now, what do you do with categorical data? How do we
+
+301
+00:33:22,080 --> 00:33:27,640
+represent it? How do we explore it? So, the first thing you should do with categorical data typically
+
+302
+00:33:29,820 --> 00:33:37,620
+is to get a set. Okay? So, there's two things you should do right away with categorical data.
+
+303
+00:33:37,820 --> 00:33:43,800
+To get a set of all the categories and then to count the various items. Okay? These are the two
+
+304
+00:33:43,800 --> 00:33:52,640
+things we're going to do in order. Okay? So, let's do the line we had before, but now we're going to
+
+305
+00:33:53,420 --> 00:34:00,140
+put the we're going to put the function set around all of it.  Okay? So, I'll type it again. Set.
+
+306
+00:34:00,140 --> 00:34:12,360
+"Set." Open parenthesis. And then df.neighborhood underscore group.
+
+307
+00:34:15,940 --> 00:34:22,920
+That's the line in underscore.  Group. So, it's neighborhood group, underscore group,
+
+308
+00:34:23,880 --> 00:34:31,560
+dot. And let's not do the head.  It doesn't really matter here. So, we could do set df.neighborhood
+
+309
+00:34:31,560 --> 00:34:50,900
+group. Set open parenthesis df.neighborhood group. Those are our five items. "Bronx, Brooklyn,
+
+310
+00:34:51,880 --> 00:34:58,020
+Staten Island, Manhattan, and Queens." Okay? Those are the five items. Those are our categories. And
+
+311
+00:34:58,020 --> 00:35:03,940
+we use the set function. It basically says give us the unique values from this data set.  Okay?
+
+312
+00:35:04,380 --> 00:35:08,660
+And what it returns here is a list-like object, which is a set object. But it's very similar to
+
+313
+00:35:08,660 --> 00:35:15,760
+a list. Okay? So, that tells us how many categories we have to work with.  The other thing that I
+
+314
+00:35:15,760 --> 00:35:20,080
+recommend doing with a with categorical data, once you know that it is categorical data,
+
+315
+00:35:20,080 --> 00:35:26,320
+even if you suspect it's categorical data, is to count it. And I would also say that set is very
+
+316
+00:35:26,320 --> 00:35:31,580
+good at telling you, is this categorical data? So, if you run the set function on a column,
+
+317
+00:35:32,240 --> 00:35:38,520
+then you will learn, you will see, oh, is it a small number of categories of repeated values?
+
+318
+00:35:38,760 --> 00:35:42,620
+If it's a small number of items that come back, then that's a strong indication that
+
+319
+00:35:42,620 --> 00:35:47,680
+where you're working with is categorical data. But if it's almost as many items as we have
+
+320
+00:35:49,420 --> 00:35:52,700
+rows in the data set, then it's probably not categorical data.  It's probably something
+
+321
+00:35:52,700 --> 00:35:58,080
+like descriptive or nominative data. If you ran a set on email addresses, it will pretty much
+
+322
+00:35:58,080 --> 00:36:05,340
+be the same number of items as the full data set. Okay? So, let's do let's now let's do a count.
+
+323
+00:36:05,540 --> 00:36:09,240
+Okay? And we'll talk about counts. So, let's do df.neighborhood group again.
+
+324
+00:36:12,220 --> 00:36:17,880
+df.neighborhood group.  Remember, I'm making a lot of use of tab here. This is where tab is
+
+325
+00:36:17,880 --> 00:36:20,380
+going to come in useful. We're going to be writing longer lines in this session.
+
+326
+00:36:21,700 --> 00:36:27,040
+So, we're going to be doing I'm going to use tab a lot more. Hopefully, you're getting a little
+
+327
+00:36:27,040 --> 00:36:31,440
+bit used to this environment. I will also say, you know, if I'm moving sometimes a little bit
+
+328
+00:36:31,440 --> 00:36:36,000
+fast in these workshops, you know, which is kind of the nature of some of these more online
+
+329
+00:36:36,000 --> 00:36:39,260
+workshops.  In-person workshops, they tend to go a lot slower, and there's time to work.
+
+330
+00:36:39,980 --> 00:36:43,400
+But, you know, we're kind of doing this for the recording a little bit. And you can review
+
+331
+00:36:45,960 --> 00:36:49,020
+afterward.  And there's a raised hand. We'll get to that in one second.
+
+332
+00:36:52,080 --> 00:36:55,020
+There's a recording, and there's a written curriculum.  So, if you're feeling a little
+
+333
+00:36:55,020 --> 00:36:58,160
+stress at any point in this workshop, just remember that those resources that they're
+
+334
+00:36:58,160 --> 00:37:03,620
+available to you. And Sarah and I are available. We're just an email away.  And there's also the
+
+335
+00:37:03,620 --> 00:37:07,060
+office hours on Thursday. So, a lot of resources available to you if you're feeling a little
+
+336
+00:37:07,060 --> 00:37:13,440
+learning stress. We had a raised hand.  Is that an intentional raised hand? I mean,
+
+337
+00:37:13,680 --> 00:37:16,920
+we can, if you want to get on the mic and ask a question, you're welcome.
+
+338
+00:37:22,730 --> 00:37:28,970
+I hit that button all the time myself, too. So, if you do, you know, if it was a question you
+
+339
+00:37:28,970 --> 00:37:35,530
+wanted to ask, just feel free to get on the mic.  Okay. So, DF.Neighborhood group. And now, so,
+
+340
+00:37:35,530 --> 00:37:40,670
+we had to DF.Neighborhood underscore group. And now, we're going to use a new method. And we're going to use
+
+341
+00:37:40,670 --> 00:37:46,130
+this method a lot. Okay.  So, try to remember what it's called because we're going to be using it a
+
+342
+00:37:46,130 --> 00:37:51,830
+lot. Okay. But you'll get a little reinforcement as this goes on.  Let's do DF.Neighborhood group.
+
+343
+00:37:52,630 --> 00:38:11,690
+Value underscore counts. So, it's DF.Neighborhood underscore group.  Value underscore counts.
+
+344
+00:38:11,790 --> 00:38:20,290
+Open parenthesis. Close parenthesis.  I kind of hate the name of this method because it's hard
+
+345
+00:38:20,290 --> 00:38:24,890
+to type. It has an underscore in it. It's kind of long.  And I use it a lot. It's one of the methods
+
+346
+00:38:24,890 --> 00:38:30,950
+I use the most when I'm doing a data analysis. Okay.  So, and we're going to use it a lot, too.
+
+347
+00:38:31,150 --> 00:38:35,550
+So, remember that tab is your friends. In this case, it might not be that useful to you.  But,
+
+348
+00:38:35,710 --> 00:38:41,070
+you know. All right. Let's run it and see what we get.  Out left bracket eight right bracket colon
+
+349
+00:38:41,950 --> 00:38:52,330
+"Manhattan 21,661. Brooklyn 20,104." So, okay. What are we listening to here? We'll zoom in a second.
+
+350
+00:38:52,890 --> 00:39:01,290
+We're hearing a series which has labels. Remember from last week, what we have the series is
+
+351
+00:39:01,290 --> 00:39:09,510
+represented with two columns.  For us, screen reader users, it's that each line has on the left
+
+352
+00:39:09,510 --> 00:39:15,190
+first a label. Okay. Which is the index.  And on the right, it has a value. In this case,
+
+353
+00:39:15,230 --> 00:39:22,730
+it's a number. Okay.  So, we're listening to a series. The labels are the categories. Okay.  So,
+
+354
+00:39:22,750 --> 00:39:29,030
+Manhattan, Bronx, Brooklyn, et cetera that we got from our set. These are the unique values in this
+
+355
+00:39:29,030 --> 00:39:37,430
+column. Okay.  And then the right most column or the right most item in each line is the value.
+
+356
+00:39:37,430 --> 00:39:41,950
+Okay. Which in this case, because we're performing a count, we created a count,
+
+357
+00:39:42,390 --> 00:39:47,730
+it's the count.  It's how many times each of these items appears in the dataset. Okay. So,
+
+358
+00:39:48,230 --> 00:39:55,350
+we heard Manhattan was something like 21,000 something something.  Brooklyn was 20,000 something
+
+359
+00:39:55,350 --> 00:40:03,710
+something. So, a little bit less. Let's listen to one more.  So, Queens, there's a bit of a drop,
+
+360
+00:40:03,710 --> 00:40:15,130
+5,660 something. Bronx is another drop. Okay.  So, you're hearing the values. It's pretty
+
+361
+00:40:15,130 --> 00:40:24,790
+intuitive. It tells us how many items in our dataset.  20,000 some odd are Manhattan. 20,000
+
+362
+00:40:24,790 --> 00:40:34,710
+some odd are Brooklyn. About 5,000 are the Queens and about something like 1,000 are Bronx.  And a
+
+363
+00:40:34,710 --> 00:40:39,290
+very small number presumably are Staten Island. I guess we could look into that. "Staten Island
+
+364
+00:40:39,290 --> 00:40:46,690
+373." Only 373. Very few Airbnbs on Staten Island. So, if you want to run an Airbnb,
+
+365
+00:40:46,690 --> 00:40:55,150
+don't open it on Staten Island.  Maybe open it on Manhattan. I'm not in that business.
+
+366
+00:40:55,730 --> 00:41:00,610
+Don't take my advice.  And then at the end, it'll say the D type. Remember, series always tells
+
+367
+00:41:00,610 --> 00:41:09,670
+you the D type. "Name colon neighborhood line group. dtype colon int." D type int. So, it's
+
+368
+00:41:09,670 --> 00:41:15,070
+integers.  The items in this are integers. Okay. They're counts.  Now, okay. Let's talk about this
+
+369
+00:41:15,070 --> 00:41:22,350
+a little bit. First of all, this is already very useful.  You pretty much if you've ever been
+
+370
+00:41:22,350 --> 00:41:28,970
+familiar with a bar chart, some of us are, you know, you have partial vision. Some of us used
+
+371
+00:41:28,970 --> 00:41:34,550
+to be sighted or more sighted. Maybe you're familiar with visualizations.  You know what a
+
+372
+00:41:34,550 --> 00:41:43,050
+bar chart looks like. I'll just quickly describe it. A bar chart basically it represents data with
+
+373
+00:41:43,050 --> 00:41:48,650
+how long different lines are.  Okay. So, if a line is longer, it has more items in it. Okay.
+
+374
+00:41:50,990 --> 00:41:56,170
+Basically, what we have here is basically it's a bar chart. Okay. It tells us how many items there
+
+375
+00:41:56,170 --> 00:42:02,990
+are.  And it's almost it's almost like if we were going to take a bar chart created by a sighted
+
+376
+00:42:02,990 --> 00:42:09,270
+data scientist and represent it in some format that is accessible to the visually impaired,
+
+377
+00:42:09,270 --> 00:42:13,810
+we might actually pick a format like this and it actually would be pretty good. You might have
+
+378
+00:42:13,810 --> 00:42:17,010
+your own preferred format, but this one is actually not terrible. Okay.  It's like it's
+
+379
+00:42:17,010 --> 00:42:22,470
+pretty it has a label. It has a number. Each each pair is on a line.  It's actually pretty usable.
+
+380
+00:42:22,750 --> 00:42:30,210
+Okay. So, basically what you have here is a bar chart.  Okay. Now, how is it different from
+
+381
+00:42:31,550 --> 00:42:35,490
+what what could a sighted person do a little more advantageously with a bar chart that you
+
+382
+00:42:35,490 --> 00:42:42,210
+couldn't do with this? I would my answer to that is, first of all, not that much. But if I had to
+
+383
+00:42:42,210 --> 00:42:48,730
+say one thing, it would be that the sighted person might get very intuitively to their mind the
+
+384
+00:42:48,730 --> 00:42:54,090
+difference between the different items.  Okay. So, instead of hearing the or seeing the very specific
+
+385
+00:42:54,090 --> 00:43:00,630
+numbers, they might be like, oh, okay. They might get an insight like, for example, Brooklyn and
+
+386
+00:43:00,630 --> 00:43:05,010
+Manhattan are really close together.  There's a pretty big drop off between those two and Queens
+
+387
+00:43:05,010 --> 00:43:10,330
+and then another big drop off between Queens and the Bronx. Okay. Now, to be honest, you can get
+
+388
+00:43:10,330 --> 00:43:16,930
+that from these numbers pretty easily.  Okay. But let's say let's make it even more like a bar chart
+
+389
+00:43:17,490 --> 00:43:24,190
+and actually and also very similar to a pie chart because a pie chart represents data by
+
+390
+00:43:24,850 --> 00:43:30,610
+it draws a circle. So, if you make a circle with your hand and then different slices on the circle
+
+391
+00:43:30,610 --> 00:43:39,370
+represent their proportion of each item in the data set.  Okay. So, we have about 20 percent of
+
+392
+00:43:39,370 --> 00:43:45,970
+the items are Brooklyn. So, 20,000 divided by some 40 something thousand would be something
+
+393
+00:43:45,970 --> 00:43:51,450
+like 40 something percent.  Okay. Just to do some back of the napkin. So, we would take out a slice
+
+394
+00:43:51,450 --> 00:43:56,630
+of the pie that would be 40 something percent.  That is basically how a pie chart works. Data
+
+395
+00:43:56,630 --> 00:44:00,630
+scientists actually hate pie charts and they look down on people who use pie charts, but in my
+
+396
+00:44:00,630 --> 00:44:09,370
+experience people like many bosses and stuff that I've had like pie charts. So, but, you know, mostly
+
+397
+00:44:09,370 --> 00:44:12,930
+things that you could do with a pie chart you could do with a bar chart and probably better.
+
+398
+00:44:13,810 --> 00:44:17,490
+But so, basically what we're doing here is we're thinking of ways to replace both pie and bar
+
+399
+00:44:17,490 --> 00:44:22,090
+charts. Okay. But what we're going to do now is even more like a pie chart and it also will give
+
+400
+00:44:22,090 --> 00:44:27,590
+you a little more of that intuition of the differences in the sizes.  Okay. So, let's use
+
+401
+00:44:27,590 --> 00:44:32,650
+the second technique here. So, you already basically have replaced bar charts, I think.
+
+402
+00:44:33,070 --> 00:44:38,230
+And bar charts are one of the easiest to replace non-visually in my opinion. But let's make it
+
+403
+00:44:38,230 --> 00:44:44,450
+even better. Let's make our representation or non-visual representation even more like intuitive
+
+404
+00:44:44,450 --> 00:44:50,730
+to us.  Okay. Or even more useful. So, let's do this.  First, let's save our counts to a variable.
+
+405
+00:44:50,730 --> 00:44:57,350
+Okay. And I'm going to tell you how to do that with some hot keys.  Okay. If that's okay. So,
+
+406
+00:44:57,470 --> 00:45:03,110
+if you prefer to type it all out, that's fine.  We'll go over that as well. But let's press the
+
+407
+00:45:03,110 --> 00:45:12,690
+up button. That loads in the last line we ran.  So, that will be the one that where we get our
+
+408
+00:45:12,690 --> 00:45:19,230
+counts. Okay. Now, press control A. And you won't hear anything.  Just press control A to go to the
+
+409
+00:45:19,230 --> 00:45:28,370
+beginning of the line. And then type let's just call it neighborhood counts. Okay.  And you can
+
+410
+00:45:28,370 --> 00:45:32,530
+spell neighbourhood any way you want. I'm going to spell it the British way, I guess, because that's
+
+411
+00:45:32,530 --> 00:45:48,210
+closer to the answer. "neighbourhood_counts = " And then I'm going to do a space and equals and a space.
+
+412
+00:45:50,970 --> 00:45:58,130
+So, what I'm doing is I'm saving the last line to a variable. Now, you could also do a really
+
+413
+00:45:58,130 --> 00:46:01,870
+quick way to do this is another cool way to do this is you could type neighborhood underscore
+
+414
+00:46:01,870 --> 00:46:07,710
+counts equals underscore. Because underscore actually represents the last line you put in,
+
+415
+00:46:07,810 --> 00:46:13,350
+which is pretty cool.  And that's one of the contributions Nick Hilvora made when he edited
+
+416
+00:46:13,350 --> 00:46:19,630
+the first in this workshop series is he added a description of that underscore that Python lets
+
+417
+00:46:19,630 --> 00:46:23,390
+you do, which is a pretty cool trick. So, you could do that. Or you could do what I did, which
+
+418
+00:46:23,390 --> 00:46:27,590
+is to press up, move to the beginning of the line with control A, and then type it in.  Okay.
+
+419
+00:46:28,070 --> 00:46:32,350
+Because who wants to type everything over and over again? Certainly not programmers. Programmers
+
+420
+00:46:32,350 --> 00:46:38,890
+are lazy.  In left bracket ten right bracket colon. Okay. So, basically, what we did there is
+
+421
+00:46:38,890 --> 00:46:43,410
+we saved our previous counts to a variable.  So, we did neighborhood underscore counts equals
+
+422
+00:46:45,050 --> 00:46:51,910
+df.neighborhood underscore group.value underscore counts. Okay. And we didn't want to type it all.
+
+423
+00:46:58,750 --> 00:47:02,490
+If someone wants to get on the mic for the question, that's fine. I'm hearing raised hands.
+
+424
+00:47:02,670 --> 00:47:05,770
+But maybe actually just type in the chat if you want to raise your hand because it's
+
+425
+00:47:05,770 --> 00:47:10,130
+in maybe accidental hand raising, which is something I very frequently do in meetings.
+
+426
+00:47:10,990 --> 00:47:14,590
+Because I often want to look at the participant list and then I raise my hand by accident.
+
+427
+00:47:15,450 --> 00:47:21,150
+Okay. So, we now have neighborhood underscore counts.  So, that's our counts that we were just
+
+428
+00:47:21,150 --> 00:47:28,250
+looking at. The five items, each with the label of the borough, you know, Manhattan, Bronx,
+
+429
+00:47:28,510 --> 00:47:32,130
+you know, the neighborhood group, and then the count, the number of times it occurs in the data
+
+430
+00:47:32,130 --> 00:47:36,130
+set. So, that's what we have saved to the variable.  What we're going to do now is
+
+431
+00:47:36,130 --> 00:47:53,030
+neighborhood underscore counts. Did it do it? Space. In left bracket.  Oh, it filled it all in.
+
+432
+00:47:53,810 --> 00:47:59,630
+Neighborhood underscore counts. So, I used the tab to fill it in.  You can type it all out yourself
+
+433
+00:47:59,630 --> 00:48:03,950
+too if you prefer. It's neighborhood underscore counts. That's the variable we created.  And now,
+
+434
+00:48:04,230 --> 00:48:08,390
+what we're going to do is it's a new technique. We're going to get the proportions of the data.
+
+435
+00:48:08,670 --> 00:48:12,510
+Okay.  And they're going to be kind of like decimal points, kind of like fractions
+
+436
+00:48:13,350 --> 00:48:19,750
+that are going to represent how much of the data is each item. Okay. So, we're going to do divided
+
+437
+00:48:19,750 --> 00:48:31,410
+by. So, it's neighborhood underscore counts divided by. Len for length. "L-E-N. Len. Left
+
+438
+00:48:31,410 --> 00:48:40,590
+paren. D-F. Right paren." Neighborhood underscore counts.
+
+439
+00:48:41,910 --> 00:48:47,530
+Then, a space. A forward slash. A space.  Remember, forward slashes divide. And then,
+
+440
+00:48:48,130 --> 00:48:56,690
+len. Open paren.  D-F. Close paren. And so, basically, the len D-F tells us the total
+
+441
+00:48:56,690 --> 00:49:00,710
+number of items in the data set.  So, that's 40 something thousand. That's all the items,
+
+442
+00:49:00,830 --> 00:49:05,550
+all the listings in this data set. And then, so, what this is going to do is going to divide each
+
+443
+00:49:05,550 --> 00:49:10,830
+item in our counts by the total number in the data set.  So, Manhattan is 21,000 something.
+
+444
+00:49:11,510 --> 00:49:17,730
+It's going to then divide that by 49,000 and something. Okay.  And what that will give us
+
+445
+00:49:17,730 --> 00:49:24,310
+is a decimal that will tell us the proportion of the items in the data set that are that. Okay. And
+
+446
+00:49:24,310 --> 00:49:30,530
+remember, we said it would be something like 40 something.  .44 or .43. It'll be something like
+
+447
+00:49:30,530 --> 00:49:35,870
+that. Okay. And that will tell us that 44, 43 percent or whatever of the items are Manhattan.
+
+448
+00:49:36,470 --> 00:49:39,190
+But anyway, let's run it and see what it sounds like. Okay.
+
+449
+00:49:39,370 --> 00:49:44,210
+"Out left bracket 10 right bracket colon. Manhattan 0.44."
+
+450
+00:49:44,590 --> 00:49:49,530
+So, you hear that. 0.44. Okay. So, that's about 44 percent of the items in this column are
+
+451
+00:49:49,530 --> 00:49:56,730
+Manhattan.  Okay. So, 44 percent of the items of the Airbnb listings in 2019 were in Manhattan.
+
+452
+00:49:56,730 --> 00:50:04,690
+"3011. Brooklyn 0.4111." Brooklyn 0.41. Now, you can tell even more intuitively,
+
+453
+00:50:04,830 --> 00:50:08,890
+these are very close to each other. So, 44 percent are Manhattan. Three percent less,
+
+454
+00:50:09,150 --> 00:50:14,630
+41 percent, something like that, are Brooklyn. "67. Queens 0.115."
+
+455
+00:50:15,650 --> 00:50:21,950
+Queens 0.11. That's 11 percent. "Bronx 0.022."
+
+456
+00:50:21,950 --> 00:50:29,410
+Bronx 0.02. Only 2 percent. .313. "Staten Island 0.00s."
+
+457
+00:50:29,990 --> 00:50:38,270
+Oh, Staten Island is tiny. "0.00762." So, less than 1 percent. .7 percent,
+
+458
+00:50:39,290 --> 00:50:42,630
+less than a percent of the items are Staten Island.  Sorry, Staten Island.
+
+459
+00:50:43,750 --> 00:50:48,270
+Okay. And then, so, that's pretty cool, right? So, we're actually getting proportions.  So,
+
+460
+00:50:48,270 --> 00:50:52,010
+now, not only replace the bar chart, we kind of replace the pie chart too, you know,
+
+461
+00:50:53,490 --> 00:50:56,650
+because now the pie chart tells you the proportions of each item,
+
+462
+00:50:57,890 --> 00:51:03,410
+and what this does, this tells you the proportions. Okay. And let's do
+
+463
+00:51:06,290 --> 00:51:11,410
+one more useful thing.  Okay. And I would say sometimes you might just want to leave it
+
+464
+00:51:11,410 --> 00:51:16,910
+there at proportions. And this will tell you very, pretty much tell you the same data that
+
+465
+00:51:16,910 --> 00:51:22,890
+someone using a bar or pie chart would.  And honestly, it's very usable. It's good. Like,
+
+466
+00:51:23,010 --> 00:51:28,750
+it's pretty straightforward to replace a bar or pie chart non-visually.  And even there's actually
+
+467
+00:51:28,750 --> 00:51:32,130
+some slight advantages to this, because sometimes it can be a little hard to read a pie chart if
+
+468
+00:51:32,130 --> 00:51:36,650
+there's a lot of items or so on. It's not a problem. That's another thing about bar and
+
+469
+00:51:36,650 --> 00:51:40,970
+pie charts is that usually sighted people can only put so many items in them, usually
+
+470
+00:51:40,970 --> 00:51:45,930
+a relatively small number, probably not more than like 20, and usually more like 5 or 10.
+
+471
+00:51:45,930 --> 00:51:50,350
+And a pie chart really does very poorly with anything more than, in most cases,
+
+472
+00:51:51,170 --> 00:51:57,010
+5, 10 items. That's about as many as you can put in a pie chart, because just reasons, you know,
+
+473
+00:51:57,030 --> 00:52:00,310
+it just doesn't look good. It looks bad, and it's hard to read if there's too many items.
+
+474
+00:52:00,690 --> 00:52:06,110
+So, actually, you don't really lose out that much with this, because already sighted people can only
+
+475
+00:52:07,210 --> 00:52:11,290
+intuitively grasp a relatively small number of items in a bar or pie chart. And so, we're
+
+476
+00:52:11,290 --> 00:52:16,010
+actually not at that much of a disadvantage with this type of data. Let's do one more thing,
+
+477
+00:52:16,110 --> 00:52:21,110
+which I think is pretty cool.  It might even kind of be in some ways better than a pie chart
+
+478
+00:52:21,690 --> 00:52:25,630
+or bar chart. Well, certainly a pie chart, but maybe in some ways even a little better than a
+
+479
+00:52:25,630 --> 00:52:33,290
+bar chart or show something kind of cool. So, let's do this.  We'll do our neighborhood counts.
+
+480
+00:52:34,230 --> 00:52:40,530
+"in left bracket 11 right bracket colon neighborhood line counts."
+
+481
+00:52:40,770 --> 00:52:44,130
+So, neighborhood underscore counts.  Remember, that's our number of counts of each item that
+
+482
+00:52:44,130 --> 00:52:50,370
+we created. And then let's do dots. And this one always is hard to remember,
+
+483
+00:52:50,450 --> 00:52:55,930
+but I think I've got a grasp on it. Dot P-C-T.
+
+484
+00:52:56,010 --> 00:53:00,510
+That's short for percent.  I always want to say it should be P-E-R, but whatever. I didn't get
+
+485
+00:53:00,510 --> 00:53:05,370
+to name these. So, they didn't ask my input when they created all this stuff for some reason.
+
+486
+00:53:06,630 --> 00:53:09,730
+P-C-T underscore. "P-C-T.
+
+487
+00:53:10,610 --> 00:53:12,670
+Line." Line. Remember, line is underscore.
+
+488
+00:53:13,130 --> 00:53:19,150
+"C-H colon A-N-G-E." Okay. That was hard to understand. But basically, it's
+
+489
+00:53:19,790 --> 00:53:26,630
+neighborhood underscore counts, our variable, dot P-C-T underscore change.  That's for percent change.
+
+490
+00:53:26,630 --> 00:53:29,290
+And then do an open parenthesis and a close parenthesis.
+
+491
+00:53:30,010 --> 00:53:33,130
+"Left paren. Right paren." And then let's listen to this.
+
+492
+00:53:34,430 --> 00:53:38,130
+And we will see what we get.  I think this one's pretty cool.
+
+493
+00:53:38,690 --> 00:53:44,430
+"Out left bracket 11 right bracket colon. Out left bracket 11 right bracket colon.
+
+494
+00:53:45,610 --> 00:53:48,670
+Manhattan N-A-N." Okay. It said Manhattan N-A-N.
+
+495
+00:53:48,750 --> 00:53:50,530
+I'll explain that in a minute. Basically, no data.
+
+496
+00:53:51,550 --> 00:53:58,950
+"Brooklyn minus 0.0718." Brooklyn minus 0.07 something something.
+
+497
+00:53:59,550 --> 00:54:03,730
+Okay. So, that is actually, what that's telling you is, between Manhattan and Brooklyn,
+
+498
+00:54:03,930 --> 00:54:10,630
+it decreased by 0.07 percent. Seven percent.  Okay. Remember that these decimals are another
+
+499
+00:54:10,630 --> 00:54:15,870
+way to represent percentages. Okay.  That says it decreased by seven percent. So,
+
+500
+00:54:15,910 --> 00:54:18,330
+from Manhattan to Brooklyn decreased by seven percent. Let's hear the next one.
+
+501
+00:54:18,330 --> 00:54:29,370
+"880. Queens minus 0.7181." Okay. Queens was minus 0.71. So,
+
+502
+00:54:29,450 --> 00:54:38,010
+Queens is almost a 70 percent drop from the previous.  So, this tells you, what this tells
+
+503
+00:54:38,010 --> 00:54:45,430
+you is the percentage change from the previous item. So, it only changed seven percent between
+
+504
+00:54:45,430 --> 00:54:49,950
+Manhattan and Brooklyn. So, those are pretty similar.  Then, between Brooklyn and Queens,
+
+505
+00:54:50,330 --> 00:54:55,370
+it dropped 70 percent. So, that's a big drop. So, this is telling you, now you're getting
+
+506
+00:54:55,370 --> 00:55:00,730
+exactly what a sighted person would get from the bar chart, that intuition about the change.  Okay.
+
+507
+00:55:00,770 --> 00:55:06,210
+And the groupings. Okay.  That you can get, oh, that changed a lot. Okay. Let's just hear the
+
+508
+00:55:06,210 --> 00:55:13,110
+rest. "66. Bronx minus 0.807." Bronx, down 80 percent. Okay. So,
+
+509
+00:55:13,110 --> 00:55:20,030
+an even bigger difference from between Brooklyn and Queens. Okay. And that's something that's hard
+
+510
+00:55:20,030 --> 00:55:24,350
+to get just from the numbers.  Okay. And what we're getting is actually even a little more precise,
+
+511
+00:55:24,510 --> 00:55:27,190
+you know, because you're going to get the exact numbers. You get an intuition
+
+512
+00:55:28,010 --> 00:55:31,250
+with the sighted visualization, but you won't get the exact numbers.  So, actually,
+
+513
+00:55:31,370 --> 00:55:38,490
+I think this is cool. Let's just hear the Staten Island. "7448. Staten Island minus 0.658."
+
+514
+00:55:38,490 --> 00:55:44,890
+Staten Island down 65 percent. Okay. So, the biggest drop is between Queens and,
+
+515
+00:55:45,950 --> 00:55:51,190
+between Queens and the Bronx.  Okay. But also, another big drop was between Brooklyn and Queens.
+
+516
+00:55:51,370 --> 00:55:56,510
+Okay.  So, this tells us a very, it's a very intuitive way of telling what you would get in
+
+517
+00:55:56,510 --> 00:56:02,390
+a bar graph, which is how big are the changes. Okay. That's what you would get with a bar graph,
+
+518
+00:56:02,390 --> 00:56:09,450
+difference in lines.  So, this is a very, let's say a very adequate or actually pretty good
+
+519
+00:56:09,450 --> 00:56:15,670
+replacement for a bar or pie chart. Okay. Which are, I will say, those are probably
+
+520
+00:56:16,290 --> 00:56:22,110
+the arguably the most used visualizations would be a bar chart.  Maybe you could say a line chart.
+
+521
+00:56:22,270 --> 00:56:26,750
+That would, I would say it's kind of a toss up between bar and line chart are the most commonly
+
+522
+00:56:26,750 --> 00:56:30,730
+used visualizations. We've kind of already sort of have a pretty adequate replacement
+
+523
+00:56:31,330 --> 00:56:37,150
+for the bar chart.  Okay. We are going to move on to the next section. I'm going to do a time check.
+
+524
+00:56:37,330 --> 00:56:41,150
+And then if people maybe have a question. "2 colon 00 PM."
+
+525
+00:56:41,570 --> 00:56:46,190
+We're exactly at the halfway point, which is exactly what I want to do.  Love that. All right.
+
+526
+00:56:46,450 --> 00:56:50,850
+Do people have any questions or do the helpers want to kind of kick up any questions that were
+
+527
+00:56:50,850 --> 00:56:56,730
+coming up a lot before we move on to the next section? Okay.  We already replaced bar and pie
+
+528
+00:56:56,730 --> 00:57:00,650
+charts. Admittedly, those are kind of the most easy to replace non-visually. Okay.  And we're
+
+529
+00:57:00,650 --> 00:57:05,370
+going to kind of get into some harder to replace them, but we already have a win under our belts.
+
+530
+00:57:05,550 --> 00:57:15,260
+Okay. It's been remarkably quiet in the chat.  So, I think anyone has, I know. So, if anyone has
+
+531
+00:57:15,260 --> 00:57:20,200
+questions. You know, I would love, I'm going to do a long wait.  I would love if someone were to
+
+532
+00:57:20,200 --> 00:57:27,740
+ask a question at this time. So, you're doing me a favor. So, if you feel so inclined, just go ahead
+
+533
+00:57:27,740 --> 00:57:45,200
+and turn on your mic and ask a question. Would sorting the data first, the data
+
+534
+00:57:45,200 --> 00:57:51,600
+sets first give you a better indication of their differences? I would say one thing is that the
+
+535
+00:57:51,600 --> 00:57:56,620
+counts are automatically sorted. Okay. Usually from greatest to least.  Okay. Now, I will say
+
+536
+00:57:56,620 --> 00:58:01,760
+we will be using sorting more before we're through here and sorting is really useful, but in this
+
+537
+00:58:01,760 --> 00:58:08,140
+case, you kind of get the sorting free with the, with the counts. So, it's not really, I don't
+
+538
+00:58:08,140 --> 00:58:13,420
+think necessary.  You can sort the categorical data, but really what you're going to get if you sort it
+
+539
+00:58:13,420 --> 00:58:19,720
+is something like Manhattan, Manhattan, Manhattan, Manhattan, Manhattan, Manhattan, Manhattan, Manhattan, Manhattan, Manhattan.
+
+540
+00:58:19,760 --> 00:58:23,320
+It'll sort it into alphabetical order and then you'll just get a lot of repeated values. You'll
+
+541
+00:58:23,320 --> 00:58:27,680
+be like the Bronx, the Bronx, the Bronx, the Bronx, the Bronx.  So, I would say sorting the column
+
+542
+00:58:27,680 --> 00:58:35,760
+by itself doesn't really tell you that much. But sorting the counts is very useful
+
+543
+00:58:37,380 --> 00:58:42,320
+and you get that kind of for free. So, usually by default, it gives you from the biggest value to
+
+544
+00:58:42,320 --> 00:58:46,580
+the smallest value.  So, they call that descending order. It gives you descending order. Okay.  Great
+
+545
+00:58:46,580 --> 00:58:51,780
+question. Great question. Thank you for asking it.  Did Sarah, was it Sarah or someone was starting
+
+546
+00:58:51,780 --> 00:58:59,780
+to say something there or? The exact same question. So, nothing further here. Well, thank you.  Is that
+
+547
+00:58:59,780 --> 00:59:08,440
+Prima? Thank you. I really appreciate the question. Okay.  So, if people have other questions,
+
+548
+00:59:08,580 --> 00:59:14,380
+please place them in the chat. You know, I love those long, awkward pauses when I do remote
+
+549
+00:59:14,380 --> 00:59:20,420
+teaching. So, I really, I live for that.  So, I will maybe ask more questions later in the workshop.
+
+550
+00:59:20,420 --> 00:59:28,220
+Okay. Okay.  So, we started out with counting, which is one of the favorite tools in my toolbox.
+
+551
+00:59:28,480 --> 00:59:33,780
+And I also showed you a couple of other cool tricks, which are getting the
+
+552
+00:59:36,500 --> 00:59:43,260
+proportions, those little percentages, and the percent drop or the percent change, which is
+
+553
+00:59:43,260 --> 00:59:49,660
+quite useful. I will say, I'm just going to gesture toward the written tutorial here because we don't
+
+554
+00:59:49,660 --> 00:59:54,520
+have time to cover all of this.  But I anticipated a couple of frequently asked questions at this
+
+555
+00:59:54,520 --> 01:00:00,720
+point. And those are, one, say I want to work with sighted colleagues and I want to make an actual
+
+556
+01:00:00,720 --> 01:00:09,340
+visual bar chart or an actual visual pie chart. How do I do that? Okay.  Now, why, you know, why,
+
+557
+01:00:09,700 --> 01:00:16,480
+no, I mean, I'm just thinking, no. I mean, we live in a sighted world. Last time I checked.
+
+558
+01:00:17,860 --> 01:00:22,940
+And, you know, we work with sighted colleagues and sometimes it's useful to actually create the
+
+559
+01:00:22,940 --> 01:00:27,880
+visualization. So, I did give instructions for creating a visualization of our counts data
+
+560
+01:00:28,440 --> 01:00:34,140
+in the written tutorial. So, you can check that out.  Another thing is, question is, can you get
+
+561
+01:00:34,140 --> 01:00:39,060
+actual percentages? And I give instructions for that too. If you don't want the decimals, there's
+
+562
+01:00:39,060 --> 01:00:43,700
+a way to actually get nice looking percentages. It's a little bit involved, not terribly involved,
+
+563
+01:00:43,700 --> 01:00:48,300
+so we're not going to cover it here.  But that information is there in the thing.
+
+564
+01:00:48,380 --> 01:00:50,340
+I had another one, FAQ, but let me check.
+
+565
+01:00:50,400 --> 01:00:55,500
+Max, Patrick, email, I search, creating bar chart, creating percentages.
+
+566
+01:00:56,140 --> 01:01:01,700
+Oh, you're right. And also, one useful thing is that I won't cover here, but it's in the tutorial
+
+567
+01:01:01,700 --> 01:01:07,840
+and the written tutorial is you can, a way to skip the step where you divide by len data frame,
+
+568
+01:01:07,840 --> 01:01:13,620
+there's actually a way to skip that step and to do, just change the value counts a little,
+
+569
+01:01:13,760 --> 01:01:19,460
+function a little bit. You add normalize equals true into the parentheses.  And that will let you
+
+570
+01:01:19,460 --> 01:01:23,440
+skip that divide step and it will give you those percentage, those proportions directly.
+
+571
+01:01:24,320 --> 01:01:27,580
+So, check those out in the written tutorial. I'm not going to cover them here,
+
+572
+01:01:28,560 --> 01:01:32,920
+but those are my guesses and things you would want to do with this categorical data at this point.
+
+573
+01:01:33,560 --> 01:01:35,960
+And you can always send me email, so I'll add to that.
+
+574
+01:01:37,760 --> 01:01:44,080
+All right. So, I'm going to now show you maybe, in my personal opinion, the next kind of really
+
+575
+01:01:44,080 --> 01:01:55,240
+cool tool in the toolbox, in this data exploration and representation toolbox, which is indexing.
+
+576
+01:01:55,920 --> 01:02:00,720
+Another way I would say this is using binary data.
+
+577
+01:02:00,720 --> 01:02:05,720
+Okay. So, what we're going to do here is that we're going to look at our full data set.  So,
+
+578
+01:02:05,720 --> 01:02:11,900
+we have a full data set, which of 47,000 rows. Now, let's say we want to answer a question,
+
+579
+01:02:12,180 --> 01:02:18,840
+not about the full data set, but only about a specific portion of the data. So, for example,
+
+580
+01:02:19,000 --> 01:02:23,380
+the example we're going to use is, say we only want to analyze rooms that are really expensive,
+
+581
+01:02:23,500 --> 01:02:30,000
+so over $1,000.  Okay. Maybe you're deciding if you want to eat the rich or something like that.
+
+582
+01:02:30,000 --> 01:02:36,100
+So, we'll look only at the expensive rooms.  So, what we can do, and this is what I'm going to
+
+583
+01:02:36,100 --> 01:02:43,480
+teach you, is you can make a new data set that is a subset of the old data set for which specific
+
+584
+01:02:43,480 --> 01:02:51,020
+thing is true, for which a specific statement that we make is true. For example, you can say,
+
+585
+01:02:51,120 --> 01:02:59,780
+okay, I want to make a subset of the data where the price of each listing is over $1,000. Okay.
+
+586
+01:02:59,780 --> 01:03:09,500
+$1,001 or more. So, we're going to do that now. So, let's clear our screen, clear our minds,
+
+587
+01:03:09,900 --> 01:03:16,500
+control L. So, we've already entered 11 lines of code.  We're on line 12 here.
+
+588
+01:03:17,420 --> 01:03:25,080
+And now let's do our indexing. And I would say this is probably maybe one of my top most used
+
+589
+01:03:25,080 --> 01:03:30,600
+techniques when I'm doing this, is creating these subsets of the data.  Okay. So, this is a pretty
+
+590
+01:03:30,600 --> 01:03:38,640
+cool one, and very flexible. So, let's do, we're going to do this in two steps.  First, we create
+
+591
+01:03:38,640 --> 01:03:47,320
+a series that is, it's going to be a series containing binary data. Another way of saying
+
+592
+01:03:47,320 --> 01:03:54,920
+that is it's a Boolean series. Okay.  Boolean, say kind of the same as binary. True or false.
+
+593
+01:03:55,400 --> 01:04:00,320
+We're going to create a series that only has true or false values.  And those are going to
+
+594
+01:04:00,320 --> 01:04:07,680
+correspond to what we ask for. So, we're going to say, create a Boolean series where it'll be true
+
+595
+01:04:07,680 --> 01:04:14,660
+if the price for the row is over $1,000. And false if the price of the row is less than $1,000.
+
+596
+01:04:14,660 --> 01:04:19,500
+So, that's our first step. And we're going to go and save it to a variable write off. Okay.  So,
+
+597
+01:04:19,540 --> 01:04:27,740
+we'll do, I'll call it expensive underscore bools for Booleans. Okay.
+
+598
+01:04:36,000 --> 01:04:44,040
+I did an underscore there. Expensive underscore bools. That's going
+
+599
+01:04:44,040 --> 01:04:52,740
+to be our variable name for our Boolean series of true false values.  Bools equals space. And
+
+600
+01:04:52,740 --> 01:05:05,240
+let's do df.price. And this is where we specify what we want. So, I'm going to say greater than
+
+601
+01:05:11,900 --> 01:05:21,740
+$1,000.  I did three zeros there. Zero, zero, zero. So, what we put in is expensive underscore
+
+602
+01:05:21,740 --> 01:05:32,720
+bools equals, for assigning the variable, df.price greater than sign $1,000.  You can leave off the
+
+603
+01:05:32,720 --> 01:05:38,700
+spaces if you're not feeling it. I put the spaces in because that's what they tell you to do in
+
+604
+01:05:39,600 --> 01:05:43,840
+programmer school, which I never went to. Okay.  So, I'm going to press enter.
+
+605
+01:05:46,600 --> 01:05:52,800
+"In left bracket, 13 right bracket colon." Okay. So, remember when you assign variables,
+
+606
+01:05:52,920 --> 01:05:57,880
+you don't get any output. You just hear the input line again. Remember, the way of thinking about
+
+607
+01:05:57,880 --> 01:06:03,060
+that is that the data that we would normally hear with the screen reader or see, perceive,
+
+608
+01:06:03,780 --> 01:06:11,380
+depending on how you're using it, goes into the variable.  It doesn't come out into our
+
+609
+01:06:12,360 --> 01:06:19,620
+command line environment. That's one way to think about it. So, let's check out that series.
+
+610
+01:06:21,140 --> 01:06:30,640
+So, let's do what did I call it? Expensive underscore bools. Expensive underscore bools
+
+611
+01:06:30,640 --> 01:06:38,040
+dots head. And I just use head a lot because I don't want to hear too much output.  Okay. Remember,
+
+612
+01:06:38,160 --> 01:06:42,760
+head will get you the first five items. So, head is very useful to just get a little bit of the
+
+613
+01:06:42,760 --> 01:06:46,640
+data so you can kind of get a sense of it. "Out left bracket, 13 right bracket colon.
+
+614
+01:06:47,860 --> 01:06:57,140
+Zero false. One false. Two false. Three false. Four false." So, that was pretty boring because
+
+615
+01:06:57,140 --> 01:07:09,620
+they're all false. But most of the listings are not over $1,000. Right? I mean, you know,
+
+616
+01:07:10,940 --> 01:07:18,100
+thank the universe, you know, because, like, you know, I can't afford $1,000 a year.  But we could
+
+617
+01:07:18,100 --> 01:07:25,160
+do DF. So, now we have our Booleans. But now how do we tell if there's actually any trues in it?
+
+618
+01:07:25,160 --> 01:07:31,600
+So, the two things you can do with the Boolean series by itself that I recommend are here's a
+
+619
+01:07:31,600 --> 01:07:35,720
+little trick that I really like.  Okay. I haven't really seen this anywhere. I don't know where I
+
+620
+01:07:35,720 --> 01:07:41,860
+picked this up.  Maybe from a colleague or something. But you could do price or expensive underscore
+
+621
+01:07:41,860 --> 01:07:57,520
+bools. Expensive underscore bools dot mean.  So, get the mean. Get the mean of the Boolean series.
+
+622
+01:07:57,840 --> 01:08:01,480
+And what this will do is it will tell you the percentage there's percent that are true.
+
+623
+01:08:08,020 --> 01:08:14,180
+So, 0.004. About half a percent of them are over $1,000. That's still a good number.
+
+624
+01:08:15,880 --> 01:08:24,680
+Okay.  So, we did expensive underscore bools dot mean. And that told us the percentage
+
+625
+01:08:24,680 --> 01:08:33,939
+in a decimal of the items that are true. Okay.  That's a cool trick. So, we do know there are
+
+626
+01:08:33,939 --> 01:08:39,040
+some in there. And now let's find out exactly how many.  So, we can also use remember we said
+
+627
+01:08:39,040 --> 01:08:44,340
+we used our value we had our method value counts. You can also count the true and false values. So,
+
+628
+01:08:44,380 --> 01:08:51,479
+let's do "EXP line bools." So, expensive underscore bools dot remember using the tab.
+
+629
+01:08:51,479 --> 01:08:58,040
+That's why it's saying it that way. Dot.  Expensive underscore bools dot
+
+630
+01:08:59,939 --> 01:09:13,060
+value underscore counts. "V-A-L-U-E. Value. Line. C-O-U-N-T-S. S. Left paren. Right paren."
+
+631
+01:09:13,520 --> 01:09:19,120
+Okay. So, we're using the value counts method on our Boolean series to count the values.
+
+632
+01:09:19,120 --> 01:09:28,240
+"Out left bracket 15 right bracket colon. False 48,656." That's 48,000 something. That's a lot.
+
+633
+01:09:28,359 --> 01:09:36,460
+That's not all of them. "True 239." So, we have 239 values in here that are true. That means
+
+634
+01:09:36,460 --> 01:09:46,080
+there's 239 rows in this data set where the price of the room is greater than $1,000.  Okay. Now,
+
+635
+01:09:46,080 --> 01:09:52,420
+let's do the real useful thing, which is we're going to create a new data frame. We're going
+
+636
+01:09:52,420 --> 01:09:57,480
+to call it expensive underscore df.  Expensive data frame. It's a new data frame. We can't just
+
+637
+01:09:57,480 --> 01:10:03,160
+keep using df1, df2, df3.  Don't do that. Don't do that to yourself. Once you go beyond using one
+
+638
+01:10:03,160 --> 01:10:07,780
+data frame, you want to give it a name that's kind of somewhat useful.  We'll call it expensive
+
+639
+01:10:07,780 --> 01:10:15,280
+underscore df. Then, what we'll do, what we'll put in it is only the items where the room is,
+
+640
+01:10:15,500 --> 01:10:23,140
+where only the rows where the price is over $1,000. Okay.  So, we do expensive.
+
+641
+01:10:28,240 --> 01:10:39,300
+Expensive underscore df space equals space.
+
+642
+01:10:39,300 --> 01:10:47,280
+Let's do df, our original data frame. Now, we open square bracket.
+
+643
+01:10:47,280 --> 01:10:55,180
+"Df left bracket." Now, we pass in, we give it our bool, boolean series.
+
+644
+01:10:58,740 --> 01:11:11,440
+"Expensive line bools. Right bracket." So, we did expensive underscore df equals df open square
+
+645
+01:11:11,440 --> 01:11:20,740
+bracket. Expensive underscore bools, our boolean series variable. Right square bracket.  You can
+
+646
+01:11:20,740 --> 01:11:27,300
+kind of think of this as a fancy, remember we used slicing syntax on our lists in the first
+
+647
+01:11:27,300 --> 01:11:34,580
+tutorial to pull out specific items from a list. It's very similar to that syntax, but we're
+
+648
+01:11:34,580 --> 01:11:42,420
+using our boolean series to tell pandas which rows to pull out. We'll go over that again.
+
+649
+01:11:42,680 --> 01:11:50,300
+I'm going to press enter. We saved a variable so we didn't get anything as output. Let's take a
+
+650
+01:11:50,300 --> 01:12:03,140
+look at that variable.  Let's do length on this variable. Expensive
+
+651
+01:12:04,100 --> 01:12:14,420
+line. Df. So, I'm putting expensive underscore df inside len.
+
+652
+01:12:19,720 --> 01:12:27,940
+239 items.  We have a new data frame and it's 239 items. You can look at it manually, but now what
+
+653
+01:12:27,940 --> 01:12:35,240
+we have in here is all the items are expensive. Every item in this new data set had a room that
+
+654
+01:12:35,240 --> 01:12:41,680
+was over a thousand dollars.  So, we can do things like, what would be the mean of the prices
+
+655
+01:12:42,120 --> 01:12:47,380
+of these rooms? It would probably be more, but let's just try it out. So, we could do...
+
+656
+01:12:48,120 --> 01:13:02,160
+I did too much. So, I did expensive underscore df dot price dot mean.
+
+657
+01:13:06,160 --> 01:13:13,720
+So, it's expensive underscore df dot price dot mean, open parenthesis,
+
+658
+01:13:13,720 --> 01:13:22,980
+close parenthesis. So, if you only take the items that are over a thousand dollars,
+
+659
+01:13:23,100 --> 01:13:29,480
+then the mean is really large.  It's like $2,500, which doesn't tell us that much.
+
+660
+01:13:30,420 --> 01:13:36,640
+But you could do other things. Maybe I want to know what neighbourhoods are the most expensive.
+
+661
+01:13:36,640 --> 01:13:43,080
+So, we could do expensive underscore df dot neighborhood.
+
+662
+01:13:49,020 --> 01:13:56,360
+So, I did expensive underscore df, I filled it in, dot neighbourhood.
+
+663
+01:13:59,460 --> 01:14:05,420
+You did the math to fill things in.  So, it's expensive underscore df dot neighborhood.
+
+664
+01:14:07,160 --> 01:14:11,340
+And then now let's do value counts, just to count them up. Because we don't want to go through all
+
+665
+01:14:11,340 --> 01:14:27,020
+that data.  We just want to count it up. So, it's expensive underscore df dot
+
+666
+01:14:30,400 --> 01:14:32,940
+neighborhood. That tells us which neighborhood that each item is in.
+
+667
+01:14:32,940 --> 01:14:38,360
+Dot value underscore counts, open parenthesis, close parenthesis. So, what essentially this is
+
+668
+01:14:38,360 --> 01:14:45,540
+telling us is it's going to tell us which neighborhoods have Airbnbs that are listings
+
+669
+01:14:45,540 --> 01:14:49,420
+that are over a thousand dollars. Okay? "File quote lesson Python."
+
+670
+01:14:52,160 --> 01:15:02,360
+Expensive df dot neighborhood. Dot price. Oh, no.  Dot value counts.
+
+671
+01:15:04,460 --> 01:15:12,200
+"Right. Riverdale one. East Flatbush one. Sheep's Head Bay one. Flushing one.
+
+672
+01:15:12,480 --> 01:15:15,500
+So, this is kind of boring. Fort Green one. So, we actually want to sort this.
+
+673
+01:15:15,500 --> 01:15:20,620
+Cypress Hills one." Oh, you know what it's doing. It's printing. It's because
+
+674
+01:15:22,220 --> 01:15:27,880
+I'm so zoomed in that it prints out stuff later. So, we actually want to use head as well. So,
+
+675
+01:15:27,920 --> 01:15:32,620
+I'm going to press up, colon, and do dot head.  So, actually we're chaining together a lot of
+
+676
+01:15:32,620 --> 01:15:37,760
+things. And we'll go over it one more time. Dot h e a d. Let's hear the output and I'll
+
+677
+01:15:37,760 --> 01:15:43,220
+go over it one more time. "Head. Right paren." So, this prints the first five items. We're
+
+678
+01:15:43,220 --> 01:15:48,300
+hearing items from the middle, which is not that good. "Colon. Value line counts left paren.
+
+679
+01:15:48,820 --> 01:15:55,840
+Right paren. Dot head left paren. Right paren.  Out left bracket 21 right bracket colon.
+
+680
+01:15:57,020 --> 01:16:04,580
+Upper west side 23." Upper west side 23. So, there are 23 items or there are 23 listings
+
+681
+01:16:04,580 --> 01:16:08,520
+that are more expensive than a thousand dollars in the upper west side. That's a pretty seems
+
+682
+01:16:08,520 --> 01:16:14,960
+like a pretty pricey neighborhood. "Midtown 19. Midtown 19. West village 14." West village 14.
+
+683
+01:16:15,660 --> 01:16:21,020
+Okay. Okay. So, those are very expensive neighborhoods.  Any other ones?
+
+684
+01:16:22,000 --> 01:16:27,800
+"Upper east side 13. Chelsea 13." Those all sound like very expensive neighborhoods in New York.
+
+685
+01:16:27,900 --> 01:16:34,840
+Okay. So, what we did there was we have our new data frame that we created that has rooms that
+
+686
+01:16:34,840 --> 01:16:42,960
+are only over the $1,000 price point, but it has all the other data in it, right? So, it's like a
+
+687
+01:16:42,960 --> 01:16:48,040
+new data frame, but the only rows in it are items that are over the prices over a certain amount,
+
+688
+01:16:48,300 --> 01:16:52,900
+but it still has all the other data in it. So, we can pull out the names.  We can pull out other
+
+689
+01:16:52,900 --> 01:16:58,340
+items. We can pull out the neighborhood. We can pull out the neighborhood group from this new data
+
+690
+01:16:58,340 --> 01:17:04,360
+frame.  So, we just then do what we did before, which is pull out some categorical data. So,
+
+691
+01:17:04,360 --> 01:17:10,580
+we pull out the neighborhood, then we count it, value counts, and then I did head because we had,
+
+692
+01:17:11,220 --> 01:17:15,020
+you know, it was printing out too many things. Okay.  So, we just pulled out the first five items,
+
+693
+01:17:15,480 --> 01:17:22,900
+and it told us the five most expensive neighborhoods. Okay. So, that was expensive underscore df dot
+
+694
+01:17:24,800 --> 01:17:31,560
+neighborhood dot value counts, count the data, dot head.  Okay. And that tells us the five
+
+695
+01:17:32,500 --> 01:17:39,760
+neighborhoods that have the most rooms over $1,000 in the data. You can see this is a very
+
+696
+01:17:39,760 --> 01:17:44,940
+flexible method.  Anything you can think about that you could pose as a question about something
+
+697
+01:17:44,940 --> 01:17:50,360
+greater than, something less than, you can make a new data set out of it. Okay. And then explore
+
+698
+01:17:50,360 --> 01:17:56,100
+only that data set.  Okay. So, it's a very flexible tool in your toolbox. You make subsets of your
+
+699
+01:17:56,100 --> 01:18:00,760
+data.  Okay. I'm going to do a quick little time check because there's one thing, something I would
+
+700
+01:18:00,760 --> 01:18:05,340
+like to show you with this, but we may not have time for it. I might just have to gesture to it.
+
+701
+01:18:10,820 --> 01:18:15,320
+222. We can very quickly go through it. I think we might have time for it. So,
+
+702
+01:18:17,380 --> 01:18:22,800
+I live in New York, as we talked about, maybe briefly before, and I grew up in Queens,
+
+703
+01:18:23,060 --> 01:18:27,360
+here in Queens, and I live here in Queens. Okay. And I say, actually, I didn't get very far in life
+
+704
+01:18:27,360 --> 01:18:33,560
+because I grew up in Queens and I live in Queens.  But, literally, in terms of distance.
+
+705
+01:18:35,660 --> 01:18:39,420
+But, you know, so, but I like my neighborhood. It's called Woodside.  It's here in Queens.
+
+706
+01:18:39,760 --> 01:18:45,760
+And I want to know some stuff about, let's say I want to know the average price of an Airbnb in
+
+707
+01:18:45,760 --> 01:18:50,720
+Woodside. Okay.  In my neighborhood. So, we'll use something a little bit, we're using the exact same
+
+708
+01:18:50,720 --> 01:18:56,160
+technique. We're going to create a Boolean series where if it's, if the neighborhood is Woodside,
+
+709
+01:18:56,160 --> 01:19:02,220
+it will be true.  The row will be true. And if it's not Woodside, it'll be false.
+
+710
+01:19:02,940 --> 01:19:07,700
+Then we're going to use that Boolean series to create a new data frame.  And the data frame will
+
+711
+01:19:07,700 --> 01:19:14,220
+only be items in Woodside. Okay. Only be items in the neighborhood Woodside.  Okay. So, instead of
+
+712
+01:19:14,220 --> 01:19:19,260
+working with numeric data, instead of using numeric data to create a subset, you know,
+
+713
+01:19:19,280 --> 01:19:25,340
+greater than, less than, whatever, like we did with the expensive data frame, we're going to
+
+714
+01:19:25,340 --> 01:19:30,760
+actually use categorical data. So, we'll say the data has to be in the, in terms of the neighborhood
+
+715
+01:19:30,760 --> 01:19:38,620
+as a categorical data.  And then we'll say, okay, the data has to be in Woodside. Okay. So, it has
+
+716
+01:19:38,620 --> 01:19:45,540
+to be in a specific category in the neighborhood column, which is Woodside.  Okay. And you can tell
+
+717
+01:19:45,540 --> 01:19:50,380
+I'm in Queens because someone's driving by. Hopefully you guys don't hear that.  Maybe you do.
+
+718
+01:19:51,240 --> 01:19:59,460
+Let's do control L to clear our screen. Okay.  I guess I'll do the math.
+
+719
+01:20:01,580 --> 01:20:11,100
+Focus is the worst thing in computers. Okay.  So, I'm doing DF, or I'm sorry, I'm doing,
+
+720
+01:20:11,680 --> 01:20:15,900
+I'm going to call this Woodside underscore bools. I'm using the same technique. I create a Boolean
+
+721
+01:20:15,900 --> 01:20:24,820
+series.  I'm going to call it Woodside bools. I'm going to go a little faster with this because
+
+722
+01:20:24,820 --> 01:20:28,980
+we already did this. I'm just showing you a slightly different technique.  Woodside bools
+
+723
+01:20:28,980 --> 01:20:48,870
+equals DF.neighbourhood equals equals is equal to,
+
+724
+01:20:49,900 --> 01:20:58,060
+and then I'll use the string, quote, "W-O-O-D-S-I-D-E." I have to use a capital letter for
+
+725
+01:20:58,060 --> 01:21:07,940
+Woodside because that's how the data is constituted, I think, quote. Okay.  So,
+
+726
+01:21:08,040 --> 01:21:12,280
+we have our Boolean series. I'm just going to double check it by doing the mean to make sure
+
+727
+01:21:12,280 --> 01:21:16,940
+there's something in it so that it works. So, Woodside underscore bools dot mean.
+
+728
+01:21:24,680 --> 01:21:31,700
+So, there is something in it. It wasn't just a zero. So, it's not a lot of the data.  It's a
+
+729
+01:21:31,700 --> 01:21:36,820
+very small percentage of the data, but it's there. And then we're immediately going to
+
+730
+01:21:36,820 --> 01:21:41,580
+create a new data frame from our Booleans. So, I'll say Woodside underscore DF.
+
+731
+01:21:46,940 --> 01:21:51,640
+DF. Say a new data frame. If you want, you can just sit back and relax during this part.  You
+
+732
+01:21:51,640 --> 01:22:05,220
+kind of already did this. And then equals, Woodside DF equals, and then DF,
+
+733
+01:22:07,000 --> 01:22:12,320
+open parenthesis, no, open square bracket, DF, and we pass in our Woodside DF. This is exactly
+
+734
+01:22:12,320 --> 01:22:19,540
+what we did before.  You know, to create the new series, we do DF, open the square bracket,
+
+735
+01:22:19,660 --> 01:22:25,500
+and we pass in our Booleans. Okay? And then it pulls out all the rows for which a value is true.
+
+736
+01:22:25,720 --> 01:22:29,340
+Okay? For which, in this case, for which the neighborhood was equal to Woodside.
+
+737
+01:22:30,200 --> 01:22:42,020
+So, Woodside underscore bools. So, here I have Woodside underscore DF equals DF
+
+738
+01:22:42,560 --> 01:22:49,100
+square bracket, Woodside underscore bools. Okay? And what this does is it creates a new data set.
+
+739
+01:22:49,220 --> 01:22:55,940
+It's a subset of our data where only the neighborhoods that are Woodside, or only the
+
+740
+01:22:55,940 --> 01:23:02,900
+items in the neighborhood column that are equal to Woodside are put into the new data frame. Okay?
+
+741
+01:23:03,120 --> 01:23:07,940
+That's a terrible way of saying it. It's a subset of the data for which the neighborhood is Woodside.
+
+742
+01:23:11,280 --> 01:23:19,240
+So, now I have a new variable, Woodside DF. Okay? And let's just quickly, we'll get the mean
+
+743
+01:23:19,240 --> 01:23:29,180
+price. So, we'll do Woodside underscore DF.  This is just like we did in the last workshop.
+
+744
+01:23:45,860 --> 01:23:52,540
+So, remember, if you kind of remember from the last time, I think if we do it again,
+
+745
+01:23:52,760 --> 01:24:07,840
+"df dot price dot mean()." The mean price in the full data set was. So, in Woodside, it's only like
+
+746
+01:24:07,840 --> 01:24:17,860
+$80 or $85, which is pretty cheap. It's relatively cheap. You know, so, you know,
+
+747
+01:24:17,900 --> 01:24:24,840
+come to Woodside, I guess.  And then one other fun thing is you could pull out the, don't follow
+
+748
+01:24:24,840 --> 01:24:28,860
+along with this, but I'm going to show you the flexibility of this approach. When I was working
+
+749
+01:24:28,860 --> 01:24:34,300
+with the data, just preparing this tutorial, I noticed that there's some very funny room names
+
+750
+01:24:34,720 --> 01:24:39,680
+for the cheap rooms in Woodside. So, just for a laugh, I'll pull that out.
+
+751
+01:24:40,040 --> 01:24:44,080
+So, you don't have to follow along with this if you don't want to. But what I'll do is I'll do
+
+752
+01:24:44,080 --> 01:25:01,300
+Woodside DF. In fact, I'm going to sort my new data frame on price.  So, I'm going to get cheap
+
+753
+01:25:01,300 --> 01:25:14,380
+and expensive. So, I'm going to do Woodside DF dot sort values. Okay.  And then I'm going to do
+
+754
+01:25:14,380 --> 01:25:29,200
+dot name. So, it's Woodside DF, our variable, dot sort underscore values. And then into that,
+
+755
+01:25:29,200 --> 01:25:35,680
+I give price.  So, I basically say sort the data frame on price from, I think it's from cheapest
+
+756
+01:25:35,680 --> 01:25:41,040
+to most expensive. And then I did another dot, and I'm going to say I want the names. Okay.
+
+757
+01:25:43,060 --> 01:25:46,440
+The name column. And then I'll just get the top most, the head.
+
+758
+01:25:51,800 --> 01:25:55,700
+Don't worry too much about following along with this.  I'm just doing this to entertain you because
+
+759
+01:25:55,700 --> 01:26:02,380
+they're funny. But that is useful. So, basically, I take my new data frame, which is only Woodside,
+
+760
+01:26:02,460 --> 01:26:10,480
+my neighborhood.  Then I'm going to sort by price. Okay. Sort the whole data frame by price.
+
+761
+01:26:11,360 --> 01:26:17,720
+Then I'm going to pull out the top, the five first results, which I believe will be the
+
+762
+01:26:17,720 --> 01:26:27,900
+cheapest. ...
+
+763
+01:26:27,900 --> 01:26:30,760
+...
+
+764
+01:26:30,760 --> 01:26:31,720
+...
+
+765
+01:26:31,720 --> 01:26:35,980
+...
+
+766
+01:26:35,980 --> 01:26:36,660
+...
+
+767
+01:26:38,540 --> 01:26:42,300
+...
+
+768
+01:27:01,600 --> 01:27:08,720
+... So, there's a funny one. It has some emoji, which isn't printing out correctly, I guess.
+
+769
+01:27:08,720 --> 01:27:14,920
+they're not hearing it and it says wow exclamation mark cozy exclamation mark so
+
+770
+01:27:14,920 --> 01:27:19,440
+that's one of the rooms and then another one of the rooms was it only has the
+
+771
+01:27:19,440 --> 01:27:25,020
+word you in it like you like letter u can get to Manhattan and that's
+
+772
+01:27:25,020 --> 01:27:28,740
+literally the cheapest room and with that it was $28 when I looked at it and
+
+773
+01:27:28,740 --> 01:27:34,080
+it was you capital letter can get to Manhattan and you know or you can use a
+
+774
+01:27:34,080 --> 01:27:38,000
+certain number of train lines I thought that was kind of funny and then another
+
+775
+01:27:38,000 --> 01:27:44,120
+room says just wow cozy and that costs like 30 bucks or something like that so
+
+776
+01:27:44,120 --> 01:27:47,420
+the ones that are the cheapest are kind of the most eccentric and I thought that
+
+777
+01:27:47,420 --> 01:27:51,360
+was kind of a little bit entertaining okay and that kind of also shows the
+
+778
+01:27:51,360 --> 01:27:54,660
+flexibility of combining some of these things so what we did was we created a
+
+779
+01:27:54,660 --> 01:27:59,340
+data set that was only Woodside then we sorted on the price to get the cheapest
+
+780
+01:27:59,340 --> 01:28:04,740
+to most expensive and then we pulled out the names from the data frame and then
+
+781
+01:28:04,740 --> 01:28:08,180
+we got the first five which is the cheap five cheapest rooms you can also do
+
+782
+01:28:08,880 --> 01:28:12,080
+doctail and get the last which would be room five rooms would be the most
+
+783
+01:28:12,080 --> 01:28:16,340
+expensive okay so once you're gonna get a little bit used to these methods you
+
+784
+01:28:16,340 --> 01:28:22,720
+can start mixing and matching and it becomes a very flexible okay so we now
+
+785
+01:28:22,720 --> 01:28:29,180
+have about half an hour I believe okay "2 colon 32 p.m." exactly okay so what I
+
+786
+01:28:29,180 --> 01:28:36,680
+want to introduce is one more concept which is correlation and then I may
+
+787
+01:28:36,680 --> 01:28:42,420
+just kind of gesture toward how you would work with create line charts as
+
+788
+01:28:42,420 --> 01:28:46,600
+well but we may not have time to fully engage with that but there are materials
+
+789
+01:28:46,600 --> 01:28:51,460
+in the written curriculum as well so we might just have to do that a little bit
+
+790
+01:28:51,460 --> 01:28:55,240
+of an abbreviated version of the of creating a line chart it's a lot to take
+
+791
+01:28:55,240 --> 01:29:02,360
+in anyway so I think we're kind of covering a lot but okay so we we've
+
+792
+01:29:02,360 --> 01:29:06,920
+learned indexing that's creating subsets of the data I would say if you're gonna
+
+793
+01:29:06,920 --> 01:29:12,400
+learn two techniques for data for exploring data for representing data
+
+794
+01:29:12,400 --> 01:29:17,740
+then the two you want to learn or make a count that's incredibly useful to just
+
+795
+01:29:17,740 --> 01:29:22,800
+do a count of a categorical of categorical data will tell you a lot the
+
+796
+01:29:22,800 --> 01:29:26,200
+second thing I'll tell you is do that learn to do that indexing learn to use
+
+797
+01:29:26,200 --> 01:29:30,720
+those boolean series which will allow you to create subsets of the data they
+
+798
+01:29:30,720 --> 01:29:35,720
+also allow you to create answer specific questions so you can learn oh what our
+
+799
+01:29:35,720 --> 01:29:41,700
+question well here was what was the proportion of the rooms that are over a
+
+800
+01:29:41,700 --> 01:29:47,280
+thousand dollars and the answer was it's about half a percent you know we got the
+
+801
+01:29:47,280 --> 01:29:51,560
+boolean series and then we do dot mean and it tells us okay how many of these
+
+802
+01:29:51,560 --> 01:29:56,320
+items is is this proposition true and that's a very flexible we can also say
+
+803
+01:29:56,320 --> 01:30:02,740
+well how many rooms are less than $30 how many rooms are under $100 or we
+
+804
+01:30:02,740 --> 01:30:07,820
+could say things like how many rooms have the minimum night greater than that
+
+805
+01:30:07,820 --> 01:30:13,280
+you have to stay greater than a week 30 than seven days anything that's a number
+
+806
+01:30:13,900 --> 01:30:16,900
+you can use that greater or less than and answer questions about it say what's
+
+807
+01:30:16,900 --> 01:30:23,560
+the proportion of rooms for which you know the other let me think of other
+
+808
+01:30:23,560 --> 01:30:28,560
+numeric items that the number of rooms for which the minimum nights you can
+
+809
+01:30:28,560 --> 01:30:32,380
+stay is less than a week you know and it will tell you the percentage that's very
+
+810
+01:30:32,380 --> 01:30:37,260
+useful and once you create a subset of the data a new data frame based on that
+
+811
+01:30:37,260 --> 01:30:41,860
+you can answer other questions like you can say you know of the rooms where you
+
+812
+01:30:41,860 --> 01:30:46,140
+can only stay for one night what's the mean price and is it greater than or less
+
+813
+01:30:46,140 --> 01:30:50,400
+than the full data set or greater and less than rooms where you can stay for
+
+814
+01:30:50,400 --> 01:30:54,600
+more than one these are you can answer very specific questions with these two
+
+815
+01:30:54,600 --> 01:31:01,520
+tools only two tools in counting and indexing these are I would say if you're
+
+816
+01:31:01,520 --> 01:31:06,460
+gonna learn two things you can get very far with just those two tools okay very
+
+817
+01:31:06,460 --> 01:31:11,680
+flexible and you also see it combined well with sorting getting the head and
+
+818
+01:31:11,680 --> 01:31:14,820
+the head and the tail those are the old and we're really only using a small
+
+819
+01:31:14,820 --> 01:31:17,900
+number of methods here to do some very flexible stuff okay you learn those
+
+820
+01:31:18,640 --> 01:31:29,600
+three or four methods count values head tail sort sort values and and then to
+
+821
+01:31:29,600 --> 01:31:33,080
+get that indexing method that I showed you where you use greater than less
+
+822
+01:31:33,080 --> 01:31:38,140
+than or equal equal to and then that's a small number of methods that lets you do
+
+823
+01:31:38,140 --> 01:31:44,160
+a lot okay so let's do something a little more data sciencey and this is a
+
+824
+01:31:44,160 --> 01:31:47,420
+you know we're kind of coming up on the end this probably the last thing we
+
+825
+01:31:47,420 --> 01:31:51,140
+fully we managed to fully engage with we'll kind of just put a line charts at
+
+826
+01:31:51,140 --> 01:31:55,260
+the end and we do have some written curriculum but I think we may not be
+
+827
+01:31:55,260 --> 01:32:02,520
+able to get to it so let's clear our clear our minds clear our screens
+
+828
+01:32:02,520 --> 01:32:07,080
+control L "in left bracket 30 right bracket colon" and we're up to 30
+
+829
+01:32:07,080 --> 01:32:11,540
+we've entered 30 lines of Python we're up to line 30 here and what we're
+
+830
+01:32:11,540 --> 01:32:17,780
+gonna talk about now is we're gonna try to replace another common visualization
+
+831
+01:32:17,780 --> 01:32:23,440
+type a little bit but we it's not it's gonna be a little more challenging it's
+
+832
+01:32:23,440 --> 01:32:28,080
+not quite as easy to replace but it is possible to get kind of a certain
+
+833
+01:32:28,080 --> 01:32:33,100
+percentage of the way there and that is that what we're gonna learn to do is
+
+834
+01:32:33,100 --> 01:32:39,880
+we're going to learn to correlate to if we have two variables so we have two
+
+835
+01:32:39,880 --> 01:32:46,660
+columns each with numeric data then we what we're gonna learn to do is find a
+
+836
+01:32:46,660 --> 01:32:51,860
+correlation between those two columns okay and what a correlation is it's a
+
+837
+01:32:51,860 --> 01:32:56,560
+it shows a relationship between the two columns between the two variables okay
+
+838
+01:32:56,560 --> 01:33:01,740
+and what do we mean by that and you know the fancy way to say this it's a linear
+
+839
+01:33:01,740 --> 01:33:05,660
+relationship linear relationship basically means you could draw a line to
+
+840
+01:33:05,660 --> 01:33:10,420
+show the relationship or you can get a number which is would be the slope of a
+
+841
+01:33:10,420 --> 01:33:17,220
+line and then that's fancy instead the simple way to say it is it say you have
+
+842
+01:33:17,220 --> 01:33:23,820
+two variables let's just imagine we have ice cream sales and temperature those
+
+843
+01:33:23,820 --> 01:33:27,840
+are two variables we have the temperature in degrees Fahrenheit let's
+
+844
+01:33:27,840 --> 01:33:31,160
+say I mean I'm in New York and a Fahrenheit is ridiculous but let's say
+
+845
+01:33:31,160 --> 01:33:34,780
+we have temperature in degrees Fahrenheit and we have ice cream sales
+
+846
+01:33:34,780 --> 01:33:41,600
+okay sales of ice cream per day and then at certain temperatures how much do the
+
+847
+01:33:41,600 --> 01:33:47,180
+sales but how does that affect sales so we could use a correlation and that
+
+848
+01:33:47,180 --> 01:33:50,780
+would suggest what is the relationship between the two variables the linear
+
+849
+01:33:50,780 --> 01:33:55,700
+relationship so if one goes up does another one go up down or doesn't
+
+850
+01:33:55,700 --> 01:34:00,420
+nothing happens that's basically what we're talking about if one variable goes
+
+851
+01:34:00,420 --> 01:34:04,320
+up then what happens to the other one does it go up down or does nothing
+
+852
+01:34:04,320 --> 01:34:08,640
+happen that's the direction of the relationship and then also how strong is
+
+853
+01:34:08,640 --> 01:34:14,060
+the relationship so does it go up a lot does it go up a little does it go down a
+
+854
+01:34:14,060 --> 01:34:19,320
+lot does it go down a little okay and that is basically what a correlation
+
+855
+01:34:19,320 --> 01:34:23,840
+okay and what we're specifically going to talk about is called a Pearson
+
+856
+01:34:23,840 --> 01:34:27,280
+correlation but it's the most common correlation type so let's not worry too
+
+857
+01:34:27,280 --> 01:34:31,700
+much about that and the way we represent this is in a number from
+
+858
+01:34:31,700 --> 01:34:39,420
+negative 1 to 1 okay so if the two numbers are if one number goes up the
+
+859
+01:34:39,420 --> 01:34:44,120
+other one goes up we call that a positive correlation and we that number
+
+860
+01:34:44,120 --> 01:34:52,920
+is and then the number that correlation number will be positive if if say one
+
+861
+01:34:52,920 --> 01:34:56,440
+number goes up the other one goes down then the number or correlation number
+
+862
+01:34:56,440 --> 01:35:00,600
+will be negative okay and then if there's no relationship then the number
+
+863
+01:35:00,600 --> 01:35:03,600
+will be pretty close to 0 okay the correlation number will be pretty close
+
+864
+01:35:03,600 --> 01:35:07,060
+to 0 okay so negative 1 means you have a negative relationship that the
+
+865
+01:35:07,060 --> 01:35:10,540
+variables go in different directions 0 means the variables aren't related
+
+866
+01:35:10,540 --> 01:35:16,060
+really they there's no association or close to 0 and then positive number
+
+867
+01:35:16,060 --> 01:35:18,920
+means that there's some kind of relationship if one goes up the other
+
+868
+01:35:18,920 --> 01:35:24,140
+one goes up and the closer the number is to 1 the stronger the relationship so if
+
+869
+01:35:24,140 --> 01:35:29,440
+if a number goes up by 1 then the other one goes up by a fixed amount say if one
+
+870
+01:35:29,440 --> 01:35:32,860
+number goes up by 1 then the other one goes up by 5 and that will be a
+
+871
+01:35:32,860 --> 01:35:39,140
+relationship of 1 okay it's perfectly correlated okay and so 1 is perfectly
+
+872
+01:35:39,140 --> 01:35:44,420
+correlated they're basically the same and 1 goes up the other one goes up
+
+873
+01:35:46,060 --> 01:35:49,260
+straightforwardly linearly and then if negative 1 one goes up the other one will
+
+874
+01:35:49,260 --> 01:35:54,340
+go down straightforwardly linearly okay so those are that's what we're gonna
+
+875
+01:35:54,340 --> 01:36:00,140
+calculate and luckily pandas makes this in terms of programming this is pretty
+
+876
+01:36:00,140 --> 01:36:04,000
+easy the hard part is just understanding what you're doing what the two what the
+
+877
+01:36:04,000 --> 01:36:08,280
+number means okay basically just what I just explained to you that there's a
+
+878
+01:36:08,280 --> 01:36:12,860
+direction positive negative or no relationship and that there's a strength
+
+879
+01:36:13,840 --> 01:36:18,080
+whether it's strongly correlated or weakly correlated and then that number
+
+880
+01:36:18,080 --> 01:36:21,920
+one number between negative 1 and 1 tells you the story of the correlation
+
+881
+01:36:21,920 --> 01:36:29,020
+okay so let's correlate two variables in our data set or two columns and two
+
+882
+01:36:29,020 --> 01:36:34,780
+numeric we only have a few numeric columns let's do number of reviews and
+
+883
+01:36:34,780 --> 01:36:38,940
+reviews per month those are two columns we have in this data set so reviews per
+
+884
+01:36:38,940 --> 01:36:45,020
+month is how many reviews come in per month for that listing and the number of
+
+885
+01:36:45,020 --> 01:36:54,620
+reviews is the total number of reviews okay so let's do DF dot DF number
+
+886
+01:36:56,520 --> 01:37:01,380
+I'm gonna let it fill it in so number "line of line reviews" so it's DF dot
+
+887
+01:37:01,380 --> 01:37:08,740
+number underscore of underscore reviews that's our column let's do dot C O R R
+
+888
+01:37:08,740 --> 01:37:16,600
+dot correlation dot C O R R dot corr dot correlation that's short for
+
+889
+01:37:16,600 --> 01:37:23,420
+correlation okay so it's DF dot number underscore of underscore reviews dot C
+
+890
+01:37:23,420 --> 01:37:31,680
+O R R for correlation open parenthesis "C O R R left paren" dot and then now we
+
+891
+01:37:31,680 --> 01:37:41,040
+pass in the other column so it's gonna be DF dot DF dot and then we're gonna do
+
+892
+01:37:41,040 --> 01:37:50,360
+reviews per month "R E V I E W review per line month" okay and then close the
+
+893
+01:37:50,360 --> 01:37:58,620
+parenthesis "right paren" so it's DF dot core sorry DF dot number underscore of
+
+894
+01:37:58,620 --> 01:38:06,640
+underscore reviews dot core open parenthesis DF dot reviews underscore
+
+895
+01:38:06,640 --> 01:38:13,220
+per underscore month right paren okay and those this will correlate the two
+
+896
+01:38:13,220 --> 01:38:18,280
+columns and just give us one number between negative one and one "out left
+
+897
+01:38:18,280 --> 01:38:26,540
+bracket 30 right bracket colon 0.5 4 9 8 6 7 5" 0.5 4 so that basically means
+
+898
+01:38:26,540 --> 01:38:31,000
+first of all it's a positive number that means that the when one number goes
+
+899
+01:38:31,000 --> 01:38:33,900
+up the other one goes up by some amount okay so that means there is a
+
+900
+01:38:33,900 --> 01:38:37,800
+relationship between these two variables which kind of makes sense that the the
+
+901
+01:38:37,800 --> 01:38:42,540
+number of reviews you have total should in some way correlate with the amount of
+
+902
+01:38:42,540 --> 01:38:46,460
+reviews reviews you get per month because it's kind of obvious if you have
+
+903
+01:38:46,460 --> 01:38:51,060
+a lot of if a if a listing has a lot of reviews they must have some amount you
+
+904
+01:38:51,060 --> 01:38:56,100
+know of reviews per month it's probably going to be high and in this case we are
+
+905
+01:38:56,100 --> 01:39:00,320
+a number it's positive so they have a positive relationship that one goes up
+
+906
+01:39:00,320 --> 01:39:06,080
+the other one goes up by some amount and 0.54 that's a pretty strong relationship
+
+907
+01:39:06,080 --> 01:39:09,400
+i would call that moderate to strong if it's somewhere around that middle mark
+
+908
+01:39:09,400 --> 01:39:14,860
+like 0.4 0.5 you'd maybe call that moderately correlated and then if it's
+
+909
+01:39:14,860 --> 01:39:18,840
+above 0.5 which is a little bit in this case you start calling it a strong
+
+910
+01:39:18,840 --> 01:39:23,720
+correlation these are all kind of subjective but but you know it's fairly
+
+911
+01:39:23,720 --> 01:39:29,280
+well agreed upon and then if it was say 0.3 0.2 0.1 that would be weakly
+
+912
+01:39:29,280 --> 01:39:33,500
+correlated not very strongly correlated okay so in this case it is correlated
+
+913
+01:39:33,500 --> 01:39:37,980
+um you know you might ask why aren't these numbers perfectly correlated if
+
+914
+01:39:37,980 --> 01:39:41,520
+you know since you know the number of reviews you have total does depend on
+
+915
+01:39:41,520 --> 01:39:44,020
+the number of reviews they have per month why are they perfectly correlated
+
+916
+01:39:44,020 --> 01:39:49,900
+um the answer to that is that there's another variable at play here um uh many
+
+917
+01:39:49,900 --> 01:39:53,520
+possibly others but the one i can think of is how long has the listing been
+
+918
+01:39:53,520 --> 01:39:59,240
+okay and if the listing's been around a long time versus a short time then then
+
+919
+01:39:59,240 --> 01:40:04,620
+that will affect how much the number of reviews has how much effect the number
+
+920
+01:40:04,620 --> 01:40:10,800
+of reviews has on the um per month has on the total number of reviews okay um
+
+921
+01:40:12,340 --> 01:40:17,160
+so uh so it's not the only variable that determines the other okay they're not
+
+922
+01:40:17,160 --> 01:40:20,320
+perfectly correlated they're only somewhat correlated which makes a kind
+
+923
+01:40:20,320 --> 01:40:23,040
+of intuitive sense i think that these would be correlated in some way
+
+924
+01:40:24,320 --> 01:40:28,280
+um so we could do this we could try this on one other i'll just run quickly on
+
+925
+01:40:28,280 --> 01:40:32,860
+one other variable let's try to see if the number of reviews and the price are
+
+926
+01:40:32,860 --> 01:40:36,380
+correlated and you know i could see there being a maybe i could make a
+
+927
+01:40:36,380 --> 01:40:42,340
+hypothesis i could say maybe rooms that are reviewed a lot have a higher price
+
+928
+01:40:42,340 --> 01:40:47,480
+because who knows you know maybe they're popular um that's a guess but let's see
+
+929
+01:40:47,480 --> 01:40:56,560
+if it's true or not we'll do df dot price dot c o r r for correlation
+
+930
+01:40:56,560 --> 01:41:10,190
+...open parenthesis
+
+931
+01:41:10,190 --> 01:41:15,310
+and then let's pass the other one and we'll do df dot number of reviews
+
+932
+01:41:15,310 --> 01:41:26,210
+"line of line colon reviews right paren" so we have df dot price dot c o r r
+
+933
+01:41:26,210 --> 01:41:33,470
+for correlation left parenthesis df dot number underscore of underscore reviews right paren
+
+934
+01:41:33,470 --> 01:41:37,290
+okay let's see if these are correlated remember my hypothesis is maybe they are
+
+935
+01:41:37,290 --> 01:41:40,650
+kind of correlated because i don't know maybe that if you have a lot of reviews
+
+936
+01:41:40,650 --> 01:41:47,210
+you're popular maybe you can charge "out left bracket 31 right bracket colon minus 0.047"
+
+937
+01:41:47,210 --> 01:41:57,290
+okay so i would say it's negative 0.047 okay so i would say that no my hypothesis is totally wrong
+
+938
+01:41:58,070 --> 01:42:02,730
+and in this case it's first of all it's a negative number so it's if anything it's negatively
+
+939
+01:42:02,730 --> 01:42:08,410
+correlated if one goes up the other one goes down but really what this is is uncorrelated
+
+940
+01:42:08,410 --> 01:42:14,790
+it's very close to zero it's a very small number and so basically what these are is they're
+
+941
+01:42:14,790 --> 01:42:19,790
+unrelated that the number of reviews doesn't seem to really affect the price in terms of this data
+
+942
+01:42:19,790 --> 01:42:27,310
+set okay which is also another pretty interesting you know factoid or whatever okay so that's
+
+943
+01:42:27,310 --> 01:42:35,750
+correlation it's um it's uh we're very commonly used like uh you know statistical method in data
+
+944
+01:42:35,750 --> 01:42:42,570
+science um in general when people want to show correlations you'll often use uh they'll often
+
+945
+01:42:42,570 --> 01:42:47,910
+use a visualization called a scatterplot and the scatterplot basically puts dots on a say you have
+
+946
+01:42:47,910 --> 01:42:52,610
+a flat plane so you just imagine just the flat table and then imagine you take a pencil and
+
+947
+01:42:52,610 --> 01:42:57,710
+put a whole bunch of dots on the table on the on the that surface and that's kind of the
+
+948
+01:42:57,710 --> 01:43:03,810
+scatterplot and what a scatterplot lets you do if you're sighted or you can otherwise access it
+
+949
+01:43:05,830 --> 01:43:13,030
+is that it shows you patterns like clusters and that will usually often also show you whether
+
+950
+01:43:13,030 --> 01:43:18,050
+data is negatively correlated just exactly what we have here negatively correlated uncorrelated or
+
+951
+01:43:19,010 --> 01:43:24,130
+positively correlated it may also show you useful things like how many outliers you have like if
+
+952
+01:43:24,130 --> 01:43:29,290
+there's certain values that are way outside of the norm that we can't we haven't done we we
+
+953
+01:43:29,290 --> 01:43:34,770
+haven't learned a way to do that with this non-visually okay so that's something a scatterplot
+
+954
+01:43:34,770 --> 01:43:39,950
+can tell you that this won't but what this will tell you is the relationship in the data and that's
+
+955
+01:43:39,950 --> 01:43:45,030
+about half of what a scatterplot or maybe more than half half to 70 percent of what a scatterplot
+
+956
+01:43:45,030 --> 01:43:50,610
+will tell you is that relationship between the two very okay so we can get that from just making
+
+957
+01:43:50,610 --> 01:43:56,570
+this correlation what it doesn't tell you is stuff about outliers or certain other kinds of more
+
+958
+01:43:56,570 --> 01:44:04,290
+subtle relationships and clustering you can get those it's just quite complicated it's out of
+
+959
+01:44:04,290 --> 01:44:10,730
+scope in this tutorial so you would want to look at things like gaussian functions which would allow
+
+960
+01:44:10,730 --> 01:44:17,570
+you to it's a little bit mathematical but basically you can do you can look for outliers
+
+961
+01:44:17,570 --> 01:44:21,570
+you could also just kind of look for really big numbers in the data set through methods that we've
+
+962
+01:44:21,570 --> 01:44:25,930
+learned already which might tell you a certain amount of that okay but if you want to get fancy
+
+963
+01:44:25,930 --> 01:44:30,950
+and kind of more formally look for outliers you can use gaussian functions okay which is
+
+964
+01:44:31,950 --> 01:44:36,510
+i would say harder than what we've been doing here so but just know that it exists
+
+965
+01:44:37,110 --> 01:44:44,670
+for non-div for our non-visual use okay um so i would say you know bar pie charts were a strong
+
+966
+01:44:44,670 --> 01:44:51,810
+win with the non-visual approaches you can really strong pretty pretty well well replace a bar pie
+
+967
+01:44:51,810 --> 01:44:57,270
+chart with non-visual methods um scatterplots definitely more difficult unfortunately scatterplots
+
+968
+01:44:57,270 --> 01:45:03,190
+are also maybe you know Chancey is here she does a lot of tactile graphics scatterplots are also
+
+969
+01:45:03,190 --> 01:45:10,570
+pretty hard are harder to get through tactician through feel on a tactile graphic line charts and
+
+970
+01:45:10,570 --> 01:45:16,130
+stuff definitely work better i think and other kinds of visualizations um but uh you know
+
+971
+01:45:16,130 --> 01:45:24,690
+scatterplots are a little tricky um you might get some use out of it but um okay so we only have a
+
+972
+01:45:24,690 --> 01:45:32,750
+few more minutes i wanted to do time "2:49 p.m" we have 10 minutes i'm just gonna quickly gesture
+
+973
+01:45:32,750 --> 01:45:37,050
+toward how you could do time because we have a very limited amount of time and i want to kind of
+
+974
+01:45:37,730 --> 01:45:45,010
+give you a little bit of the philosophy of all of this interaction at the end um but um essentially
+
+975
+01:45:45,010 --> 01:45:53,130
+what you want to do in time is um and i will point you toward the written tutorial um but
+
+976
+01:45:53,130 --> 01:45:58,970
+essentially what you want to do is um that there's special a special function in pandas
+
+977
+01:45:58,970 --> 01:46:05,110
+that will allow you to take a time column and convert it into a form that you can use
+
+978
+01:46:05,710 --> 01:46:17,130
+so it looks something like this pandas as pandas dot dot um pandas dot two underscore date time
+
+979
+01:46:17,130 --> 01:46:26,010
+date time and then you can pass in a column and it will make it into a special format that will
+
+980
+01:46:26,010 --> 01:46:33,470
+allow you to do time-based things with it um so it would be df the only time column on this
+
+981
+01:46:33,470 --> 01:46:41,110
+data set is called last review when the last review came in "last_review" so here i did
+
+982
+01:46:41,110 --> 01:46:48,750
+uh i did df uh our pandas dot two date time two underscore date time open paren
+
+983
+01:46:49,290 --> 01:46:55,050
+and then i passed in our df dot last review column that was a it's time data um i'm going
+
+984
+01:46:55,050 --> 01:46:58,150
+quickly with this i'm just going to give you a general idea of how to do it i wouldn't follow
+
+985
+01:46:58,150 --> 01:47:02,930
+along now if you're if you're doing this live um and i'm going to save it to a variable i'm
+
+986
+01:47:02,930 --> 01:47:11,850
+going to call the variable um i'll just call it date datess so i have now
+
+987
+01:47:11,850 --> 01:47:23,130
+a column that's date--a lot of the a lot of them are empty but um uh some of them are
+
+988
+01:47:23,130 --> 01:47:31,390
+not hopefully and then you can then use that you can do year uh date dot dt dot year
+
+989
+01:47:31,870 --> 01:47:38,510
+"out left bracket 34 right bracket colon" and then we can count that in left bracket 30 dot value
+
+990
+01:47:43,610 --> 01:47:49,650
+"2018.06" so now we have to we're hearing the output there let's run it again because
+
+991
+01:47:49,650 --> 01:48:04,610
+"out left bracket 36 right bracket colon 2017.03 205 2016.0 2700" and essentially this is telling
+
+992
+01:48:04,610 --> 01:48:11,690
+us how many items from each year um there are in the data set okay so this is kind of fairly
+
+993
+01:48:11,690 --> 01:48:19,890
+useful time data and then you could um just sort this and then get an idea okay over time
+
+994
+01:48:20,490 --> 01:48:26,210
+how how does something change okay this would be more useful if it was when the the listing was
+
+995
+01:48:26,210 --> 01:48:31,450
+first posted or something like that but if you look at this and i i encourage you to take a look
+
+996
+01:48:31,450 --> 01:48:35,650
+at the written curriculum that goes into more detail on how to perform this operation but
+
+997
+01:48:35,650 --> 01:48:42,350
+basically what we're doing here is we're turning a column into a specific format that allows us to
+
+998
+01:48:42,350 --> 01:48:48,030
+manipulate it in terms of time then we're using that to pull out the year then we're using our
+
+999
+01:48:48,030 --> 01:48:54,750
+familiar value counts to count how many of each year we have and then if you sort it you'll get
+
+1000
+01:48:54,750 --> 01:49:00,870
+a sense of how things change over time and you can actually even add in that percent change um
+
+1001
+01:49:00,870 --> 01:49:05,590
+function uh or method that we used at the beginning and you'll get something very similar
+
+1002
+01:49:05,590 --> 01:49:09,970
+to a line chart where you get the idea of the percent went up the percent went you know the
+
+1003
+01:49:09,970 --> 01:49:15,490
+percent is going up by a certain amount per year or down a certain amount per year which is exactly
+
+1004
+01:49:15,490 --> 01:49:20,430
+what a line chart tells you um unfortunately i don't want to keep you guys longer than you
+
+1005
+01:49:20,430 --> 01:49:26,490
+you're you know are two hours um so if you're interested in how to replace these line charts i
+
+1006
+01:49:26,490 --> 01:49:31,870
+i recommend looking at the written curriculum uh and feel free to send me questions and stuff as well
+
+1007
+01:49:32,890 --> 01:49:39,330
+okay um i will say uh yeah so and that percent change it really does actually give you a fairly
+
+1008
+01:49:39,330 --> 01:49:45,790
+once you this is harder to make but once you have it if you if you you know get an account
+
+1009
+01:49:45,790 --> 01:49:52,830
+of all the different years um then uh then get the percent change you do get a sense of
+
+1010
+01:49:52,830 --> 01:49:58,070
+exactly what you would get with a line chart which is how much does something how steep is
+
+1011
+01:49:58,070 --> 01:50:02,130
+the change how radical is the change between these different time periods the different years
+
+1012
+01:50:02,750 --> 01:50:10,190
+okay um this making these uh kinds of visualizations of over of time can get pretty
+
+1013
+01:50:10,190 --> 01:50:17,230
+uh tricky non-visually but once you make them you can get a pretty strong idea of the change
+
+1014
+01:50:17,230 --> 01:50:21,790
+in the data set okay um they're not as easy to make as the bar charts in terms of programming
+
+1015
+01:50:21,790 --> 01:50:27,870
+but but you do get a very strong sense just like you would with a line chart of the change over
+
+1016
+01:50:27,870 --> 01:50:35,250
+time um it's maybe not quite as direct or intuitive as what um sarah will show you uh in the coming
+
+1017
+01:50:35,250 --> 01:50:40,690
+two weeks with sonifications where you'll hear the change with the pitch but it is pretty okay
+
+1018
+01:50:40,690 --> 01:50:46,350
+it's pretty it's it's not terrible um it's it's easier to replace than the scatterplot
+
+1019
+01:50:47,370 --> 01:50:54,150
+um okay i'm clearing my screen in left we're pretty much at the end of the um of this workshop
+
+1020
+01:50:54,150 --> 01:51:00,010
+um i'll just want to give you a little bit of uh i want to point out some of the the things to
+
+1021
+01:51:00,010 --> 01:51:05,250
+keep in mind um and give you kind of the usual uh pep talk for that for the non-visual data analysis
+
+1022
+01:51:06,050 --> 01:51:14,890
+first of all is that um uh is that what was the the basic methodology we have here which is to
+
+1023
+01:51:14,890 --> 01:51:23,690
+create an interactive to to create interactive um objects that we can then manipulate so uh you
+
+1024
+01:51:23,690 --> 01:51:29,710
+know data frames series and then to ask for very specific things from them and to get very specific
+
+1025
+01:51:29,710 --> 01:51:34,990
+results back it really when you get fairly adept at it when you get even a little adept at it or
+
+1026
+01:51:34,990 --> 01:51:39,710
+when you get fairly adept at it it really feels like having a conversation with your data it
+
+1027
+01:51:39,710 --> 01:51:45,530
+really feels like talking to your data and you can get a very strong idea of the relationships
+
+1028
+01:51:45,530 --> 01:51:53,830
+the contents uh and so on uh of the data sets through this method um and i would say possibly
+
+1029
+01:51:53,830 --> 01:51:59,970
+even if you get quite good at it it's it you really honestly you won't be missing the visualizations
+
+1030
+01:51:59,970 --> 01:52:04,310
+that much you can really get a very strong sense of the data set through these methods
+
+1031
+01:52:05,030 --> 01:52:13,450
+um now are there downsides uh obviously uh i would say in some cases um the the main downside
+
+1032
+01:52:13,450 --> 01:52:18,870
+the main downsides i would say are if you're working with sighted colleagues um and you want
+
+1033
+01:52:18,870 --> 01:52:26,610
+to share uh a representation of the data i will say sighted people love charts you know um and you
+
+1034
+01:52:26,610 --> 01:52:32,790
+know they're they're often persuaded by them and so on so you if you want to work with sighted people
+
+1035
+01:52:32,790 --> 01:52:38,530
+it's helpful to actually make the the visualization if you can um you know it's obviously
+
+1036
+01:52:38,530 --> 01:52:43,490
+it's hard as an as a as a blind visual impaired person to make a visualization but if you're
+
+1037
+01:52:43,490 --> 01:52:48,470
+working with sighted people there's advantages um the other thing so if you're working with people
+
+1038
+01:52:48,470 --> 01:52:55,510
+that's one um important important reason that this this is not a great approach um specifically
+
+1039
+01:52:56,410 --> 01:53:04,570
+um the other one is uh uh the other disadvantage is that you do need to kind of know what you're
+
+1040
+01:53:04,570 --> 01:53:08,950
+doing um so i'm not gonna i'm trying to say this in a more diplomatic way but like
+
+1041
+01:53:09,510 --> 01:53:14,930
+um i would say often visualizations can be a little bit of a kludge um that people kind of
+
+1042
+01:53:14,930 --> 01:53:18,910
+just do them out of habit and then they look at the data and gives them some kind of general idea
+
+1043
+01:53:18,910 --> 01:53:25,830
+of relationships and so on um uh and you know a good visualization is a good visualization
+
+1044
+01:53:26,350 --> 01:53:32,670
+but often i feel like sometimes visualizations are a slight crutch for data scientists and
+
+1045
+01:53:32,670 --> 01:53:37,410
+unfortunately if you want to do things this way that's not a visual way you will kind of maybe
+
+1046
+01:53:37,410 --> 01:53:41,530
+need to know what you're doing in terms of the types of data you're working with how you're
+
+1047
+01:53:41,530 --> 01:53:47,450
+transforming them and how you're representing them in a more specific way you know doing things like
+
+1048
+01:53:47,450 --> 01:53:54,290
+the way we divided the um the data to get the proportions or to get the percent change they do
+
+1049
+01:53:54,290 --> 01:53:59,190
+kind of or to get other useful things like the correlation um there's things we didn't even get
+
+1050
+01:53:59,190 --> 01:54:05,030
+into but um there's things like variance standard deviation and so on you really do need to know
+
+1051
+01:54:05,030 --> 01:54:10,870
+what those mean in order to make them useful to you um so you may need to get uh you know get a
+
+1052
+01:54:10,870 --> 01:54:16,010
+think about the math a little bit more or to think about the types of data that you have a little bit
+
+1053
+01:54:16,010 --> 01:54:20,610
+more um so unfortunately there's no real shortcuts for the non-visual stuff but if you
+
+1054
+01:54:20,610 --> 01:54:27,970
+when you get there it's a very powerful way to interact with data um and then i guess i'll leave
+
+1055
+01:54:27,970 --> 01:54:34,670
+you on um uh i mean just i wanted one say one more i'm looking at my notes you might you might
+
+1056
+01:54:34,670 --> 01:54:37,310
+need to actually know what you're doing you might need to actually know what you're doing
+
+1057
+01:54:37,310 --> 01:54:40,970
+you might you might need to act you might disadvantage not as immediate not as good
+
+1058
+01:54:40,970 --> 01:54:43,910
+for collaboration with sided or disadvantage not as immediate so i was good at collaboration
+
+1059
+01:54:44,710 --> 01:54:48,590
+some types of insights are harder to access or take longer we're going to make a we're going to
+
+1060
+01:54:48,590 --> 01:54:54,950
+make tonification for the next two workshops and those are much more direct um ways to experience
+
+1061
+01:54:54,950 --> 01:55:02,230
+the data okay um and they're much more shareable in a lot of ways okay um and i do think sonifications
+
+1062
+01:55:02,230 --> 01:55:06,290
+are going to be et cetera we'll talk more about them but they're going to be much bigger than
+
+1063
+01:55:06,290 --> 01:55:12,090
+they are in the coming years um and i do feel like they will help us out in these areas for when we're
+
+1064
+01:55:12,090 --> 01:55:16,670
+trying to create stuff to share with side of colleagues because what i've found is that while
+
+1065
+01:55:16,670 --> 01:55:21,330
+side of colleagues they maybe won't look want to look at these kind of like you know non-visual
+
+1066
+01:55:21,330 --> 01:55:28,110
+representations we have quite as much they really do often do like a sonification so some hope so
+
+1067
+01:55:28,110 --> 01:55:31,810
+i have high hopes for sonifications in the coming years i think it's good they're going to be bigger
+
+1068
+01:55:31,810 --> 01:55:38,270
+we're going to do more of them in the next two workshops as sarah takes over and i'll just say
+
+1069
+01:55:38,270 --> 01:55:42,710
+i've really enjoyed teaching these three workshops um it's kind of a privilege to teach
+
+1070
+01:55:42,710 --> 01:55:49,550
+workshops specifically for my fellow blind di people um i don't get that opportunity that often
+
+1071
+01:55:49,550 --> 01:55:57,970
+usually i teach sighted um people um and and it's quite nice to to teach you all how i
+
+1072
+01:55:57,970 --> 01:56:06,250
+actually do data science which is this in this non-visual mode so um so i will will end there
+
+1073
+01:56:06,810 --> 01:56:15,980
+except for questions and answers so thank you thank you all okay i'll leave the i will leave
+
+1074
+01:56:15,980 --> 01:56:24,620
+the recording on for questions and answers uh and then we will also then turn off the recording
+
+1075
+01:56:25,760 --> 01:56:31,380
+um if people you know if people want to ask off mic okay so we'll leave the recording on for now
+
+1076
+01:56:32,400 --> 01:56:37,900
+um and uh if anyone wants to get on the mic and ask a question this is the time
+
+1077
+01:56:37,900 --> 01:56:48,780
+or if the helpers have questions from the chat the only thing we've seen recurrent in the chat
+
+1078
+01:56:48,780 --> 01:56:56,040
+is a couple people having trouble um loading the data frame um from the url
+
+1079
+01:56:56,820 --> 01:57:04,060
+yeah um and we think upon upon some examination we believe that for these people it's probably
+
+1080
+01:57:04,060 --> 01:57:09,720
+either a problem with their network so it took too long to load because their internet's too slow
+
+1081
+01:57:09,720 --> 01:57:15,940
+and ipython timed out or maybe they have some sort of uh like proxy enabled so we encourage
+
+1082
+01:57:15,940 --> 01:57:21,060
+people to go look in their network settings um and make sure you don't have some like barrier
+
+1083
+01:57:21,060 --> 01:57:27,660
+like firewall i suppose between you and whatever you're downloading so um but if you're still
+
+1084
+01:57:27,660 --> 01:57:33,180
+having that issue we do encourage you to maybe come to office hours because this is not exactly
+
+1085
+01:57:33,180 --> 01:57:38,960
+an issue with the code so much as something something funky going on with your computer
+
+1086
+01:57:38,960 --> 01:57:44,480
+and one other additional thing i can so in the tutorial when i update the tutorial i will add
+
+1087
+01:57:44,480 --> 01:57:49,480
+a link to download the csv and then you can try to place the csv in your home folder and import
+
+1088
+01:57:49,480 --> 01:57:56,420
+it that way the url is definitely a lot easier if you can access it okay um i would say you know
+
+1089
+01:57:56,420 --> 01:58:04,020
+the most likely if you're having a problem with the url 90 it's a problem with the the way you
+
+1090
+01:58:04,020 --> 01:58:10,000
+type the link um or in the copying and pasting uh i would say that's the most likely reason or
+
+1091
+01:58:10,000 --> 01:58:15,220
+the most common reason when i and and this is also when i do it with excited workshop participants
+
+1092
+01:58:15,220 --> 01:58:22,060
+it's that's almost always the reason and then the next reason is like sarah said network issues um
+
+1093
+01:58:22,060 --> 01:58:27,480
+now if you're on the zoom meeting chances are you know you're on the internet so hopefully you know
+
+1094
+01:58:27,480 --> 01:58:33,080
+you check that box i will say that in the last year or so github is getting more fussy with
+
+1095
+01:58:33,080 --> 01:58:41,800
+what ips they accept requests from and so on but they should accept for most um i am often on my
+
+1096
+01:58:42,360 --> 01:58:48,440
+um you know very suspicious vpn server and you know whatever it is rotterdam or something like
+
+1097
+01:58:48,440 --> 01:58:53,600
+that that a lot of websites don't like and cloudflare doesn't like and github still lets me
+
+1098
+01:58:53,600 --> 01:58:58,720
+look at these pages and import the data sets and all this kind of stuff so i would say triple
+
+1099
+01:58:58,720 --> 01:59:09,940
+quadruple and quintuple check your url remember it's http colon slash slash um bit.ly forward
+
+1100
+01:59:09,940 --> 01:59:19,380
+slash nyc bnb and i would also try both http and https just try both of those okay i did http
+
+1101
+01:59:19,380 --> 01:59:24,140
+because i think it's the most likely to work but you could also try https
+
+1102
+01:59:24,980 --> 01:59:28,000
+um as a possibility okay those are the things i've tried
+
+1103
+01:59:29,680 --> 01:59:35,220
+um okay i would hope someone asked a question just make me feel let me feel happy
+
+1104
+01:59:36,900 --> 01:59:41,180
+i love to hear your you know i love teaching a person and hearing people's voices and
+
+1105
+01:59:41,180 --> 01:59:45,240
+hearing the noise and questions and everything and that's you asking questions on the mic is
+
+1106
+01:59:45,240 --> 01:59:51,260
+the closest thing hey patrick it's marco hey marco how's it going hey it's going all right
+
+1107
+01:59:51,260 --> 01:59:56,180
+thanks again for this whole series here um i put i put this question in the chat but i just
+
+1108
+01:59:56,180 --> 02:00:01,540
+wanted to see if you your take on it uh so you know we talked a lot about the data sets that
+
+1109
+02:00:01,540 --> 02:00:07,080
+we have and um you know kind of understanding it from a text point of view within the terminal
+
+1110
+02:00:08,580 --> 02:00:13,440
+but i could take this airbnb data set you know grab a subset of something that i want to build
+
+1111
+02:00:13,440 --> 02:00:18,640
+as a bar chart or a line chart and then as long as i gain access to those values within a normal
+
+1112
+02:00:18,640 --> 02:00:26,400
+python data type like a dictionary um i could then funnel those values into like something
+
+1113
+02:00:26,400 --> 02:00:31,480
+that's going to write svg code for me to so i can actually create a tactile graphic out of that um
+
+1114
+02:00:31,480 --> 02:00:39,560
+so i was wondering like an elegant way of taking like a subset like if we grab price and the
+
+1115
+02:00:40,200 --> 02:00:47,760
+name i guess of the of you know the listing how to take that and create a dictionary straight from
+
+1116
+02:00:47,760 --> 02:00:54,160
+a subset and i think you know helper posted i guess um pandas has its own two underscore dicts
+
+1117
+02:00:55,920 --> 02:01:00,220
+uh or there's like there's a method that does that for you which is pretty awesome i was just
+
+1118
+02:01:00,220 --> 02:01:04,600
+wondering your thoughts on that well would it help to create an svg file directly like
+
+1119
+02:01:04,600 --> 02:01:10,060
+like an svg file of what side of people would would have would that be helpful or
+
+1120
+02:01:10,560 --> 02:01:15,320
+i mean i would be able to do that because that's that's right the whole thing that i've been working
+
+1121
+02:01:15,320 --> 02:01:19,640
+on is building svgs so you can do that already or do you want me to show you how to do that
+
+1122
+02:01:19,640 --> 02:01:24,460
+no i know how to do that yeah i teach people how to do that but it's just you want what you
+
+1123
+02:01:24,460 --> 02:01:31,480
+want is a representation which would be something like the lengths of the um like can you describe
+
+1124
+02:01:31,480 --> 02:01:35,260
+how the dictionary should look and then i could kind of maybe advise because the only thing is
+
+1125
+02:01:35,260 --> 02:01:41,940
+you know i've you've worked with svgs but in a very lazy way so you know okay yeah i mean like to
+
+1126
+02:01:41,940 --> 02:01:46,520
+let's say to create like a line chart you would just use the polyline svg shape and then
+
+1127
+02:01:46,520 --> 02:01:56,360
+you would the points um you would have to grab the you have to kind of set it set up the axes of
+
+1128
+02:01:56,360 --> 02:02:05,000
+the canvas um take the data that you're getting from the data frame and uh you're kind of piping
+
+1129
+02:02:05,000 --> 02:02:08,840
+that in but then you have to massage the data in a certain way to get it to scale properly
+
+1130
+02:02:08,840 --> 02:02:14,020
+you probably need to we'll need to normalize it um i would say basically what you're talking about
+
+1131
+02:02:14,020 --> 02:02:20,400
+is something kind of fairly um it's it either has something existing for it in which case
+
+1132
+02:02:20,400 --> 02:02:24,000
+you know i probably wind up googling around the same as you and i encourage you actually to
+
+1133
+02:02:24,000 --> 02:02:28,460
+maybe add send me drop me an email and i'll do a quick google or to someone on the chat
+
+1134
+02:02:28,460 --> 02:02:38,420
+on the call no about this so um geopandas does this geopandas has a column for polygons and svgs
+
+1135
+02:02:38,840 --> 02:02:44,940
+um so the geospatial geojson community has already done some of these things
+
+1136
+02:02:44,940 --> 02:02:51,240
+um so if you go yeah if you go and check out geopandas you'll get some of this stuff and um
+
+1137
+02:02:51,240 --> 02:02:58,820
+alternatively um actually yeah no stick with that um that's probably the cheapest way to get svg
+
+1138
+02:03:00,940 --> 02:03:07,320
+um thank you i just want to say this is um the person who just answered there is
+
+1139
+02:03:07,320 --> 02:03:14,180
+tony fast who you know is a contributor to project jupiter and i had the pleasure of working
+
+1140
+02:03:14,180 --> 02:03:18,540
+with tony last year on a project with space telescope science institute to make their
+
+1141
+02:03:18,540 --> 02:03:22,460
+notebook outputs more accessible you can check out that project it's called notebooks for all
+
+1142
+02:03:23,120 --> 02:03:28,900
+and i will say tony is um he's been working on creating a version of jupyter notebooks that is
+
+1143
+02:03:28,900 --> 02:03:37,800
+um uh that is more readily accessible to us um and outputs things in more in more useful ways and so
+
+1144
+02:03:37,800 --> 02:03:41,820
+on so if you're interested in that maybe just send me an email i'll put you in touch with tony i know
+
+1145
+02:03:41,820 --> 02:03:46,740
+he's looking for testers and i heard that tony might be doing some kind of event coming up related
+
+1146
+02:03:46,740 --> 02:03:55,820
+to that as well so i'll let you guys know by email yeah i'm super interested in uh tactile svgs um
+
+1147
+02:03:55,820 --> 02:04:01,160
+especially on like tablets and phones so let's get in touch marco yeah definitely because i know
+
+1148
+02:04:01,160 --> 02:04:05,620
+the one thing is like to get the svg out but also make it human readable so we can
+
+1149
+02:04:05,620 --> 02:04:10,100
+get through the file and add our own things to it which is what i've been doing with like my own
+
+1150
+02:04:10,100 --> 02:04:15,260
+website um yeah yeah we can we can work on that stuff we just have to do some nasty things with
+
+1151
+02:04:15,260 --> 02:04:19,880
+pandas they're outside of the scope of here yeah i would say definitely possible it's just a matter
+
+1152
+02:04:19,880 --> 02:04:24,520
+of how to get from point a to point b in the in the easiest way and and uh and i'll put you guys
+
+1153
+02:04:24,520 --> 02:04:30,840
+does anyone have thanks does anyone else have any uh questions they'd like to get on the mic and ask
+
+1154
+02:04:31,880 --> 02:04:36,280
+and that was a fairly you know advanced question but you could ask a question about anything you
+
+1155
+02:04:36,280 --> 02:04:59,120
+know it doesn't have to be okay i live for those awkward pauses but you have to do them or
+
+1156
+02:04:59,120 --> 02:05:04,440
+otherwise people won't ask but we'll i think then we'll end the recording and i'll stay on for a
+
+1157
+02:05:04,440 --> 02:05:10,480
+minute or two if anyone has any other questions and we're looking forward to seeing you for um
+
+1158
+02:05:10,480 --> 02:05:17,020
+the uh the fourth workshop in the series that um sarah king will be leading on uh
+
+1159
+02:05:17,020 --> 02:05:20,140
+just the same time next tuesday so thank you all

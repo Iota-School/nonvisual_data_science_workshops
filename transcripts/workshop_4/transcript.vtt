@@ -1,0 +1,4033 @@
+WEBVTT
+
+1
+00:00:02.990 --> 00:00:08.050
+Hi everyone, my name is Sarah Kane. I'm a PhD student in astronomy at the
+
+2
+00:00:08.050 --> 00:00:13.710
+University of Cambridge and I am one of the co-instructors for this non-visual
+
+3
+00:00:13.710 --> 00:00:19.150
+data science tutorial series alongside Patrick Smith who is a blind programmer
+
+4
+00:00:19.150 --> 00:00:23.270
+and programming instructor and consultant with the Iota School. This is
+
+5
+00:00:23.270 --> 00:00:28.550
+the fourth of the five tutorial series.  Today we'll begin talking about data
+
+6
+00:00:28.550 --> 00:00:33.570
+sonification and the next tutorial, next week, will also cover the same topic.
+
+7
+00:00:33.930 --> 00:00:39.190
+Again these tutorials take place Tuesdays from 6 to 8 p.m. UK time, that's my time
+
+8
+00:00:39.190 --> 00:00:45.710
+zone, 1 to 3 p.m. Eastern Time in the US or whatever that corresponds to in your
+
+9
+00:00:45.710 --> 00:00:51.330
+respective time zone. These tutorials are being very generously supported by Pandas
+
+10
+00:00:51.330 --> 00:00:56.490
+and Numfocus which makes them free and available to all of you and all of the
+
+11
+00:00:57.210 --> 00:01:01.730
+recording you're watching right now and all of the written curricula are online
+
+12
+00:01:01.730 --> 00:01:05.750
+and available to you.  I really encourage you to check out the curriculum, it's got
+
+13
+00:01:05.750 --> 00:01:10.170
+all of the code we'll go over as well as some more details and you know written
+
+14
+00:01:10.170 --> 00:01:13.510
+instructions for everything we're doing today if you want to revisit it in
+
+15
+00:01:13.510 --> 00:01:16.870
+written form and of course Patrick and I are always happy to answer your
+
+16
+00:01:16.870 --> 00:01:22.710
+questions over email. We also have office hours on Thursdays from 6 to 8 p.m. UK
+
+17
+00:01:22.710 --> 00:01:28.590
+time, 1 to 3 p.m. Eastern Time in the US and so on and so forth over the same
+
+18
+00:01:28.590 --> 00:01:33.270
+zoom link that this live tutorial occurs. Now those of you who are watching this
+
+19
+00:01:33.270 --> 00:01:38.250
+right now might be able to tell that this is not a live zoom course happening.
+
+20
+00:01:38.710 --> 00:01:43.410
+We're currently, well I, this is not the Royal We, but I am currently re-recording
+
+21
+00:01:43.410 --> 00:01:49.530
+this tutorial. We had some unfortunate sound difficulties during the live zoom
+
+22
+00:01:49.530 --> 00:01:53.690
+so we wanted to make sure there was a nice clean version with no sound
+
+23
+00:01:53.690 --> 00:01:59.030
+difficulties available to everyone for posterity so to speak. So I'm excited to
+
+24
+00:01:59.030 --> 00:02:02.530
+go over this curriculum again with all of you and again if you have questions
+
+25
+00:02:02.530 --> 00:02:08.070
+please feel free to reach out.  Now without further ado, especially because
+
+26
+00:02:08.070 --> 00:02:12.810
+there's no one else here with me, I think we're just going to jump right into
+
+27
+00:02:12.810 --> 00:02:19.510
+things. So as you have before I encourage you now to open up Anaconda prompt. I'm
+
+28
+00:02:19.510 --> 00:02:23.730
+already on the screen, I'm going to turn on my NVDA speech again, didn't want it
+
+29
+00:02:23.730 --> 00:02:28.650
+talking over me during the intro.  Speech mode beeps, speech mode talk. Excellent
+
+30
+00:02:28.650 --> 00:02:35.850
+and hopefully you can hear that okay. Okay so open up Anaconda prompt as we
+
+31
+00:02:35.850 --> 00:02:40.050
+have in the previous three tutorials.  If you are not already there like I am you
+
+32
+00:02:40.050 --> 00:02:44.990
+can do that by hitting the Windows key and typing in Anaconda prompt to open it
+
+33
+00:02:44.990 --> 00:02:50.110
+up. Again this is Anaconda prompt not Anaconda navigator and what I want you
+
+34
+00:02:50.110 --> 00:02:56.510
+to do right now is not to start IPython. Again please do not start IPython yet
+
+35
+00:02:56.510 --> 00:03:01.790
+which is what we do usually after opening Anaconda prompt because
+
+36
+00:03:01.790 --> 00:03:06.870
+that's the sort of interactive workspace we have to write code and test it.  But
+
+37
+00:03:06.870 --> 00:03:11.130
+what we're actually about to do right now is to do something called installing
+
+38
+00:03:11.130 --> 00:03:17.590
+a package. Now we've used packages in the previous tutorials. We've used pandas and
+
+39
+00:03:17.590 --> 00:03:22.150
+NumPy.  These are like libraries of code that other people have written that we
+
+40
+00:03:22.150 --> 00:03:26.590
+can now make use of and those packages because they're really popular and
+
+41
+00:03:26.590 --> 00:03:31.970
+widely used are available with the Anaconda installation that you already
+
+42
+00:03:31.970 --> 00:03:37.910
+have. But some less common packages like Astronify which is the sonification
+
+43
+00:03:37.910 --> 00:03:43.450
+package that we're going to use today is not already pre-installed with Anaconda.
+
+44
+00:03:43.890 --> 00:03:48.030
+So we're gonna have to install it ourselves.  No worries it's a pretty
+
+45
+00:03:48.030 --> 00:03:52.510
+simple. It's as simple as one line of code actually. But before we get into that I
+
+46
+00:03:52.510 --> 00:03:58.470
+want to just go over a few caveats.  First of all unfortunately to our knowledge we
+
+47
+00:03:58.470 --> 00:04:03.670
+really only expect the Astronify installation to work properly on Windows
+
+48
+00:04:03.670 --> 00:04:09.970
+computers and also maybe on older MacBooks. If you have a MacBook with one
+
+49
+00:04:09.970 --> 00:04:16.630
+of the newer Mac chips so not an Intel chip but a Mac chip so that's the M1, M2,
+
+50
+00:04:17.029 --> 00:04:22.270
+M3 Mac we have had no luck getting Astronify to work on those new Macs.
+
+51
+00:04:22.770 --> 00:04:28.650
+Likewise if you are a Linux person using Linux unfortunately we also have not had
+
+52
+00:04:28.650 --> 00:04:33.390
+luck getting Astronify to work on Linux.  This alongside our desire to use
+
+53
+00:04:33.390 --> 00:04:37.390
+NVDA as the screen reader we're teaching with is kind of one of the
+
+54
+00:04:37.390 --> 00:04:41.870
+motivations for us encouraging all of you to use Windows for this tutorial
+
+55
+00:04:41.870 --> 00:04:49.630
+series. Also if you have other packages already installed so say you already
+
+56
+00:04:49.630 --> 00:04:54.370
+program a bunch and have other things installed on your Anaconda it is
+
+57
+00:04:54.370 --> 00:04:59.310
+possible that this might not work. It's really hard to predict how different
+
+58
+00:04:59.310 --> 00:05:03.150
+package dependencies might not get along with each other, might not work out
+
+59
+00:05:03.150 --> 00:05:08.250
+properly.  So if you have some sort of error message because you have other
+
+60
+00:05:08.250 --> 00:05:12.430
+packages already installed please do let Patrick and I know either in office
+
+61
+00:05:12.430 --> 00:05:17.270
+hours or over email and we will try to help you out. But for the vast majority
+
+62
+00:05:17.270 --> 00:05:22.130
+of you who have installed Anaconda nice and fresh for this course this should be
+
+63
+00:05:22.130 --> 00:05:28.090
+quite simple. We hope anyway.  Cross your fingers. So installing Astronify and
+
+64
+00:05:28.090 --> 00:05:32.310
+I've uninstalled it actually so that I can install it with you now is as simple
+
+65
+00:05:32.310 --> 00:05:37.510
+as one line that we're going to type again not in IPython just in the Anaconda
+
+66
+00:05:37.510 --> 00:05:45.850
+prompt. We are going to type PIP.  PIP is our package manager here. It's the
+
+67
+00:05:45.850 --> 00:05:50.350
+one managing all these libraries of code. PIP is the thing that's going to install
+
+68
+00:05:50.350 --> 00:05:54.270
+this package for us.  There's another package manager out there called Conda.
+
+69
+00:05:54.690 --> 00:05:58.690
+Some things are available via Conda others via PIP. We won't get into that.
+
+70
+00:05:58.690 --> 00:06:02.850
+This one we're going to use PIP and if you're curious check out the curriculum
+
+71
+00:06:02.850 --> 00:06:09.530
+online where I talk about it a little bit more. So it's PIP P-I-P space space
+
+72
+00:06:10.390 --> 00:06:25.290
+install "I-N-S-T-A-L-L" PIP space install space Astronify "space A-S-T-R-O-N
+
+73
+00:06:25.290 --> 00:06:37.670
+R-O-N-I-F-Y" PIP install Astronify A-S-T-R-O-N-I-F-Y and hit enter.
+
+74
+00:06:41.600 --> 00:06:48.340
+"Collecting Astronify. Using cached Astronify 0.1 pi 3 none any dot WHL.
+
+75
+00:06:48.800 --> 00:06:55.260
+Requirement already satisfied. Astropy in C. Users." Alright so I'm going to stop
+
+76
+00:06:55.260 --> 00:06:59.680
+that now because there's a lot of text happening there. So I don't want you to
+
+77
+00:06:59.680 --> 00:07:03.140
+hear all of it but I wanted some of it to play because I don't want you to feel
+
+78
+00:07:03.140 --> 00:07:08.340
+like alarmed when NVDA starts reading out just this absolute barrage of text.
+
+79
+00:07:08.520 --> 00:07:12.820
+It should mostly be along the lines of like requirement already satisfied you
+
+80
+00:07:12.820 --> 00:07:17.520
+know installing XYZ.  If you start getting some angry sounding messages
+
+81
+00:07:17.520 --> 00:07:22.400
+like you know couldn't do this or whatnot that's a good time to start
+
+82
+00:07:22.400 --> 00:07:27.480
+maybe doing some googling or contacting Patrick and I but hopefully it'll all
+
+83
+00:07:27.480 --> 00:07:31.820
+be nice things that are like requirement already satisfied and it should end with
+
+84
+00:07:31.820 --> 00:07:36.100
+successfully installed Astronify and that should be all you need to do.
+
+85
+00:07:37.180 --> 00:07:41.220
+Occasionally I think I've seen some people get a message where it says
+
+86
+00:07:41.220 --> 00:07:47.760
+proceed question mark yes why slash no and you have to hit type Y for yes and
+
+87
+00:07:47.760 --> 00:07:52.320
+then hit enter. I don't think most of you should get that but if you do not
+
+88
+00:07:52.320 --> 00:08:00.920
+worry.  And with that congratulations the Astronify package is installed cool done.
+
+89
+00:08:01.280 --> 00:08:06.640
+First module or first section of this curriculum or this tutorial is checked
+
+90
+00:08:06.640 --> 00:08:11.860
+off the list. What I'm going to do now is I'm going to actually step away from the
+
+91
+00:08:11.860 --> 00:08:16.100
+terminal step away from some code and give you a little bit more theory about
+
+92
+00:08:16.100 --> 00:08:20.880
+what sonification is and how it works.  Now I've just mentioned sonification a
+
+93
+00:08:20.880 --> 00:08:25.500
+bunch of times here without actually saying anything about what it is so
+
+94
+00:08:25.500 --> 00:08:28.480
+we're gonna get into the theory we're gonna get into the examples and then
+
+95
+00:08:28.480 --> 00:08:39.360
+we'll get back to the code yeah. On that note I'm going to turn off the
+
+96
+00:08:39.360 --> 00:08:43.960
+speech for NVDA so it doesn't decide it wants to talk over me or talk over any
+
+97
+00:08:43.960 --> 00:08:48.460
+of the sonification examples which we did have a little bit of in the original
+
+98
+00:08:48.460 --> 00:08:54.240
+zoom so you know this is one a sound issue we will dodge. Speech mode off.
+
+99
+00:08:54.500 --> 00:09:01.520
+All right and with that we will get into what is this sonification thing. So in the
+
+100
+00:09:01.520 --> 00:09:09.620
+simplest terms sonification is the representation of data via sound. This is
+
+101
+00:09:09.620 --> 00:09:15.440
+directly analogous to data visualization where data is represented via some
+
+102
+00:09:15.440 --> 00:09:20.720
+visual medium.  These are your line charts your bar charts your pie charts
+
+103
+00:09:20.720 --> 00:09:24.860
+your histograms the list goes on there are a ton of data visualizations out
+
+104
+00:09:24.860 --> 00:09:30.560
+there. Importantly the data does not literally look this way it does not
+
+105
+00:09:30.560 --> 00:09:34.360
+literally look like a line graph it doesn't look like a bar chart this is
+
+106
+00:09:34.360 --> 00:09:39.920
+how we choose often to represent it through some visual medium. In fact
+
+107
+00:09:39.920 --> 00:09:44.780
+there are a lot of arbitrary choices involved in these in these visualizations
+
+108
+00:09:44.780 --> 00:09:50.020
+for instance you have a line chart how are you going to scale the axes how
+
+109
+00:09:50.020 --> 00:09:54.160
+large will you make the points these are all various different choices that you
+
+110
+00:09:54.160 --> 00:10:00.940
+can make in these data visualizations.  It is a representation of the data a way we
+
+111
+00:10:00.940 --> 00:10:05.680
+choose often to picture the data and oftentimes they're quite useful they let
+
+112
+00:10:05.680 --> 00:10:10.000
+us understand trends and things like that but there are issues with data
+
+113
+00:10:10.000 --> 00:10:14.600
+visualizations and not the least of which which will be of course great
+
+114
+00:10:14.600 --> 00:10:18.540
+interest to me and you is that they're not accessible to people with visual
+
+115
+00:10:18.540 --> 00:10:24.400
+impairments like me. So data sonification where we represent the
+
+116
+00:10:24.400 --> 00:10:30.660
+data as sound sort of corrects or steps around that one that sort of problem. Now
+
+117
+00:10:30.660 --> 00:10:35.460
+before we get more into data sonification and what exactly a
+
+118
+00:10:35.460 --> 00:10:40.860
+sonification could be besides the sound representation of data I want to break
+
+119
+00:10:40.860 --> 00:10:46.400
+down some common misconceptions about sonification.  First of all sonification
+
+120
+00:10:46.400 --> 00:10:52.680
+generally doesn't involve words so it's like non-speech audio so for instance me
+
+121
+00:10:52.680 --> 00:10:57.600
+standing here and telling you about data for instance when Patrick told you about
+
+122
+00:10:57.600 --> 00:11:03.160
+the Airbnb data set that is not a sonification it's just him telling you
+
+123
+00:11:03.160 --> 00:11:07.340
+about the about the data so it's not typically what we'd consider a
+
+124
+00:11:07.340 --> 00:11:12.460
+sonification a sound representation of the data it's like a word representation
+
+125
+00:11:12.460 --> 00:11:15.960
+of the data something along the lines of that I don't have a more elegant word
+
+126
+00:11:15.960 --> 00:11:20.860
+for that but it's not generally what we'd consider sonification. Sonification
+
+127
+00:11:20.860 --> 00:11:27.420
+also is not what we consider like natural sounds or or just the sounds
+
+128
+00:11:27.420 --> 00:11:32.780
+themselves. What do I mean by this? Well for instance imagine you have someone
+
+129
+00:11:32.780 --> 00:11:38.580
+walking and you are listening to their footsteps to understand to measure how
+
+130
+00:11:38.580 --> 00:11:44.780
+quickly they are walking.  In this case the sound of their footsteps is not a
+
+131
+00:11:44.780 --> 00:11:50.840
+sonification. The sound of their footsteps is the data so the sound is
+
+132
+00:11:50.840 --> 00:11:57.020
+not a representation of the data the sound in that case is the data. Scott
+
+133
+00:11:57.020 --> 00:12:00.520
+Fleming in his talk at the Space Telescope Science Institute's Day of
+
+134
+00:12:00.520 --> 00:12:06.220
+Accessibility had another great example bird songs not a sonification bird songs
+
+135
+00:12:06.220 --> 00:12:11.180
+would be your data if you were going out and observing bird songs same sort of
+
+136
+00:12:11.180 --> 00:12:16.540
+idea here.  So it is in the same way that a data visualization is not literally
+
+137
+00:12:16.540 --> 00:12:22.020
+like what the data looks like a data sonification is not literally what the
+
+138
+00:12:22.020 --> 00:12:28.920
+data sounds like. Alright so we've broken down roughly what sonification is it's
+
+139
+00:12:28.920 --> 00:12:34.220
+a sound representation of the data and it's not words and it's not sounds from
+
+140
+00:12:34.220 --> 00:12:39.680
+nature. Okay we've got the big picture here the only way to concretize this
+
+141
+00:12:39.680 --> 00:12:45.020
+sort of idea of what sonification is is going to be to get into how we actually
+
+142
+00:12:45.020 --> 00:12:50.100
+sonify things.  Today we're going to go over two of the most common sonification
+
+143
+00:12:50.100 --> 00:12:55.300
+techniques this is going to be modification and parameter mapping what
+
+144
+00:12:55.300 --> 00:13:00.200
+they are what their differences are and we'll also talk about some or we'll also
+
+145
+00:13:00.200 --> 00:13:07.950
+show some examples of each. Alright let's begin by talking about
+
+146
+00:13:07.950 --> 00:13:13.190
+modification. You'll often hear modification described as the most
+
+147
+00:13:13.190 --> 00:13:20.230
+direct mapping the most direct representation of data as sound.  What do
+
+148
+00:13:20.230 --> 00:13:27.630
+we mean by this? Well suppose we have two variables here X and Y and in this case
+
+149
+00:13:27.630 --> 00:13:34.490
+Y is our dependent variable which means that as X changes Y changes in response.
+
+150
+00:13:35.270 --> 00:13:41.530
+Now for our purposes here I'm going to say X is time so as time goes on Y
+
+151
+00:13:41.530 --> 00:13:48.550
+changes with time and so if Y is varying with time going up and down as time goes
+
+152
+00:13:48.550 --> 00:13:54.110
+by you can kind of imagine Y moving like in a regular wave not like a smooth wave
+
+153
+00:13:54.110 --> 00:14:00.470
+pattern but it's going up and down so Y the height of the wave is changing with
+
+154
+00:14:00.470 --> 00:14:07.490
+time. Now we call the height of a wave the amplitude and just as this height
+
+155
+00:14:07.490 --> 00:14:13.750
+this amplitude of Y is changing with time we can imagine the amplitude of a
+
+156
+00:14:13.750 --> 00:14:20.570
+sound wave changing with time at the same sort of way.  So basically if Y goes
+
+157
+00:14:20.570 --> 00:14:27.750
+up the amplitude the height of our sound wave goes up and if Y goes down the
+
+158
+00:14:27.750 --> 00:14:33.930
+amplitude or height of our sound wave goes down. So we are mapping the height
+
+159
+00:14:33.930 --> 00:14:40.530
+of Y to the height of the sound wave. This is what we mean by direct mapping
+
+160
+00:14:40.530 --> 00:14:45.830
+we're treating Y like it's a wave and then just making the sound wave that
+
+161
+00:14:45.830 --> 00:14:52.030
+represents Y behave in the exact same way as Y in terms of how it goes up and
+
+162
+00:14:52.030 --> 00:14:58.910
+down.  Now our ears perceive amplitude the height of the sound wave and again sound
+
+163
+00:14:58.910 --> 00:15:05.670
+is a wave in the air so our ears perceive the amplitude of a sound wave as the
+
+164
+00:15:05.670 --> 00:15:09.550
+volume it has to do with like this air pressure essentially you'll hear it as
+
+165
+00:15:09.550 --> 00:15:16.010
+changes in volume and so essentially what is happening is by going up and
+
+166
+00:15:16.010 --> 00:15:22.650
+down Y is controlling the value ofhsorry the volume of the sound wave we
+
+167
+00:15:22.650 --> 00:15:31.170
+hear representing the data. Alright so we've covered how the volume is
+
+168
+00:15:31.170 --> 00:15:37.590
+controlled by Y. What about pitch that's another really important part of sound
+
+169
+00:15:37.590 --> 00:15:43.090
+how high or low of note is. Well this comes down to something we call data
+
+170
+00:15:43.090 --> 00:15:48.230
+sampling.  We don't measure data continuously rather we have some sampling
+
+171
+00:15:48.230 --> 00:15:53.330
+rate which is often how we measure the data. So for instance I'm going to play
+
+172
+00:15:53.330 --> 00:15:57.330
+you some sounds from the accessible oceans project some modification from
+
+173
+00:15:57.330 --> 00:16:02.670
+the accessible oceans project and the times are measured each hour this is our
+
+174
+00:16:02.670 --> 00:16:07.490
+data sampling rate so we have like 24 measurements in a day one measurement
+
+175
+00:16:07.490 --> 00:16:13.950
+each hour. Likewise we don't play the sound continuously but rather we play it
+
+176
+00:16:13.950 --> 00:16:22.490
+at some data sampling rate where we play each note at an individual moment.  So we
+
+177
+00:16:22.490 --> 00:16:26.990
+have our data measurement rate or a data sampling rate and we have an audio
+
+178
+00:16:26.990 --> 00:16:32.230
+sampling rate where we play the rate at which we play the sounds. Now the
+
+179
+00:16:32.230 --> 00:16:37.230
+sampling rate or the frequency at which we measure and then play the
+
+180
+00:16:37.230 --> 00:16:43.510
+modification of data is analogous to sound frequency which our ears perceive
+
+181
+00:16:43.510 --> 00:16:51.690
+as pitch. Thus the frequency of the sound playback influences the pitch at which
+
+182
+00:16:51.690 --> 00:16:57.710
+we hear the modification.  Often we cannot play the modification of the data with
+
+183
+00:16:57.710 --> 00:17:02.150
+the same frequency as the original data sampling rate because the then the
+
+184
+00:17:02.150 --> 00:17:06.710
+frequency or the pitch we'd be playing would just be outside the audible
+
+185
+00:17:06.710 --> 00:17:11.510
+hearing range for humans. Thus in audification we often have to do
+
+186
+00:17:11.510 --> 00:17:15.589
+something that I've seen called translating or shifting the sound
+
+187
+00:17:15.589 --> 00:17:20.710
+representation of the data how the sampling rate at which we play notes
+
+188
+00:17:20.710 --> 00:17:25.690
+just so that the pitch is in the audible pitch range. Now what I'm going to do is
+
+189
+00:17:25.690 --> 00:17:30.530
+I'm going to play you a sonification of the tides from the accessible oceans
+
+190
+00:17:30.530 --> 00:17:35.830
+project at two different sampling rates.  It might be a little bit difficult to
+
+191
+00:17:35.830 --> 00:17:40.850
+hear over the recording like from my computer to your computer but there are
+
+192
+00:17:40.850 --> 00:17:44.370
+two different sampling rates and you can hear that there's a pitch difference
+
+193
+00:17:44.370 --> 00:17:48.750
+between the two. If you can't hear it through the recording I do encourage you
+
+194
+00:17:48.750 --> 00:17:55.570
+to go from the tutorial curriculum page to the accessible oceans page which is
+
+195
+00:17:55.570 --> 00:17:59.870
+linked there and has the examples on it. So if you can't hear the pitch difference
+
+196
+00:17:59.870 --> 00:18:03.330
+here definitely encourage you to go check that out.  I'm going to go play that
+
+197
+00:18:03.330 --> 00:18:05.410
+now so it'll be two sonifications.
+
+198
+00:18:14.770 --> 00:18:17.250
+All right that was pretty quick so I'm going to play that one more time.
+
+199
+00:18:20.770 --> 00:18:27.830
+All right hopefully you could hear the noise happening there.  That is the
+
+200
+00:18:27.830 --> 00:18:34.070
+tide cycle you're hearing. So tides go in and out you know every 24 hours that's
+
+201
+00:18:34.070 --> 00:18:37.930
+at least as much as I know about oceanography tells you what I know and
+
+202
+00:18:37.930 --> 00:18:42.430
+so what you're hearing is that actually every 24 samples not that we can hear
+
+203
+00:18:42.430 --> 00:18:47.710
+the individual nodes because they're so close together you hear that as the
+
+204
+00:18:47.710 --> 00:18:54.650
+tides going up and down control the volume of the modification going up and
+
+205
+00:18:54.650 --> 00:19:01.930
+down that each of those cycles is that 24 hour cycle of the tides going up and
+
+206
+00:19:01.930 --> 00:19:06.730
+down. Now I'm going to play this one more time the same modification before I
+
+207
+00:19:06.730 --> 00:19:10.490
+play the next one that's at a different sampling rate so you can hopefully hear
+
+208
+00:19:10.490 --> 00:19:12.990
+the two pitches side-by-side.
+
+209
+00:19:22.210 --> 00:19:26.170
+All right hopefully you can hear that on my end I can definitely hear the pitch
+
+210
+00:19:26.170 --> 00:19:30.730
+difference I'm hoping it comes through on the recording fingers crossed so what
+
+211
+00:19:30.730 --> 00:19:35.310
+you might have been able to tell on those two is first that whoop whoop whoop
+
+212
+00:19:35.310 --> 00:19:40.150
+is still there because we're still measuring that same tide or we're still
+
+213
+00:19:40.150 --> 00:19:46.690
+representing that same tide data of it going up and down the pitch is lower on
+
+214
+00:19:46.690 --> 00:19:51.370
+the second round of data and also it's a little bit slower it's a little bit
+
+215
+00:19:51.370 --> 00:19:55.790
+slower between each whoop whoop whoop and the modification lasts a little bit
+
+216
+00:19:55.790 --> 00:20:00.390
+longer because the data sampling the frequency at which we play those notes
+
+217
+00:20:00.390 --> 00:20:07.410
+is is a little bit slower which lowers that pitch and also lengthens the time of
+
+218
+00:20:07.410 --> 00:20:11.370
+the modification. So again hopefully you could hear that difference and if you
+
+219
+00:20:11.370 --> 00:20:19.050
+couldn't definitely recommend checking it out on your own computer. All right so
+
+220
+00:20:19.050 --> 00:20:23.850
+if modification is so straightforward we're treating the data like a wave and
+
+221
+00:20:23.850 --> 00:20:29.290
+then actually one second before I keep going I think the computer is about to
+
+222
+00:20:29.290 --> 00:20:33.770
+die rather than suffer another technical difficulty which should make
+
+223
+00:20:33.770 --> 00:20:51.870
+me quite sad I'm just going to plug this in sorry folks.  All right we're back
+
+224
+00:20:51.870 --> 00:20:56.390
+at business. Okay so if modification is so straightforward where we're really
+
+225
+00:20:56.390 --> 00:21:01.230
+just treating the data like a wave and then representing it as an analogous
+
+226
+00:21:01.230 --> 00:21:05.510
+sound wave why don't we do it for everything? Well there are a lot of
+
+227
+00:21:05.510 --> 00:21:09.850
+reasons. First it's pretty limited and what we can or cannot sonify.  For
+
+228
+00:21:09.850 --> 00:21:15.650
+instance how would you audify make an audification or a sonic
+
+229
+00:21:15.650 --> 00:21:21.730
+representation using audification of an image of some 2d data you know with an
+
+230
+00:21:21.730 --> 00:21:26.310
+X and a Y colors there are too many different parameters going on there to
+
+231
+00:21:26.310 --> 00:21:32.650
+put into this amplitude so this volume and then the time. So it's really better
+
+232
+00:21:32.650 --> 00:21:38.510
+suited for a very specific type of data a simpler type of data. Also there might
+
+233
+00:21:38.510 --> 00:21:43.130
+be other reasons we don't want to use audification for instance maybe there's
+
+234
+00:21:43.130 --> 00:21:48.530
+a more like aesthetically pleasing a nicer sound that we can use rather than
+
+235
+00:21:48.530 --> 00:21:55.070
+these amplitude changes in the sound wave.  An aesthetic difference is a really
+
+236
+00:21:55.070 --> 00:21:59.330
+valid reason to have a different representation of the data. I mean I can
+
+237
+00:21:59.330 --> 00:22:02.810
+say that I know a lot of scientists that spend a lot of time trying to make
+
+238
+00:22:02.810 --> 00:22:08.370
+their data visualizations look nice look pretty so that matters as a choice too
+
+239
+00:22:08.370 --> 00:22:14.330
+and it's a totally valid choice to make. Again we're not literally showing what
+
+240
+00:22:14.330 --> 00:22:18.590
+the data sounds like we're making choices of how to represent it and
+
+241
+00:22:18.590 --> 00:22:24.570
+depending on our audience and our goals we might make different choices.  So let's
+
+242
+00:22:24.570 --> 00:22:29.410
+get into what one of those different choices might be and that might be to
+
+243
+00:22:29.410 --> 00:22:35.570
+use a very popular and very flexible sonification technique called parameter
+
+244
+00:22:35.570 --> 00:22:41.490
+mapping. Parameter mapping is a more flexible as I mentioned form of
+
+245
+00:22:41.490 --> 00:22:45.990
+sonification that has become popular in the recent years and in parameter
+
+246
+00:22:45.990 --> 00:22:52.450
+mapping in essence we map or connect different aspects or dimensions of the
+
+247
+00:22:52.450 --> 00:22:57.570
+data to different parameters of the sound representation such as pitch or
+
+248
+00:22:57.570 --> 00:23:04.490
+volume and rhythm. Like modification we could use parameter mapping to sonify
+
+249
+00:23:04.490 --> 00:23:09.510
+data consisting of say one independent variable that's what I called Y and one
+
+250
+00:23:09.510 --> 00:23:14.190
+dependent variable that's what was time for us here but one of the strengths of
+
+251
+00:23:14.190 --> 00:23:19.850
+parameter mapping is that we can actually map much represent with sound
+
+252
+00:23:19.850 --> 00:23:27.270
+much more complex data than we can with modification because there are many
+
+253
+00:23:27.270 --> 00:23:32.130
+more aspects parameters to the sound that we can use that's pitch and rhythm
+
+254
+00:23:32.130 --> 00:23:37.050
+and volume different instruments and timber I'm not a musician but the list
+
+255
+00:23:37.050 --> 00:23:40.950
+goes on there are a lot of different knobs we can turn in our sound to
+
+256
+00:23:40.950 --> 00:23:47.050
+represent different dimensions different aspects of our data.  All right let's
+
+257
+00:23:47.050 --> 00:23:52.010
+clarify the concept of parameter mapping using an example suppose you
+
+258
+00:23:52.010 --> 00:23:55.930
+have measurements of number of sales of something I'm gonna go with ice cream
+
+259
+00:23:55.930 --> 00:23:59.990
+because I like ice cream I can totally go for some right now and net profits from
+
+260
+00:23:59.990 --> 00:24:06.310
+those sales of ice cream over a period of 50 years we choose to map the number
+
+261
+00:24:06.310 --> 00:24:13.630
+of sales to pitch such that more sales are represented by higher pitches and to
+
+262
+00:24:13.630 --> 00:24:19.390
+map net profits to volume such that more profits are represented by a louder
+
+263
+00:24:19.390 --> 00:24:26.630
+note so essentially we let pitch be mapped to sales and volume be
+
+264
+00:24:27.930 --> 00:24:34.210
+mapped to profits from those sales and now we're letting time that independent
+
+265
+00:24:34.210 --> 00:24:37.930
+variable what we'd have along you know the x-axis if this were a visualization
+
+266
+00:24:37.930 --> 00:24:44.830
+for any visualization folks we let time represent be represented by time in the
+
+267
+00:24:44.830 --> 00:24:49.950
+sonification such that each note is a measurement in time so that you know if
+
+268
+00:24:49.950 --> 00:24:53.390
+you're listening later in the sonification you know you're hearing
+
+269
+00:24:53.390 --> 00:24:58.290
+later in time so the first note represents 50 years ago and the last
+
+270
+00:24:58.290 --> 00:25:04.710
+note of the sonification represents the data measured now suppose as we listen
+
+271
+00:25:04.710 --> 00:25:08.550
+to the sonification that we hear a period in which the pitch of notes
+
+272
+00:25:08.550 --> 00:25:14.230
+drops so the pitch goes down we can tell from the mapping decisions that we made
+
+273
+00:25:14.230 --> 00:25:19.310
+that this means the number of ice cream sales in this period has dropped relative
+
+274
+00:25:19.310 --> 00:25:23.830
+to the other measurements perhaps it's wintertime or a recession and people
+
+275
+00:25:23.830 --> 00:25:28.230
+aren't buying as much ice cream now suppose that over the course of the
+
+276
+00:25:28.230 --> 00:25:33.930
+entire data sonification we hear the volume of notes generally increase but
+
+277
+00:25:33.930 --> 00:25:40.170
+the pitch remains relatively constant this means that profits have gone up but
+
+278
+00:25:40.170 --> 00:25:47.570
+the number of sales has gone has remained relatively constant so the cost
+
+279
+00:25:47.570 --> 00:25:53.430
+per ice cream sale the profit per ice cream sale must have gone up that's what
+
+280
+00:25:53.430 --> 00:25:58.710
+I'd call inflation finally suppose that the amount of time between notes
+
+281
+00:25:58.710 --> 00:26:02.690
+decreases towards the end of the sonification this might mean that the
+
+282
+00:26:02.690 --> 00:26:07.990
+data were collected more frequently in later times so that there's less time
+
+283
+00:26:07.990 --> 00:26:15.490
+between each data point note here that there is no one correct way to map our
+
+284
+00:26:15.490 --> 00:26:20.250
+data to different parameters we could just as easily have mapped sales to
+
+285
+00:26:20.250 --> 00:26:25.870
+volume and profits to pitch thus we make choices generally through testing and
+
+286
+00:26:25.870 --> 00:26:29.850
+experimentation to see which representations of our data most
+
+287
+00:26:29.850 --> 00:26:34.490
+effectively and most accurately capture the importance of information and
+
+288
+00:26:34.490 --> 00:26:39.730
+communicate of the information and communicate it preferably in a way
+
+289
+00:26:39.730 --> 00:26:43.850
+that's both understandable comprehensible and aesthetically pleasing
+
+290
+00:26:43.850 --> 00:26:49.930
+this is truly just no different from a data visualization where graphics will go
+
+291
+00:26:49.930 --> 00:26:54.810
+through many iterations of designs to clearly represent the data data
+
+292
+00:26:54.810 --> 00:26:59.950
+representations whether sonic or visual always represent choice so one of the
+
+293
+00:26:59.950 --> 00:27:03.350
+things I hear most often about sonifications is that they're arbitrary
+
+294
+00:27:03.350 --> 00:27:07.810
+is that you know this isn't you know there are so many different ways you
+
+295
+00:27:07.810 --> 00:27:11.030
+could represent the same data how do you ever know anything because that you
+
+296
+00:27:11.030 --> 00:27:13.770
+could just represent the data so many different ways but this is just how
+
+297
+00:27:13.770 --> 00:27:19.250
+representations of data in general go it involves choice it's kind of a fun thing
+
+298
+00:27:19.250 --> 00:27:26.130
+all right let's actually listen to a sonification or to a parameter mapping
+
+299
+00:27:26.130 --> 00:27:30.950
+example now because my background is in astronomy we're going to listen to an
+
+300
+00:27:30.950 --> 00:27:36.470
+astronomy example this is from the NASA and Chandra X-ray Center's universe of
+
+301
+00:27:36.470 --> 00:27:40.210
+sound website and what we're going to do is we're going to listen to the
+
+302
+00:27:40.210 --> 00:27:49.230
+sonification but it also comes with a description which tells us how the
+
+303
+00:27:49.230 --> 00:27:53.690
+break down the parameter mapping so what aspect of the data was mapped to
+
+304
+00:27:53.690 --> 00:27:59.250
+which a parameter of the sound and then we'll listen to the sonification all
+
+305
+00:28:02.100 --> 00:28:10.780
+right it's so we're going to listen to a sonification of the galactic center or
+
+306
+00:28:10.780 --> 00:28:14.140
+of data from the galactic center this was taken from the Chandra X-ray
+
+307
+00:28:14.140 --> 00:28:21.640
+telescope I believe explore the center of our very own Milky Way galaxy the
+
+308
+00:28:21.640 --> 00:28:26.340
+translation begins on the left side of the image and moves to the right with
+
+309
+00:28:26.340 --> 00:28:31.020
+the sounds representing the position and brightness of the sources all right
+
+310
+00:28:31.020 --> 00:28:35.680
+we've already got our first parameter mapping the translation begins on the
+
+311
+00:28:35.680 --> 00:28:39.180
+left side of the image and moves to the right they don't say this directly but
+
+312
+00:28:39.180 --> 00:28:44.780
+what this means is that time within the sonification is mapped to how far we are
+
+313
+00:28:44.780 --> 00:28:49.180
+moving from left to right in the image so you know if you hear in something
+
+314
+00:28:49.180 --> 00:28:53.420
+earlier in the sonification it's closer to the left you hear something right at
+
+315
+00:28:53.420 --> 00:28:57.380
+the end of the sonification later in time you know it's representing
+
+316
+00:28:57.380 --> 00:29:03.500
+something on the right of the image the light of objects located towards the top
+
+317
+00:29:03.500 --> 00:29:07.420
+of the image are heard as higher pitches while the intensity of the light
+
+318
+00:29:07.420 --> 00:29:13.580
+controls the volume all right that's two more parameter mappings there so pitch
+
+319
+00:29:13.580 --> 00:29:18.960
+is controlled by how far we are up and down the image with higher pitches
+
+320
+00:29:18.960 --> 00:29:24.720
+representing objects higher up in the image so closer to the top where lower
+
+321
+00:29:24.720 --> 00:29:32.550
+notes are going to represent objects lower down in the image we also have a
+
+322
+00:29:32.550 --> 00:29:35.790
+second parameter mapping in the sentence the intensity of the light
+
+323
+00:29:35.790 --> 00:29:40.290
+controls the volume what this means is that brighter objects are going to be
+
+324
+00:29:40.290 --> 00:29:45.430
+represented by louder noises and dimmer objects in the image are going to be
+
+325
+00:29:45.430 --> 00:29:53.040
+represented by softer noises stars and compact sources are converted to
+
+326
+00:29:53.040 --> 00:29:58.300
+individual notes while extended clouds of gas and dust produce an evolving
+
+327
+00:29:58.300 --> 00:30:03.480
+drone what does this mean well smaller objects are going to be little notes
+
+328
+00:30:03.480 --> 00:30:08.580
+larger objects longer sounds so the size of the object has to do with the duration
+
+329
+00:30:08.580 --> 00:30:14.620
+of the note the crescendo happens when we reach the bright region to the lower
+
+330
+00:30:14.620 --> 00:30:20.160
+right of the image this is where the 4 million solar mass supermassive black
+
+331
+00:30:20.160 --> 00:30:25.780
+hole at the center of our galaxy known as Sagittarius a star resides and where
+
+332
+00:30:25.780 --> 00:30:32.240
+the clouds of gas and dust are the brightest all right I'm gonna hit play
+
+333
+00:30:33.400 --> 00:30:34.000
+hopefully
+
+334
+00:31:41.680 --> 00:31:46.500
+right I love that sonification that's one of my favorites the universe of
+
+335
+00:31:46.500 --> 00:31:50.360
+sound project has lots of sonification so I definitely recommend checking it
+
+336
+00:31:50.360 --> 00:31:55.220
+out you can get a super long crash course into parameter mapping I think
+
+337
+00:31:55.220 --> 00:31:59.080
+they're lovely really lovely to listen to I'm biased because I like space but
+
+338
+00:31:59.080 --> 00:32:03.260
+there you have it I don't know about you but I think for me the easiest thing to
+
+339
+00:32:03.260 --> 00:32:06.700
+pick out is that note duration thing I could definitely hear those little chimes
+
+340
+00:32:06.700 --> 00:32:11.180
+that are representing stars and then the longer notes especially towards the end
+
+341
+00:32:11.180 --> 00:32:15.720
+where they told us that supermassive black hole is I can hear that sort of
+
+342
+00:32:16.340 --> 00:32:21.440
+longer stretch of notes really lovely I recommend if you want to go and listen
+
+343
+00:32:21.440 --> 00:32:24.740
+to that maybe several more times see if you can hear those individual
+
+344
+00:32:24.740 --> 00:32:29.080
+parameter mappings the pitch representing how high we are along the
+
+345
+00:32:29.080 --> 00:32:34.440
+image up or down the volume representing how bright something is I
+
+346
+00:32:34.440 --> 00:32:37.640
+definitely recommend that I think it also probably would be easier to hear
+
+347
+00:32:37.640 --> 00:32:42.200
+over your own computer again rather than through this recording I'm hoping
+
+348
+00:32:42.200 --> 00:32:46.540
+fingers crossed that the sound records much better here than it did for
+
+349
+00:32:46.540 --> 00:32:50.480
+everyone else sorry if you hear some background noise my guide dog is
+
+350
+00:32:50.480 --> 00:32:55.440
+standing up and shaking but I'm hoping it records much better than it did
+
+351
+00:32:55.440 --> 00:33:01.600
+during the original zoom all right so that is modification and parameter
+
+352
+00:33:01.600 --> 00:33:05.860
+mapping the two I would say most common sonification techniques you will
+
+353
+00:33:05.860 --> 00:33:10.660
+encounter that's also a really quick crash course into what sonification is
+
+354
+00:33:10.660 --> 00:33:16.560
+just keep in mind again sonification is a sound representation of the data now if
+
+355
+00:33:16.560 --> 00:33:21.340
+you're sitting here and thinking Sarah it's super pretty I think it's cool but
+
+356
+00:33:21.340 --> 00:33:28.120
+how in the world do you ever learn to interpret that very understandable and
+
+357
+00:33:28.120 --> 00:33:32.080
+especially it's understandable given that we think of data visualizations
+
+358
+00:33:32.080 --> 00:33:37.340
+graphs and charts and line graphs and so on and so forth as intuitive and easy
+
+359
+00:33:37.340 --> 00:33:42.820
+to interpret but that is not at all true children in schools spend years learning
+
+360
+00:33:42.820 --> 00:33:47.520
+to read graphs in the US where I'm from there's a standardized test for college
+
+361
+00:33:47.520 --> 00:33:52.140
+like to get into university called on the ACT and a whole section of the thing is
+
+362
+00:33:52.140 --> 00:33:57.280
+basically reading graphs and kids study for months for that so clearly we need
+
+363
+00:33:57.280 --> 00:34:02.120
+to learn to read and interpret data visualizations and there are studies
+
+364
+00:34:02.120 --> 00:34:07.980
+suggesting the same should be expected to be true of data sonifications that we
+
+365
+00:34:07.980 --> 00:34:12.480
+should expect to need to learn how to understand and interpret them this kind
+
+366
+00:34:12.480 --> 00:34:16.520
+of makes sense no one's born learning to read a data visualization no one's
+
+367
+00:34:16.520 --> 00:34:20.179
+born learning to understand like already knowing how to understand a data
+
+368
+00:34:20.179 --> 00:34:26.719
+sonification so our goal for the rest of this tutorial recording is going to be to
+
+369
+00:34:26.719 --> 00:34:33.300
+get some basic shapes in Python and then to sonify those different shapes with
+
+370
+00:34:33.300 --> 00:34:40.139
+that astronify package that we just installed in such a way that we can
+
+371
+00:34:40.139 --> 00:34:44.920
+sonify those different shapes and understand how they sound so you can
+
+372
+00:34:44.920 --> 00:34:49.219
+hear this is how a straight line sounds different from a curve which sounds
+
+373
+00:34:49.219 --> 00:34:53.020
+different from something that's moving in sort of a wave like shape the goal
+
+374
+00:34:53.020 --> 00:34:57.320
+here is to develop some intuition for you so things sort of make sense a
+
+375
+00:34:57.320 --> 00:35:00.520
+little bit more on a natural level so that next week when we get into
+
+376
+00:35:00.520 --> 00:35:04.840
+sonifying some more realistic data something that's not just shapes and
+
+377
+00:35:04.840 --> 00:35:08.880
+lines you'll have this intuition or at least the beginning of an intuition
+
+378
+00:35:08.880 --> 00:35:13.780
+already built so that's the goal for the rest of today so now we're going to
+
+379
+00:35:13.780 --> 00:35:19.180
+return to Anaconda prompt or maybe you're already sitting there and I'm
+
+380
+00:35:19.180 --> 00:35:25.520
+going to turn NVDA back on "speech mode beeps speech mode talk" and now we can
+
+381
+00:35:25.520 --> 00:35:34.120
+start IPython. So just as we have before I'm going to start IPython by
+
+382
+00:35:34.120 --> 00:35:44.100
+typing I P Y T H O N IPython no spaces and hitting enter. "Python 3.1 1.5
+
+383
+00:35:44.100 --> 00:35:50.040
+packaged by Anaconda Incorporated Main September." Alright I'm not gonna let it
+
+384
+00:35:50.040 --> 00:35:53.060
+play that whole thing through because I think you've heard it before but
+
+385
+00:35:53.060 --> 00:35:55.900
+essentially you'll know you're an IPython because it'll tell you your
+
+386
+00:35:55.900 --> 00:36:01.560
+Python version and eventually you'll get to it if you let it finish it'll tell
+
+387
+00:36:01.560 --> 00:36:08.440
+you we're in in one we're in the first input line. Now we're going to start by
+
+388
+00:36:08.440 --> 00:36:13.680
+making some of what I'm going to now refer to as synthetic or simulated data
+
+389
+00:36:13.680 --> 00:36:18.080
+what this basically means is not like real data from like observations or
+
+390
+00:36:18.080 --> 00:36:22.780
+measurements this is basically like fake data we've made to follow various shapes
+
+391
+00:36:22.780 --> 00:36:27.560
+or if you're math savvy and remember like your high school algebra classes
+
+392
+00:36:27.560 --> 00:36:32.300
+we're actually going to just be making some simple algebraic equations here
+
+393
+00:36:32.300 --> 00:36:37.800
+we're not actually going to go through making all of them we're going to go
+
+394
+00:36:37.800 --> 00:36:41.360
+through making several of them so you get the idea of like how this math is
+
+395
+00:36:41.360 --> 00:36:46.160
+going to work and then there's a CSV file that has everything already made
+
+396
+00:36:46.160 --> 00:36:51.420
+that you can load in from the URL I encourage you to go to the curriculum
+
+397
+00:36:51.420 --> 00:36:56.800
+it's under data preparation under the final subheading called just in case
+
+398
+00:36:56.800 --> 00:37:03.620
+quote onquote basically it gives you the CSV file in the URL and just gives you
+
+399
+00:37:03.620 --> 00:37:10.440
+the code to paste it in yes so I encourage you to do that but if you're
+
+400
+00:37:10.440 --> 00:37:15.680
+interested for how exactly all of that synthetic so again all of that not real
+
+401
+00:37:15.680 --> 00:37:20.900
+measured data was made in the CSV file the curriculum goes into painstaking
+
+402
+00:37:20.900 --> 00:37:25.200
+detail about how every column was made and exactly the equations that's going
+
+403
+00:37:25.200 --> 00:37:29.420
+into it so we'll kind of do a brief intro to that just so you have a rough
+
+404
+00:37:29.420 --> 00:37:34.160
+idea of how this CSV was made but if you want all the nitty-gritty details the
+
+405
+00:37:34.160 --> 00:37:40.440
+curriculum has everything all right so those of you who remember algebra
+
+406
+00:37:40.440 --> 00:37:45.460
+classes will remember that like functions equations have two different
+
+407
+00:37:45.460 --> 00:37:52.660
+variables what I've called independent or X and dependent Y so Y is a function of
+
+408
+00:37:52.660 --> 00:37:59.320
+X. Y is going to change when X changes so what I want to do first is I want to
+
+409
+00:37:59.320 --> 00:38:05.940
+make an array of numbers that's going to be our X values so imagine these all of
+
+410
+00:38:05.940 --> 00:38:12.740
+these values so I want for in our case I want 100 values evenly spaced from 0 to
+
+411
+00:38:12.740 --> 00:38:21.740
+10 so that at each value of X going from 0 to 0.1 0.2 0.3
+
+412
+00:38:21.740 --> 00:38:27.340
+whatever the the even spacing will be will have Y change a different value of
+
+413
+00:38:27.340 --> 00:38:31.820
+Y at each of those values and that Y will change differently depending on what
+
+414
+00:38:31.820 --> 00:38:37.200
+function we do now as was evidenced by the fact that I had to already sit and
+
+415
+00:38:37.200 --> 00:38:45.600
+think about like the first three numbers in those numbers ranging from 0 to 10 I
+
+416
+00:38:46.920 --> 00:38:53.020
+really don't actually want to sit here and write out a list or an array of a
+
+417
+00:38:53.020 --> 00:38:57.440
+hundred numbers evenly spaced from 0 to 10 I hope you don't want to do that
+
+418
+00:38:57.440 --> 00:39:02.000
+either I think we can all agree that that sounds really quite painful so the
+
+419
+00:39:02.000 --> 00:39:06.860
+good news is NumPy has a built-in function that will do this for us so
+
+420
+00:39:06.860 --> 00:39:10.760
+let's get started I'm going to start by importing our favorite packages here so
+
+421
+00:39:10.760 --> 00:39:22.300
+I'm going to do import NumPy import space NumPy and
+
+422
+00:39:22.300 --> 00:39:29.060
+"N-U-M-P-Y as NP" it's suggesting the way I always type NumPy but we're not
+
+423
+00:39:29.060 --> 00:39:33.060
+going to do that at the moment into all right and you can hear I hit enter and
+
+424
+00:39:33.060 --> 00:39:37.020
+now it's saying you're on the second line I'm gonna do import pandas "import
+
+425
+00:39:37.020 --> 00:39:42.260
+NumPy" it wants to repeat import NumPy we're not going to do that but we're not
+
+426
+00:39:42.260 --> 00:39:46.000
+gonna need pandas at the moment but we will need it very shortly so let's just
+
+427
+00:39:46.000 --> 00:39:57.080
+get it in here "I-M-P-O-R-T space P-A-N-D-A-S" import pandas in three whoo good news all
+
+428
+00:39:57.080 --> 00:40:00.880
+set and ready to go so what I've just done is brought the NumPy and pandas
+
+429
+00:40:00.880 --> 00:40:07.940
+packages into this coding session all right and next what we're going to do is
+
+430
+00:40:07.940 --> 00:40:13.180
+we're going to use something called the linspace function the linspace function
+
+431
+00:40:13.180 --> 00:40:19.440
+is a built-in function in NumPy that will basically give us an evenly spaced
+
+432
+00:40:19.440 --> 00:40:24.920
+array of numbers starting at a specified start number and ending at a specified
+
+433
+00:40:24.920 --> 00:40:30.240
+stop number I think this will be easiest to conceptualize if we actually do an
+
+434
+00:40:30.240 --> 00:40:39.120
+example so let's start by doing NumPy so "N-U-M-P-Y" so from NumPy so NumPy dot
+
+435
+00:40:39.120 --> 00:40:50.940
+dot NumPy dot linspace that's L-I-N-S-P-A-C-E so basically from the
+
+436
+00:40:50.940 --> 00:40:58.100
+NumPy package pull the linspace function open parenthesis I'm gonna do
+
+437
+00:40:58.100 --> 00:41:09.520
+0 comma 5 comma 5 close parenthesis. That's NumPy dot linspace
+
+438
+00:41:09.520 --> 00:41:17.520
+open parenthesis 0 comma 5 comma 5 that first 0 that's our start value for the
+
+439
+00:41:17.520 --> 00:41:24.160
+array the second number the 5 is the stop value for our array and then that
+
+440
+00:41:24.160 --> 00:41:29.940
+third number 5 is the number of values I want so basically what I'm saying is
+
+441
+00:41:29.940 --> 00:41:36.280
+linspace give me an array of numbers from 0 to 5 evenly spaced and I want
+
+442
+00:41:36.280 --> 00:41:40.660
+5 of them and when I hit enter it's going to return to me an array of those
+
+443
+00:41:40.660 --> 00:41:52.860
+numbers "out 3 array 0 1.25 2.5 3.75 5" yep there we go
+
+444
+00:41:52.860 --> 00:41:59.360
+and it has spit out an array that goes from 0 to 5 5 numbers evenly spaced
+
+445
+00:41:59.360 --> 00:42:04.360
+let's try this again we can change the parameters let's try NumPy dot linspace
+
+446
+00:42:04.360 --> 00:42:14.700
+"N-U-M-P-Y" dot linspace dot "L-I-N-S-P-A-C-E" "open parenthesis "left paren" I'm gonna go
+
+447
+00:42:14.700 --> 00:42:23.300
+0 comma 10 comma 5 what is this saying it's saying our
+
+448
+00:42:23.300 --> 00:42:31.100
+start our start value is 0 our stop value is 10 and I want 5 numbers so NumPy
+
+449
+00:42:31.100 --> 00:42:37.920
+dot linspace open parenthesis 0 comma 10 comma 5 close parenthesis give me 5
+
+450
+00:42:37.920 --> 00:42:49.760
+numbers evenly spaced from 0 to 10 "out 4 array 0 2.5 5 7.5 10" and now you can
+
+451
+00:42:49.760 --> 00:42:54.840
+hear we get an array of numbers going all the way up to 10 this time now this
+
+452
+00:42:54.840 --> 00:42:59.400
+is almost what I said I wanted I wanted an array of numbers from 0 to 10 but I
+
+453
+00:42:59.400 --> 00:43:04.900
+wanted a hundred of them so this time we're just going to increase that third
+
+454
+00:43:04.900 --> 00:43:10.380
+value from 5 to a hundred so instead give me a hundred numbers evenly spaced
+
+455
+00:43:10.380 --> 00:43:14.580
+from 0 to 10 and also I don't want the computer to just spit it out at us I
+
+456
+00:43:14.580 --> 00:43:18.500
+actually want to save it so just as Patrick taught us to save variables this
+
+457
+00:43:18.500 --> 00:43:23.320
+time instead of just doing NumPy dot linspace I'm going to do X equals NumPy
+
+458
+00:43:23.320 --> 00:43:28.240
+dot linspace because I'm gonna say hey make this array of numbers from 0 to 10
+
+459
+00:43:28.240 --> 00:43:44.280
+100 of them and call it X. "X space equals space n u m p y dot l i n s p a c e left
+
+460
+00:43:44.280 --> 00:43:53.920
+paren 0 comma 0 comma 1 0 0 right paren" X equals NumPy dot linspace open
+
+461
+00:43:53.920 --> 00:44:00.440
+parenthesis 0 comma 10 comma 100 close parenthesis in 6 and there's no output
+
+462
+00:44:00.440 --> 00:44:06.760
+this time because we've just saved X but if we type X and hit enter X "X equals
+
+463
+00:44:06.760 --> 00:44:11.420
+NumPy dot" it wants to suggest that I repeat that same line from before I
+
+464
+00:44:11.420 --> 00:44:15.280
+don't want to repeat the same line I just want to hit X and hit enter "out 6
+
+465
+00:44:15.280 --> 00:44:26.960
+array 0 0.1 0 1 0 1 0 1 0.2 0 2 0 2 0 2 0.3 0" all right I'm not gonna let it go
+
+466
+00:44:26.960 --> 00:44:30.440
+through the whole thing but as you can hear it's spitting out a rather long
+
+467
+00:44:30.440 --> 00:44:35.500
+array of numbers that are relatively close together and it'll keep going all
+
+468
+00:44:35.500 --> 00:44:38.520
+the way up to 10 a hundred of them we don't want to listen to all of that or
+
+469
+00:44:38.520 --> 00:44:42.020
+at least I don't you're welcome to listen in your own time if you really
+
+470
+00:44:42.020 --> 00:44:45.340
+want to hear all hundred of those numbers but now we have checked that
+
+471
+00:44:45.340 --> 00:44:50.920
+indeed it's saved as X we have an array of numbers evenly spaced from 0 to 10
+
+472
+00:44:50.920 --> 00:44:56.080
+and a hundred of them so rather small spaces now I'm going to do something I'm
+
+473
+00:44:56.080 --> 00:45:03.420
+going to make one of these equations as an example so that you can see how
+
+474
+00:45:03.420 --> 00:45:09.160
+roughly I've made these sort of simple shapes we have going and then we'll load
+
+475
+00:45:09.160 --> 00:45:14.200
+the CSV so that we just have all of the data so what I'm going to do right now
+
+476
+00:45:14.200 --> 00:45:20.100
+is I'm going to make something called a sine function a sine of X so what I mean
+
+477
+00:45:20.100 --> 00:45:24.220
+by this is a sine function is a trig function a trigonometric function
+
+478
+00:45:24.220 --> 00:45:31.300
+basically it's a wave so as X increases Y responds to X by moving up and down in
+
+479
+00:45:31.300 --> 00:45:37.040
+an even wave pattern it just goes up and down at regular intervals as X goes up
+
+480
+00:45:37.040 --> 00:45:41.800
+so essentially what we are doing right now is we are making a wave shape and I
+
+481
+00:45:41.800 --> 00:45:47.680
+just want to call this Y because this is how we often do this in math classes so
+
+482
+00:45:47.680 --> 00:45:52.320
+I'm going to actually I'm going to call it Y underscore sine to specify that we
+
+483
+00:45:52.320 --> 00:45:57.480
+are making a like a sine function it's always good to like name your variables
+
+484
+00:45:57.480 --> 00:46:01.260
+in such a way that you know what they mean because here why if I just call Y
+
+485
+00:46:01.260 --> 00:46:05.660
+it could be like any function if I call Y underscore sine we know it's a sine
+
+486
+00:46:05.660 --> 00:46:14.660
+like a sine wave so we are making a wave right now one Y any line so Y
+
+487
+00:46:14.660 --> 00:46:21.180
+underscore S I N E that's how we spell sine for for you know in math it's not
+
+488
+00:46:21.180 --> 00:46:29.780
+like a sign like a street sign yes. so y_sine
+
+489
+00:46:29.780 --> 00:46:35.660
+"space equals space" um and fortunately NumPy so sine is like
+
+490
+00:46:35.660 --> 00:46:39.600
+non easy math thing to do like a multiplication it's something you
+
+491
+00:46:39.600 --> 00:46:44.080
+generally want a calculator for fortunately NumPy has a built-in sine
+
+492
+00:46:44.080 --> 00:46:48.740
+function so all we have to do is do NumPy dot it's actually sin so it's not
+
+493
+00:46:48.740 --> 00:46:55.420
+a full sign it's NumPy dot s i n and that's NumPy's sine function and you
+
+494
+00:46:55.420 --> 00:47:03.880
+... that was a typo it should be NumPy
+
+495
+00:47:03.880 --> 00:47:11.700
+dot sign not NumPy parenthesis dot s i n left for n right now we want that left
+
+496
+00:47:11.700 --> 00:47:19.520
+for n so Y underscore s i n e equals NumPy dot s i n open parenthesis 2 times
+
+497
+00:47:19.520 --> 00:47:27.920
+X that's going to be "2 star X right paren" so we are saying that
+
+498
+00:47:27.920 --> 00:47:34.620
+Y sine is equal to the sine of 2 times X again this is a really powerful thing
+
+499
+00:47:34.620 --> 00:47:38.960
+about NumPy arrays that you can do math with them like this you can multiply them
+
+500
+00:47:38.960 --> 00:47:42.880
+you can take the sine of them all sorts of things like this and we can hit enter
+
+501
+00:47:42.880 --> 00:47:51.600
+and if we print out Y sine now so if I just type Y underscore sine "Y line s i n
+
+502
+00:47:51.600 --> 00:48:12.540
+e and hit enter out a array 0 0.20064886 0.39313661 0.56963411 0.72296256 0.84688556
+
+503
+00:48:12.540 --> 00:48:28.760
+0.93636273 0.98775469 0.99897117 0.969555" sorry to play so many of those numbers for
+
+504
+00:48:28.760 --> 00:48:33.400
+you but I wanted you to hear that it goes up and then back down if I let it play even
+
+505
+00:48:33.400 --> 00:48:38.180
+longer we would have heard it go all the way down below zero and then back up again
+
+506
+00:48:38.820 --> 00:48:42.460
+which I encourage you to do because it'll give you an intuition for what's going on
+
+507
+00:48:42.460 --> 00:48:46.420
+with this function but essentially what I want you to understand is that a sine of X
+
+508
+00:48:46.420 --> 00:48:51.280
+is a wave so it's going to go up and then down and then up again and then down again
+
+509
+00:48:52.000 --> 00:48:59.560
+all right cool let's make maybe one more really quite simple equation here I in fact it's
+
+510
+00:48:59.560 --> 00:49:03.700
+going to be the simplest equation it's going to be a linear equation we're going to make
+
+511
+00:49:03.700 --> 00:49:11.880
+Y equals X which basically means that for every step X makes to get larger Y gets larger
+
+512
+00:49:11.880 --> 00:49:19.480
+by the same amount and I'm going to call this Y underscore linear Y Y line linear Y underscore
+
+513
+00:49:19.480 --> 00:49:30.120
+L I N E A R "L I N E A R space equals space" and it's just Y equals X so Y underscore linear
+
+514
+00:49:30.120 --> 00:49:37.040
+equals X and that's basically saying it's like a straight line just slanted upwards
+
+515
+00:49:37.040 --> 00:49:43.940
+every step X gets bigger Y gets bigger by the same amount in 10 and if we output Y underscore
+
+516
+00:49:43.940 --> 00:50:01.060
+linear "1 L I N E A R out 10 array 0 0.1010101 0.2020202 0.3030" all right I'm going to stop
+
+517
+00:50:01.060 --> 00:50:05.700
+it there but maybe you remember from when we printed out X that this is exactly the same
+
+518
+00:50:05.700 --> 00:50:12.980
+so basically we've just gone and we've made a an array that makes the exact same that
+
+519
+00:50:12.980 --> 00:50:18.560
+is exactly the same as X so every step X gets bigger Y stays the same amount so it gets
+
+520
+00:50:18.560 --> 00:50:23.000
+bigger by the same amount it is a straight line now again if you go to the curriculum
+
+521
+00:50:23.000 --> 00:50:28.060
+it goes through in absolute detail how to make every single one of the equations that
+
+522
+00:50:28.060 --> 00:50:32.740
+we're going to load into the CSV and so if you're mathematically minded or you just want
+
+523
+00:50:32.740 --> 00:50:37.460
+to learn more about how to do math in Python I definitely encourage you to check that out
+
+524
+00:50:37.460 --> 00:50:43.800
+it covers quadratic equations all sorts of things like that but we're not going to get
+
+525
+00:50:43.800 --> 00:50:47.940
+into all of that right now just because I know it's a little bit tedious and everything's
+
+526
+00:50:47.940 --> 00:50:53.100
+already loaded into a CSV so if you're more on the data analysis side of things you don't
+
+527
+00:50:53.100 --> 00:51:02.720
+want to do all the math then we don't have to get into all of that maybe yeah so I encourage
+
+528
+00:51:02.720 --> 00:51:07.060
+you to check out the curriculum either at this moment to see the rest of the math happen
+
+529
+00:51:08.140 --> 00:51:13.780
+or to load the CSV which I'm about to do I actually with the benefit of hindsight I would
+
+530
+00:51:13.780 --> 00:51:17.040
+love to show you guys how to do a quadratic equation as well just because I want to show
+
+531
+00:51:17.040 --> 00:51:21.540
+you guys how to do an exponent maybe this is the math person in me showing so I'm just
+
+532
+00:51:21.540 --> 00:51:26.980
+going to show you how to do a quadratic really quickly now this isn't actually the exact
+
+533
+00:51:26.980 --> 00:51:35.260
+quadratic that I have in the CSV I've sort of shifted and compressed that a little bit
+
+534
+00:51:35.260 --> 00:51:40.340
+just to make it a nicer shape to listen to and again the curriculum goes into painstaking
+
+535
+00:51:40.340 --> 00:51:46.320
+detail about how exactly that goes but I just want to show you how to do an exponent so
+
+536
+00:51:46.320 --> 00:51:52.360
+a parabola is the shape of a quadratic equation it's basically a curve that goes up up up
+
+537
+00:51:52.360 --> 00:51:59.140
+really steep as you get to the turning point it sort of starts to level out it turns around
+
+538
+00:51:59.140 --> 00:52:03.960
+and then gets steeper and steeper as it goes back down or up again depending on whether
+
+539
+00:52:03.960 --> 00:52:09.740
+or not you flipped it so it's almost like a wave but it's not like the sign because the
+
+540
+00:52:09.740 --> 00:52:16.760
+sign goes up and down repeatedly the parabola is just a curve that turns over once and it's
+
+541
+00:52:16.760 --> 00:52:22.780
+steepest at the sides and flattest at the top and it's the simplest form of a quadratic
+
+542
+00:52:23.400 --> 00:52:29.820
+is y equals x squared I'm going to save this as an equation that or as a variable that I'm
+
+543
+00:52:29.820 --> 00:52:35.540
+going to call y underscore parabola because that is the shape of a quadratic so it's going to be
+
+544
+00:52:35.540 --> 00:52:51.480
+y underscore "y underscore p a r a b o l a"
+
+545
+00:52:51.480 --> 00:52:59.700
+parabola space equals space x squared and the the main reason that I am taking the time
+
+546
+00:52:59.700 --> 00:53:06.080
+to do this right now even though it's all in that csv is that I want you guys to know how to do
+
+547
+00:53:06.080 --> 00:53:12.800
+exponents in I want to recap how to do exponents in Python just in case because I think it's good
+
+548
+00:53:12.800 --> 00:53:19.700
+to know so I always when I started doing Python expected an exponent to be a caret it is not it
+
+549
+00:53:19.700 --> 00:53:31.020
+is two asterisks so x squared is x asterisk asterisk square two "x star star two" so y parabola
+
+550
+00:53:31.020 --> 00:53:39.040
+equals x asterisk asterisk two in 12 and if we print out y parabola just by typing it and hitting
+
+551
+00:53:39.040 --> 00:53:55.860
+enter "y line p a r a b o l a out 12 array 0.000000000 e plus 00 1.02030405 times" we
+
+552
+00:53:55.860 --> 00:54:00.360
+had some crazy numbers I don't I don't find that easy to interpret I don't know about you I think
+
+553
+00:54:00.360 --> 00:54:05.640
+they're all in a scientific notation that's what that e means that it's put it you know in the form
+
+554
+00:54:05.640 --> 00:54:16.080
+of so for instance 9e2 would be 9 times 10 to the power of 2 which is 200 not 200 is 100 sorry
+
+555
+00:54:16.080 --> 00:54:22.280
+about that so 9 times 100 or 900 it's what we do for like really large or small numbers in science
+
+556
+00:54:22.280 --> 00:54:26.940
+and Python loves to print things out like that sometimes if it gets a little unwieldy I don't
+
+557
+00:54:26.940 --> 00:54:30.740
+know about you but I find that a little bit difficult to interpret just listening to it
+
+558
+00:54:30.740 --> 00:54:35.680
+scientific notation is a little bit hard to interpret just hearing it or looking at it I
+
+559
+00:54:35.680 --> 00:54:41.960
+would say but the thing to keep in mind again is that a parabola a quadratic equation is that curve
+
+560
+00:54:41.960 --> 00:54:48.700
+shape going up and then down just once and if you want to see the exact way I did this to make it
+
+561
+00:54:48.700 --> 00:54:54.240
+in the CSV then again check out the curriculum it goes into absolute detail about how I made this
+
+562
+00:54:54.240 --> 00:54:59.240
+this CSV so you can have all the nitty-gritty you can know the exact equation I used for everything
+
+563
+00:54:59.240 --> 00:55:03.780
+and again if you're curious about that feel free to stop by office hours or shoot me an email
+
+564
+00:55:04.380 --> 00:55:10.560
+all right I'm going to pop out of um out of ipython and into uh into google chrome
+
+565
+00:55:10.560 --> 00:55:23.260
+...
+
+566
+00:55:23.260 --> 00:55:30.500
+...
+
+567
+00:55:33.020 --> 00:55:39.000
+and because I am low vision I am well accustomed to squinting at my computer so you might notice
+
+568
+00:55:39.000 --> 00:55:45.240
+me navigating in a way that is a little bit more sighted than maybe um just fully using NVDA that's
+
+569
+00:55:45.240 --> 00:55:54.500
+also...me not being a full NVDA desktop I usually use mac
+
+570
+00:55:54.500 --> 00:56:01.920
+so one little caveat if you are working from uh the curriculum as it is now there's one little
+
+571
+00:56:01.920 --> 00:56:06.440
+thing we're going to need to do before we copy and paste that little snippet of code again this is
+
+572
+00:56:06.440 --> 00:56:13.800
+under that subheading just in case in the module preparing data for sonification now I have done
+
+573
+00:56:13.800 --> 00:56:18.900
+a little shorthand in this code snippet that in retrospect I shouldn't know so I might go back and
+
+574
+00:56:18.900 --> 00:56:25.460
+fix it but basically I am very accustomed to shortening pandas as pd you'll see people do
+
+575
+00:56:25.460 --> 00:56:30.640
+this a lot it's just because it's shorter to type out than pandas but we have to tell our computers
+
+576
+00:56:30.640 --> 00:56:36.840
+like hey I'm going to call pandas pd from now on so we've already imported pandas but we're actually
+
+577
+00:56:36.840 --> 00:56:42.720
+going to import it again and tell the computer actually from now on I'm going to call it pd
+
+578
+00:56:42.720 --> 00:56:56.840
+so that's just import "I M P O R T "import pandas "space p a n d a s" as pd space "a s pd"
+
+579
+00:56:59.080 --> 00:57:05.680
+import pandas as pd so bring in pandas and from now on we're calling it pd again we've already
+
+580
+00:57:05.680 --> 00:57:10.360
+brought in pandas we're into this ipython session but now we need to remind the computer tell the
+
+581
+00:57:10.360 --> 00:57:14.860
+computer hi I'm calling it something different now we only need to do this just because if you
+
+582
+00:57:14.860 --> 00:57:21.700
+copy and paste straight from the code I put in the curriculum I call pandas pd there which
+
+583
+00:57:21.700 --> 00:57:26.640
+was an oversight on my part so I might go back and fix that I probably ought to so I'm going to hit
+
+584
+00:57:26.640 --> 00:57:32.900
+enter importing all right we've imported pandas as pd and now I am just going to paste in that
+
+585
+00:57:32.900 --> 00:57:41.520
+line of code or those three lines of code actually um from uh oh actually there's one other thing we
+
+586
+00:57:41.520 --> 00:57:46.960
+need to cover before we paste in those lines of code and that's going to be uh something called
+
+587
+00:57:46.960 --> 00:57:55.400
+um astropy tables now astronify the sonification package that we are using today is a package that
+
+588
+00:57:55.400 --> 00:58:00.380
+was made by astronomers to be used by astronomers and we'll get into more detail about what exactly
+
+589
+00:58:00.380 --> 00:58:07.620
+it is and how it works in a second but because it was made by astronomers for astronomers um it uses
+
+590
+00:58:07.620 --> 00:58:15.280
+a specific type of data a object type in python that astronomers like to use this is something
+
+591
+00:58:15.280 --> 00:58:24.160
+called an astropy table astropy is astropython basically it is a python package that has a ton
+
+592
+00:58:24.160 --> 00:58:30.200
+of astronomy functionalities things like astronomy units like things like light years and parsecs
+
+593
+00:58:30.200 --> 00:58:36.360
+it also has coordinate system transforms all sorts of things like that are handled within
+
+594
+00:58:36.360 --> 00:58:42.780
+astropy it also has a data type actually there's multiple but in this case it has this uh this type
+
+595
+00:58:42.780 --> 00:58:49.980
+um of object called a table for our purposes here an astropy table is exceptionally similar
+
+596
+00:58:50.830 --> 00:58:59.280
+to an astro uh to um a panda's data frame and in fact they're so similar that astropy has a built
+
+597
+00:58:59.280 --> 00:59:08.020
+in function to uh convert a panda's data frame directly to an astropy table um and the reason
+
+598
+00:59:08.020 --> 00:59:16.820
+we're going to do this is because um the reason we want to do this is because uh um astronify only
+
+599
+00:59:16.820 --> 00:59:24.100
+takes as input astropy tables it really just wants astropy tables because it was made for astronomy
+
+600
+00:59:24.100 --> 00:59:31.260
+data so we have to convert our panda's data frame to an astropy table in order to give it to um
+
+601
+00:59:31.260 --> 00:59:36.880
+in order to give it to astronify to sonify so what i'm going to do here is i'm going to import
+
+602
+00:59:37.460 --> 00:59:43.600
+table from astropy so basically say from this astropy package bring in this table things we
+
+603
+00:59:43.600 --> 00:59:55.680
+need it so i'm going to type from "f r o m" so from astropy that space that's "a s t r o p y"
+
+604
+00:59:56.600 --> 01:00:09.320
+dot table "dot t a b l e" so from the subsection of astropy called table space import "i m p o r t"
+
+605
+01:00:09.320 --> 01:00:21.660
+so from astropy dot table import table except here table is capitalized "space T a b l e" so from
+
+606
+01:00:21.660 --> 01:00:29.640
+astropy table import table and again the table that second table so not astropy dot table but
+
+607
+01:00:29.640 --> 01:00:37.960
+that table after import that's got to be a capital t there "in 15" all right and it's imported we've
+
+608
+01:00:37.960 --> 01:00:44.460
+brought the table thing in so if i bring in these lines of code i'm just going to copy and paste
+
+609
+01:00:44.460 --> 01:00:50.560
+those three lines of code in from under just in case um i'm sorry to all of you guys watching on
+
+610
+01:00:50.560 --> 01:00:57.700
+the recording that i'm not reading this out it is just a horrendously long url um maybe should
+
+611
+01:00:57.700 --> 01:01:03.300
+i read it out oh no i i'm gonna i'm gonna really encourage you guys to go and copy and paste this
+
+612
+01:01:03.300 --> 01:01:09.680
+from the uh from the curriculum or maybe we can put it in the description of this youtube video
+
+613
+01:01:09.680 --> 01:01:15.800
+um because i think me reading it out loud right now is just going to lead to some suffering and
+
+614
+01:01:15.800 --> 01:01:20.820
+also to uh just mistyping it i don't think it's going to be very helpful but there are three
+
+615
+01:01:20.820 --> 01:01:26.680
+lines in this code the first line that we're going to copy and paste in is url equals that really
+
+616
+01:01:26.680 --> 01:01:34.760
+long url it's basically hey the url is called this save it as this thing called url the second
+
+617
+01:01:34.760 --> 01:01:44.740
+one is a function we've seen before it's df equals pd dot read csv url so it's basically saying
+
+618
+01:01:45.820 --> 01:01:54.500
+make a new data frame called df and then pd remember that's now pandas pandas dot read csv
+
+619
+01:01:54.500 --> 01:02:02.640
+so read the csv at that url after url it's comma index underscore call equals
+
+620
+01:02:02.640 --> 01:02:10.320
+zero that means set the index of our new data frame as the zeroth column and then the third
+
+621
+01:02:10.320 --> 01:02:19.280
+and final line of code is tbl equals table so capital t table that's the table we just imported
+
+622
+01:02:19.280 --> 01:02:29.120
+from astropy dot from pandas open parenthesis df close parenthesis what that's saying is make
+
+623
+01:02:29.120 --> 01:02:37.940
+a new table call it tbl and make it from the pandas data frame that we've named df all right
+
+624
+01:02:37.940 --> 01:02:42.020
+now i'll finally stop yammering and copy and paste that in well i've already copied it warning
+
+625
+01:02:42.020 --> 01:02:46.760
+dialogue warning you are about to paste text that command prompt terminal ipython
+
+626
+01:02:46.760 --> 01:02:53.480
+i trust uh it was asking whether or not i trusted that copy and paste that was putting in and and i do
+
+627
+01:02:53.480 --> 01:02:57.780
+trust it because that's my own url this is the moment we cross our fingers that uh it's gonna
+
+628
+01:02:57.780 --> 01:03:05.660
+work um again first line is the url "e slash sonification e selected main slash prepared
+
+629
+01:03:05.660 --> 01:03:13.640
+data dot csv raw equals true selected slash url equal" that's it reading that part of the url that's
+
+630
+01:03:13.640 --> 01:03:23.680
+that first line "df equals selected space selected pd dot read csv url index co l equals zero selected"
+
+631
+01:03:24.380 --> 01:03:29.920
+all right and that's it reading the second line df equals pd dot read underscore csv
+
+632
+01:03:29.920 --> 01:03:37.780
+open parenthesis url that's the url from the first line comma comma index underscore call
+
+633
+01:03:37.780 --> 01:03:43.940
+equals zero and then finally that last line "tbl equals t selected i selected
+
+634
+01:03:43.940 --> 01:03:50.900
+...that wasn't very helpful that
+
+635
+01:03:50.900 --> 01:04:01.200
+that final line is tbl equals table capital t dot from pandas open parenthesis df close
+
+636
+01:04:01.200 --> 01:04:07.700
+parenthesis so make a make a table from the panda's data frame df and call it tbl i'm gonna hit enter
+
+637
+01:04:07.700 --> 01:04:14.900
+and cross our fingers that it works "in 16." all right no error messages read out that means it
+
+638
+01:04:14.900 --> 01:04:22.580
+worked success all right our data is prepared it is in an astropy table let's take a moment
+
+639
+01:04:22.580 --> 01:04:28.440
+to explore this astropy table so first what we're going to do is we're going to print out
+
+640
+01:04:28.440 --> 01:04:34.740
+the column names the way we do this for an astropy table is by doing tbl so that's the
+
+641
+01:04:34.740 --> 01:04:42.380
+name of our table t b l and then we're going to do dot call dot ... it's already trying to
+
+642
+01:04:42.380 --> 01:04:55.520
+suggest it dot c o l n a m e s tbl dot col names so from table take
+
+643
+01:04:55.520 --> 01:05:02.120
+the column names and if we hit enter it'll just print them out "out 16 x linear n e g linear
+
+644
+01:05:02.120 --> 01:05:12.060
+parabola abs sine in 17." all right so in this table there are six columns there is x linear
+
+645
+01:05:12.060 --> 01:05:22.380
+neg underscore linear parabola abs and sine these are the x actually the exact same x that we made
+
+646
+01:05:22.380 --> 01:05:29.760
+with that lin space function above and then five other functions of x so variables that are
+
+647
+01:05:29.760 --> 01:05:36.960
+following a function of x linear is that y equals x that we made above so it's just every step that
+
+648
+01:05:36.960 --> 01:05:43.880
+x makes to get bigger y gets bigger by the same amount so it's a straight line going up neg
+
+649
+01:05:43.880 --> 01:05:51.200
+underscore linear is y equals negative x so it's still a straight line except every time that x gets
+
+650
+01:05:51.200 --> 01:05:59.180
+bigger y gets smaller so it's a straight line slanted downwards parabola that's the quadratic
+
+651
+01:05:59.180 --> 01:06:04.560
+equation we were talking about now in this case it's not exactly y equals x squared it's a little
+
+652
+01:06:04.560 --> 01:06:10.480
+bit different um i believe it's something like if i recall correctly i want to say it's let me take a
+
+653
+01:06:10.480 --> 01:06:20.600
+look y equals negative times the quantity x minus five squared plus one um if any of you are algebra
+
+654
+01:06:20.600 --> 01:06:25.240
+people if not don't worry about it essentially what we care about here is not so much the math
+
+655
+01:06:25.240 --> 01:06:30.240
+as the shape so we understand the shape we're going to represent with sound and remember this
+
+656
+01:06:30.240 --> 01:06:40.720
+is a curve that goes up up up up new notification no no no no sorry um someone's notification um
+
+657
+01:06:40.720 --> 01:06:46.540
+okay um what we care about here is that parabola is a curve that goes up really steep then as it
+
+658
+01:06:46.540 --> 01:06:53.080
+starts to turn over it gets a little bit flatter stays flat turns over gets steeper again going
+
+659
+01:06:53.080 --> 01:07:01.140
+down absolute value what i've called abs abs that is a function that goes up up up and then very
+
+660
+01:07:01.140 --> 01:07:07.820
+sharply turns back down so it's a straight line slanted upwards kind of like our y equals x and
+
+661
+01:07:07.820 --> 01:07:13.580
+then it very sharply turns around and goes slanted downward in a straight line like our y equals
+
+662
+01:07:13.580 --> 01:07:22.140
+negative x and then finally sine that is our wave so y equals sine of x so that y goes up and down
+
+663
+01:07:22.140 --> 01:07:30.680
+at regular intervals in a wave as x gets bigger all right so those are our six columns of the
+
+664
+01:07:30.680 --> 01:07:36.780
+table next let's just take a look at what's inside one of those columns and the way we're going to
+
+665
+01:07:36.780 --> 01:07:41.400
+call one of the columns uh of the table is a little bit different than the syntax you've been
+
+666
+01:07:41.400 --> 01:07:45.960
+using with patrick to call the columns of the panda's data frames i believe we're going to do
+
+667
+01:07:45.960 --> 01:07:54.180
+tbl tbl so from table what we've called our tbl that's the name of our table open square bracket
+
+668
+01:07:54.180 --> 01:08:00.520
+left bracket x it's already trying to suggest uh what we're going to do open bracket we're going
+
+669
+01:08:00.520 --> 01:08:09.920
+to do quotation mark x quotation mark and then close square bracket so it's tbl
+
+670
+01:08:10.560 --> 01:08:20.080
+open square bracket uh quotation mark x quotation mark close square bracket so basically um in x
+
+671
+01:08:20.660 --> 01:08:27.140
+or in table we're calling the column called x which is saved in quotation marks uh sort of like
+
+672
+01:08:27.140 --> 01:08:31.620
+how we do for pandas data frames they've they've got quotation marks around because they're a string
+
+673
+01:08:31.620 --> 01:08:38.080
+they're they're a word and then if we hit enter "out 17 less column name equals x type equals
+
+674
+01:08:38.080 --> 01:08:52.640
+float 64 length equals 100 greater 0.0 0.1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0.2 0 2 0 2 0 2 0 2 0 2"
+
+675
+01:08:52.640 --> 01:08:56.819
+all right i'm gonna stop that there um i don't think we need to listen to the whole thing but
+
+676
+01:08:56.819 --> 01:09:00.600
+you might have noticed it was a little different at the beginning from how a panda's data frame
+
+677
+01:09:00.600 --> 01:09:05.580
+prints out um a column uh but it tells you there's a column the column name is called x
+
+678
+01:09:05.580 --> 01:09:10.200
+it tells you that it's a float which means it's decimal numbers tells you the length of the
+
+679
+01:09:10.200 --> 01:09:14.300
+column i actually don't i guess i wasn't paying enough attention hopefully it said 100 there
+
+680
+01:09:14.300 --> 01:09:19.800
+because there should be 100 numbers and then again if you remember from before those are the same
+
+681
+01:09:19.800 --> 01:09:29.040
+numbers that were in our x array that we got from numpy dot linspace so phew this astropy table has
+
+682
+01:09:29.040 --> 01:09:37.439
+preserved the data that we made and again the um and then that we put in that csv and again the
+
+683
+01:09:37.439 --> 01:09:42.600
+curriculum goes through in detail every step of how we made this synthetic so again this not real
+
+684
+01:09:42.600 --> 01:09:48.660
+data to represent shapes put it in a data frame and then get it into this astropy table that we
+
+685
+01:09:48.660 --> 01:09:55.080
+now have awesome so we know which columns are in our pen or in our astropy table and we've checked
+
+686
+01:09:55.080 --> 01:10:00.200
+on one of the columns to make sure that it's a new notification from oh this is new note of
+
+687
+01:10:00.200 --> 01:10:05.540
+sorry about that folks i am uh i'm borrowing a friend's laptop to do this since i
+
+688
+01:10:05.540 --> 01:10:11.340
+am a mac user primarily um and in fact i don't even know how to put a windows laptop on do not
+
+689
+01:10:11.340 --> 01:10:17.180
+disturb so we might have some notifications coming in um hopefully not too many um okay moving
+
+690
+01:10:17.180 --> 01:10:23.300
+onwards um so we've checked on this astropy table we've made sure it doesn't look fishy
+
+691
+01:10:23.300 --> 01:10:29.100
+kind of is behaving for our purposes an awful lot like a panda's data frame that's good news
+
+692
+01:10:29.100 --> 01:10:36.880
+that is all we really need to care about and with that we are going to uh check off that data
+
+693
+01:10:36.880 --> 01:10:43.360
+preparation stage and celebrate because we are about to get into actually sonifying things
+
+694
+01:10:43.360 --> 01:10:50.500
+with one caveat first i want us to talk about what astronify is and how it works
+
+695
+01:10:51.460 --> 01:10:58.760
+all right so astronify is a python package we've installed that is developed by scott
+
+696
+01:10:58.760 --> 01:11:04.460
+fleming at the space telescope science institute clara brosser at space telescope science institute
+
+697
+01:11:04.460 --> 01:11:09.860
+and now at the university of saint andrews um jen kotler at space telescope and kate meredith
+
+698
+01:11:09.860 --> 01:11:16.760
+at glass education and it is a package designed to sonify or represent a sound a very specific
+
+699
+01:11:16.760 --> 01:11:23.540
+type of astronomical data called a light curve light curves represent the observed amount of
+
+700
+01:11:23.540 --> 01:11:30.540
+light from an object typically a star as we see it on earth so it observe it measures the amount
+
+701
+01:11:30.540 --> 01:11:37.240
+of light we see um generally from a telescope so how much light we are collecting from a telescope
+
+702
+01:11:37.880 --> 01:11:44.160
+from a specific star over time astronomers like to call that observed amount of light how much
+
+703
+01:11:44.160 --> 01:11:49.400
+light we receive from an object here on earth we like to call that flux so we are observing the
+
+704
+01:11:49.400 --> 01:11:56.520
+flux the amount of light seen from a star over time thus light curves allow astronomers to
+
+705
+01:11:56.520 --> 01:12:01.860
+observe variability in the amount of light a telescope records coming from a star or to
+
+706
+01:12:01.860 --> 01:12:08.960
+record how bright a star basically appears to us on earth observing this variability can give
+
+707
+01:12:09.260 --> 01:12:15.600
+insight into all sorts of incredible phenomena including explosive stellar activity called flares
+
+708
+01:12:15.600 --> 01:12:22.860
+so that would be a sudden increase in brightness at a period of time and small periodic dips in
+
+709
+01:12:22.860 --> 01:12:28.120
+the amount of light observed from a star caused by a planet orbiting that star and blocking some
+
+710
+01:12:28.120 --> 01:12:33.820
+of its light as it passes through our line of sight and orbits the star um as it passes through
+
+711
+01:12:33.820 --> 01:12:39.200
+our line of sight with the star we call this latter phenomenon a an exoplanet transit and
+
+712
+01:12:39.200 --> 01:12:44.560
+we've used it to discover thousands of planets outside our solar system orbiting other stars
+
+713
+01:12:44.560 --> 01:12:49.060
+what's essentially happening is that at regular intervals as the planet orbits the star
+
+714
+01:12:49.060 --> 01:12:55.220
+it gets in between our telescope and the star and blocks a tiny fraction of the light and it does
+
+715
+01:12:55.220 --> 01:13:00.480
+that over and over and over again so you know if you see a star that looks like it's getting dimmer
+
+716
+01:13:00.480 --> 01:13:05.840
+by a tiny regular amount at regular intervals you can be like there might be a planet getting
+
+717
+01:13:05.840 --> 01:13:13.000
+in the way there and boom you found a planet. Astronify works by mapping the observed flux
+
+718
+01:13:13.000 --> 01:13:19.160
+again remember that's the observed amount of light we see from the star that's our dependent
+
+719
+01:13:19.160 --> 01:13:26.600
+variable that's changing with time to pitch such that higher fluxes are represented by higher
+
+720
+01:13:26.600 --> 01:13:32.960
+pitches so if you have a moment where you observe more light that data is going to be represented by
+
+721
+01:13:32.960 --> 01:13:39.400
+a higher pitch each observation of the star's brightness is thus represented by a note where
+
+722
+01:13:39.400 --> 01:13:45.540
+the pitch is controlled by the value of that observation it is worth noting here that although
+
+723
+01:13:45.540 --> 01:13:51.340
+it's the default to have brighter like higher fluxes brighter moments brighter data points
+
+724
+01:13:51.340 --> 01:13:57.760
+mapped to higher pitches the user can set a parameter within Astronify to invert the pitches
+
+725
+01:13:57.760 --> 01:14:03.920
+such that higher fluxes more light are mapped to lower pitches there might be you know personal
+
+726
+01:14:03.920 --> 01:14:09.480
+preference reasons you might do that. We might get into discussing parameters involved in Astronify
+
+727
+01:14:09.480 --> 01:14:14.520
+sonifications next week and this will hopefully make some more sense with some more examples
+
+728
+01:14:14.520 --> 01:14:20.780
+so I'm going to once again going to turn off NVDA's speech mode so it doesn't talk over the
+
+729
+01:14:20.780 --> 01:14:28.320
+sonifications speech mode off speech mode beeps nope I don't want it on speech mode off all right
+
+730
+01:14:28.320 --> 01:14:34.500
+and I'm going to go to Astronify's example this is straight from their web page I highly recommend
+
+731
+01:14:34.500 --> 01:14:39.480
+that you check out Astronify's web page it's again linked on the curriculum um it's a really
+
+732
+01:14:39.480 --> 01:14:44.500
+incredible project I think it's great so I highly recommend you check it out and I'm going to play
+
+733
+01:14:44.500 --> 01:14:49.120
+something this is a sonification of a light curve containing a stellar flare
+
+734
+01:14:59.520 --> 01:15:03.240
+did you hear that I'm going to play that one more time
+
+735
+01:15:08.100 --> 01:15:08.760
+so
+
+736
+01:15:14.030 --> 01:15:20.640
+the sound stays relatively constant until boom there's this moment of where it gets
+
+737
+01:15:20.640 --> 01:15:27.020
+way higher pitched and we know from the mapping we've just discussed that that higher pitch
+
+738
+01:15:27.490 --> 01:15:32.340
+is representing a moment where the star gets a lot brighter as we see it and that's the flare
+
+739
+01:15:32.340 --> 01:15:39.080
+a flare of light and activity from the star that we can really clearly hear as a change in the pitch
+
+740
+01:15:39.080 --> 01:15:46.320
+of the sound representation of the data all right cool now as a concept check
+
+741
+01:15:46.320 --> 01:15:50.780
+moving uh thinking back to our discussion of modification and parameter mapping
+
+742
+01:15:50.780 --> 01:15:57.680
+do you think that Astronify is parameter mapping or modification I'll wait for a second
+
+743
+01:16:01.480 --> 01:16:05.600
+it's awkward to like wait and and give you a chance to think about it when there's like no
+
+744
+01:16:05.600 --> 01:16:10.880
+one on like a zoom call with me or anything I'm just sort of like yes I sit in uh I sit in silence
+
+745
+01:16:10.880 --> 01:16:16.960
+and I uh I let people hopefully online think about it okay that's probably enough time um so
+
+746
+01:16:17.720 --> 01:16:24.780
+Astronify is parameter mapping because in this case the flux or how high y goes up or down
+
+747
+01:16:24.780 --> 01:16:31.020
+our independent or our dependent variable it goes up or down is mapped to pitch so it's not
+
+748
+01:16:31.020 --> 01:16:35.340
+controlling the amplitude of the sound wave which remember we perceive generally as volume
+
+749
+01:16:35.340 --> 01:16:42.300
+it's controlling the pitch so that is a parameter mapping where we have mapped the flux to the
+
+750
+01:16:42.300 --> 01:16:51.060
+parameter pitch in our sonification all right now here we've discussed Astronify within the context
+
+751
+01:16:51.060 --> 01:16:58.220
+of its intended use sonifying light curves however light curves are just the type of 1d data or what
+
+752
+01:16:58.220 --> 01:17:05.640
+I would call 1d data in astronomy so we have two variables time and flux x and y I suppose
+
+753
+01:17:05.640 --> 01:17:10.880
+mathematicians might tell me that they're actually two dimensions 2d because it's time and flux those
+
+754
+01:17:10.880 --> 01:17:15.780
+are two dimensions I'm going to call it 1d variable um hopefully there are no mathematicians who are
+
+755
+01:17:15.780 --> 01:17:22.140
+going to like hunt me down for this but there are all kinds of 1d data out there including maybe
+
+756
+01:17:22.140 --> 01:17:29.560
+some data that you've uh you've dealt with before so we can realistically present other 1d data
+
+757
+01:17:29.560 --> 01:17:36.680
+using Astronify beyond just light curves but before we get to all that complicated stuff
+
+758
+01:17:36.680 --> 01:17:42.520
+let's go back to that sonification education point we were getting back before and this was
+
+759
+01:17:42.520 --> 01:17:47.100
+inspired by a talk that Scott Fleming one of the developers of Astronify gave at the Space
+
+760
+01:17:47.100 --> 01:17:51.220
+Telescope Science Institute's Day of Accessibility wherein he talked about
+
+761
+01:17:52.120 --> 01:17:58.940
+about sonification education and gave some examples where we sonify um where we where he
+
+762
+01:17:58.940 --> 01:18:04.460
+sonified with Astronify some of these simple shapes very similar to what we're about to do
+
+763
+01:18:05.280 --> 01:18:11.400
+so now we're going to make our own sonifications you're going to get a sense for what Astronify
+
+764
+01:18:11.400 --> 01:18:16.760
+does all right I'm going to turn my volume down a little bit so I don't blast our ears out with uh
+
+765
+01:18:16.760 --> 01:18:23.800
+with NVDA "speech mode speech mode talk" I'm going to turn the volume up uh I'm going to turn the
+
+766
+01:18:23.800 --> 01:18:27.720
+volume up hopefully not too much hopefully that's a reasonable amount of volume we'll hope for the
+
+767
+01:18:27.720 --> 01:18:36.140
+best okay we've installed Astronify but we haven't imported it into this Python session so what I'm
+
+768
+01:18:36.140 --> 01:18:49.120
+going to do is I'm going to write from "F-R-O-M" from Astronify that's "A-S-T-R-O-N-I-F-Y.series"
+
+769
+01:18:49.680 --> 01:18:53.580
+it wants to finish for me but I've like finished the sentence or finished the line for me but I'm
+
+770
+01:18:53.580 --> 01:19:07.440
+not gonna let it from Astronify A-S-T-R-O-N-I-F-Y dot series "dot s-e-r-i-e-s" so from the subsection
+
+771
+01:19:07.440 --> 01:19:16.140
+of Astronify series import so space "space i-m-p-o-r-t" import and we're going to import
+
+772
+01:19:16.140 --> 01:19:34.380
+a function called Soni series that is capital s so capital S-o-n-i-series capital S-e-r-i-e-s
+
+773
+01:19:34.380 --> 01:19:41.740
+so the s in sauna and the s beginning series are capitalized from Astronify series from
+
+774
+01:19:41.740 --> 01:19:49.100
+dot series import sauna series "wx python is not found for the current python version
+
+775
+01:19:49.100 --> 01:19:55.440
+pyo will use a minimal gui toolkit written with tkinter if available this toolkit has
+
+776
+01:19:55.440 --> 01:20:01.880
+limited functionalities and is no more maintained or updated if you want to use all of pyos"
+
+777
+01:20:01.880 --> 01:20:06.280
+all right so I just let it play some of a warning that came out I think a lot of people have been
+
+778
+01:20:06.280 --> 01:20:09.740
+getting this warning I've been getting this warning I think Patrick did as well I heard
+
+779
+01:20:09.740 --> 01:20:14.520
+from some other people from the live class that they got this warning nothing to worry about it's
+
+780
+01:20:14.520 --> 01:20:20.480
+just like a little warning maybe bad advice but I often ignore warnings if it's not an actual error
+
+781
+01:20:20.480 --> 01:20:25.100
+message so maybe don't take that to heart but I just wanted you to hear it so that if you hear
+
+782
+01:20:25.100 --> 01:20:30.020
+it on your computer you don't worry it's no biggie and now we're going to get started with
+
+783
+01:20:30.020 --> 01:20:36.840
+the sonification now this is going to involve inherently some kind of repetitive four lines
+
+784
+01:20:36.840 --> 01:20:43.440
+of code I'm going to go through the first time or two relatively slowly but then I encourage you
+
+785
+01:20:43.440 --> 01:20:49.040
+and then I'm going to get faster just to you know so we don't take too much time it's again all of
+
+786
+01:20:49.040 --> 01:20:54.380
+these lines of code are on the online curriculum so if you get lost if I start moving too quickly
+
+787
+01:20:54.380 --> 01:20:58.340
+at some point just go and copy and paste it because it's all a little bit repetitive it's
+
+788
+01:20:58.340 --> 01:21:03.720
+like the same thing with like one word changed so there's no shame in like copying and pasting as
+
+789
+01:21:03.720 --> 01:21:11.780
+long as you understand what's going on and couldn't do it yourself afterwards but most programmers
+
+790
+01:21:11.780 --> 01:21:18.800
+copy and paste so what we're going to do first is make an instance of a soni series so the sauna
+
+791
+01:21:18.800 --> 01:21:24.460
+series is a class we're going to make a soni series object I'm going to call it soni underscore
+
+792
+01:21:24.460 --> 01:21:36.820
+linear "s o n i" underscore linear " l i n e a r" soni underscore linear and I'm going to
+
+793
+01:21:36.820 --> 01:21:44.080
+do equals space equals and I'm going to do um and the reason I'm calling it soni linear is because
+
+794
+01:21:44.080 --> 01:21:49.440
+this is going to be the sonification object the sauny series object for a linear equation so
+
+795
+01:21:49.440 --> 01:22:00.340
+remember that's our straight line going up "space s o n i s e r i e s" remember that's
+
+796
+01:22:00.340 --> 01:22:07.100
+all one word with the s in soni and the s in series both capitalized then open parenthesis
+
+797
+01:22:08.320 --> 01:22:16.920
+tbl so make a soni series object from our table which we've called tbl now there are
+
+798
+01:22:16.920 --> 01:22:22.620
+two extra things we need to do here in this function and that is we need to say hey astronify
+
+799
+01:22:22.620 --> 01:22:28.980
+I know you're made for astronomers sonifying light curves but um actually so I know that you expect
+
+800
+01:22:28.980 --> 01:22:34.980
+these time columns and value columns to be like time and flux but actually we don't have time
+
+801
+01:22:34.980 --> 01:22:40.320
+and flux we have like x and linear that's the name of our columns so we're just going to tell
+
+802
+01:22:40.320 --> 01:22:47.700
+soni series hey expect time call the time column to be x and val call to be linear the value column
+
+803
+01:22:48.100 --> 01:22:59.980
+so that's tbl comma space time "t i m e" underscore c o l "line c o l" equals "equals"
+
+804
+01:23:00.580 --> 01:23:09.420
+open quotation mark x close quotation mark so say the time call is our x column that's the name that
+
+805
+01:23:09.420 --> 01:23:16.500
+we printed out above when we checked the column names in tbl comma "comma" space "space" and then the
+
+806
+01:23:16.500 --> 01:23:27.180
+value column which is val col "v a l" underscore "line c o l" c o l equals "equals" quotation mark
+
+807
+01:23:27.660 --> 01:23:37.620
+linear "l i n e a r"close quotation mark close parenthesis soni underscore linear
+
+808
+01:23:38.300 --> 01:23:47.800
+equals soni series with the s's capitalized open parenthesis tbl comma time underscore c o l
+
+809
+01:23:47.800 --> 01:23:55.560
+equals open quotation mark x quote close quotation mark comma v a l underscore c o l
+
+810
+01:23:55.560 --> 01:24:08.070
+equals open quotation mark linear close quotation mark close parenthesis here's the next line well
+
+811
+01:24:08.070 --> 01:24:12.430
+we haven't actually played anything we've just made the object there's another little step I
+
+812
+01:24:12.430 --> 01:24:18.830
+want to take I want to say hey sonification um make the notes kind of a wider spacing and this
+
+813
+01:24:18.830 --> 01:24:23.270
+is something I've played around with already um and a choice that I've made again remember how
+
+814
+01:24:23.270 --> 01:24:28.930
+data representations involve a lot of choice I'm increasing the note spacing here from the default
+
+815
+01:24:28.930 --> 01:24:33.650
+just so it's a little bit slower and easier to hear so the way we're going to do it is we're
+
+816
+01:24:33.650 --> 01:24:44.170
+going to do soni_linear
+
+817
+01:24:44.170 --> 01:24:53.370
+the thing we just made dot note underscore spacing dot n o t e that's note n o t e underscore
+
+818
+01:24:57.750 --> 01:25:04.210
+space equals "space equals" space and I'm going to set it to 0.05 this is something that I have
+
+819
+01:25:04.210 --> 01:25:10.890
+in advance tested and decided is a good note spacing for us again choices we can make "0.05"
+
+820
+01:25:10.890 --> 01:25:18.750
+all right sonny underscore linear dot note spacing equals 0.05 in 21 all right we've
+
+821
+01:25:18.750 --> 01:25:25.830
+changed the note spacing now we're going to do soni underscore linear "s o n i" underscore linear
+
+822
+01:25:25.830 --> 01:25:37.090
+"line l i n e a r" dot sonify that means make the sound representation of this thing "s o n i...
+
+823
+01:25:37.090 --> 01:25:43.970
+one" open parenthesis close parenthesis because it's a function but we don't have any
+
+824
+01:25:43.970 --> 01:25:50.650
+parameters we want to put in so sonny underscore linear dot sonify make the sonification make the
+
+825
+01:25:50.650 --> 01:25:57.390
+sound representation "in 22" and the last thing we need to do is soni underscore linear dot play
+
+826
+01:25:57.390 --> 01:25:59.650
+open parenthesis close parenthesis
+
+827
+01:26:09.970 --> 01:26:15.270
+all right and this is the moment where I will once again turn off NVDA so it doesn't talk at us
+
+828
+01:26:15.270 --> 01:26:20.530
+um you might get a warning that says like port MIDI closed that's what NVDA is going to try to
+
+829
+01:26:20.530 --> 01:26:27.030
+read for me if you get that warning uh don't worry about it um but I have uh "speech mode" off I've
+
+830
+01:26:27.030 --> 01:26:31.650
+turned off speech mode I'm going to turn up my volume and I'm going to hit enter and it will play
+
+831
+01:26:31.650 --> 01:26:37.490
+our sonification before we start again remember what we're sonifying we're sonifying the shape
+
+832
+01:26:37.490 --> 01:26:45.830
+of a straight line slanted upwards so as time as x gets bigger we should expect y to get bigger and
+
+833
+01:26:45.830 --> 01:27:02.940
+remember y is mapped to pitch I'm going to play that again I'm just typing that same line again
+
+834
+01:27:03.380 --> 01:27:05.900
+exact same thing just so I can play it a second time
+
+835
+01:27:13.110 --> 01:27:18.970
+okay can you hear that the pitch gets higher and higher in a sort of straight line as we move along
+
+836
+01:27:18.970 --> 01:27:23.970
+in time which is the same as moving along along that value you might hear this sort of
+
+837
+01:27:25.530 --> 01:27:29.010
+this sort of wobble that's just because there's like a little bit of a spacing
+
+838
+01:27:29.010 --> 01:27:33.410
+again that's actually the spacing I've done between the notes where I've spread them out
+
+839
+01:27:33.410 --> 01:27:37.830
+where there's a little bit of space but some overlap between the notes and your ears hear
+
+840
+01:27:37.830 --> 01:27:42.490
+that as like kind of a wobble in the noise but the pitch in general is going up in a straight line
+
+841
+01:27:42.490 --> 01:27:50.110
+representing that straight line speech mode speech mode talk all right NVDA is back on
+
+842
+01:27:50.690 --> 01:27:53.810
+turn the volume back down so we don't hurt my ears here
+
+843
+01:27:53.810 --> 01:28:03.290
+okay we've got plenty of time so that's good let's sonify our negative linear equation so
+
+844
+01:28:03.290 --> 01:28:10.410
+that's the straight line slanted downwards and I'm going to this is the exact same lines of
+
+845
+01:28:10.410 --> 01:28:16.130
+code except instead of calling it sonny linear I'm going to call it sonny underscore neg underscore
+
+846
+01:28:16.130 --> 01:28:21.910
+linear and instead of the value column being linear it's going to be neg underscore linear
+
+847
+01:28:21.910 --> 01:28:28.970
+which is the name of that negative line column in the table so let's repeat those same four lines
+
+848
+01:28:28.970 --> 01:28:46.890
+of code "s o n i line n e g line l i n e a r space equals" so soni underscore s o n i underscore neg
+
+849
+01:28:46.890 --> 01:28:57.470
+underscore linear equals space soni series s o n i again remembering those capital s's s e r i
+
+850
+01:28:57.470 --> 01:29:06.390
+e s soni series again take open quote or open parenthesis tbl make a soni
+
+851
+01:29:06.390 --> 01:29:17.930
+series from our table tbl "comma time call space i m e line c o l" sorry that should be time call
+
+852
+01:29:17.930 --> 01:29:24.290
+that k was an accident time call so remember it expects the x-axis the independent variable to be
+
+853
+01:29:24.290 --> 01:29:33.490
+called time we've called it "equals tick x tick" we've called it x "comma" and our val col space a
+
+854
+01:29:33.490 --> 01:29:47.050
+"l line c o l" our value column equals in this case is neg linear tick "n e g line l i n e a r tick"
+
+855
+01:29:47.590 --> 01:29:56.530
+right paren sonny underscore neg underscore linear equals sauna series open parenthesis
+
+856
+01:29:56.530 --> 01:30:04.370
+tbl comma time underscore col equals open quotation mark x close quotation mark
+
+857
+01:30:04.370 --> 01:30:11.830
+comma val underscore call equals open quotation mark neg underscore linear
+
+858
+01:30:11.830 --> 01:30:18.470
+close quotation mark close parenthesis make us on a series object from the table call it
+
+859
+01:30:18.470 --> 01:30:24.470
+soni neg linear where the time column is x and the value column is neg linear "in 25."
+
+860
+01:30:24.880 --> 01:30:36.510
+all right we're going to once again change the note spacing "s o n i line n e g line l i n e a r"
+
+861
+01:30:36.510 --> 01:30:49.290
+sonny underscore neg underscore linear dot notice underscore spacing "dot n o t e line s p a c i n g
+
+862
+01:30:49.290 --> 01:31:00.110
+space" so soni underscore neg underscore linear dot note underscore spacing equals "equals space"
+
+863
+01:31:00.110 --> 01:31:13.590
+0.05 "0.05" that's the same as we did before "in 26" and then remember those last two lines "s o n i"
+
+864
+01:31:13.590 --> 01:31:25.690
+soni underscore neg underscore linear "line s s n e g line l i n e a r" soni underscore neg
+
+865
+01:31:25.690 --> 01:31:35.830
+underscore linear dot um sonify "s o n i f y left and right paren" open and close parenthesis we don't have
+
+866
+01:31:35.830 --> 01:31:44.070
+anything in them sonny underscore neg underscore linear dot sonify parentheses in 27 and then the
+
+867
+01:31:44.070 --> 01:31:50.530
+last line is that sonny underscore neg underscore linear dot play open quote or open parenthesis
+
+868
+01:31:50.530 --> 01:32:04.450
+close parenthesis "s o n i line n e g line l i n e a r dot p l a y left right paren"
+
+869
+01:32:04.450 --> 01:32:10.610
+and i'm going to turn off nvda again "speech mode off" and i'm going to turn the volume up
+
+870
+01:32:18.400 --> 01:32:28.970
+and you can hear the pitch starts high and goes low let's play that again i keep expecting to hear
+
+871
+01:32:28.970 --> 01:32:34.370
+nvda like read the line because i'm typing the same line again right now to play it again um and
+
+872
+01:32:34.370 --> 01:32:39.430
+i expected to speak to me but of course i just turned speech off so um jokes on me i guess that's
+
+873
+01:32:39.430 --> 01:32:43.950
+my own fault soni underscore neg underscore linear to play it again
+
+874
+01:32:50.310 --> 01:32:55.430
+excellent all right i'm going to do one more thing you can hear again it goes much in the
+
+875
+01:32:55.430 --> 01:33:01.450
+same way that sonny linear went up in a straight line here the pitch goes down in a linear fashion
+
+876
+01:33:01.450 --> 01:33:06.630
+it goes down in a straight line with time because this is representing a line slanted downwards
+
+877
+01:33:07.490 --> 01:33:13.110
+all right let's um i'm gonna do one more thing i'm gonna do soni underscore linear dot play so
+
+878
+01:33:13.110 --> 01:33:17.830
+you can hear that just sort of side by side so this is that straight line slanted up
+
+879
+01:33:23.820 --> 01:33:29.420
+sonny underscore linear dot play just to play that straight line slanted upwards this time
+
+880
+01:33:35.710 --> 01:33:41.730
+cool can you hear that yeah it's going up the pitch goes up this time instead of down i feel
+
+881
+01:33:41.730 --> 01:33:46.930
+like i can almost like feel it going up um maybe that's sort of a weird thing to say maybe i've
+
+882
+01:33:46.930 --> 01:33:52.170
+just listened to a lot of astronify uh sounds um it's kind of fun and spacey i like these they
+
+883
+01:33:52.170 --> 01:33:57.190
+kind of feel like aliens in a fun way i like it um all right i'm going to turn speech mode back
+
+884
+01:33:59.690 --> 01:34:03.610
+and i'm going to remember to turn the volume down so we don't like pain anyone
+
+885
+01:34:08.210 --> 01:34:12.030
+all right and what i'm going to do next is i'm going to sonify
+
+886
+01:34:12.030 --> 01:34:19.450
+the sine wave function remember that is um our wave that goes up and down y equals sine of x it's
+
+887
+01:34:19.450 --> 01:34:25.090
+a wave that goes up and down now we are again this is the same four lines of code where we
+
+888
+01:34:25.090 --> 01:34:32.310
+make the sauna series object we change the note spacing we sonify it and we hit play and uh just
+
+889
+01:34:32.310 --> 01:34:36.130
+with those couple of little differences but because it's so similar i'm going to start moving
+
+890
+01:34:36.130 --> 01:34:41.910
+a little quicker again all of this code is on the curriculum online feel free to copy and paste
+
+891
+01:34:41.910 --> 01:34:48.070
+if you you know feel the need um i understand but also make sure you understand what's going on so
+
+892
+01:34:48.070 --> 01:34:58.650
+this time i'm going to call it soni underscore sine "s-i-n-e s-o-n-y line l-i-n-e" l've called
+
+893
+01:34:58.650 --> 01:35:05.830
+it sonny line i actually want to call it soni sine "s-i-n-e" all right soni underscore s-i-n-e
+
+894
+01:35:05.830 --> 01:35:11.910
+"equals space" equals Soni Series with those capital s's
+
+895
+01:35:15.920 --> 01:35:24.110
+open parenthesis tbl comma space time call
+
+896
+01:35:25.120 --> 01:35:31.310
+underscore equals x in quotation marks
+
+897
+01:35:31.310 --> 01:35:44.010
+x comma val col a underscore c o l equals sine because that's the name of the column
+
+898
+01:35:44.570 --> 01:35:49.770
+with the sign function in our table and again if you don't remember you can always just do tbl dot
+
+899
+01:35:49.770 --> 01:35:55.550
+col names and hit enter to print out the list of column names in your table if you need to check
+
+900
+01:35:56.350 --> 01:36:03.470
+"s-i-n-e tick" and again remember sign is in quotation marks and it's spelled s-i-n-e
+
+901
+01:36:03.470 --> 01:36:07.950
+and close the parenthesis or it'll throw an angry "in 31"
+
+902
+01:36:08.750 --> 01:36:17.450
+changing the note spacing soni dot sine "line" soni underscore sine sorry not soni dot sine
+
+903
+01:36:17.450 --> 01:36:24.350
+dot note spacing underscore spacing
+
+904
+01:36:24.350 --> 01:36:34.490
+"s-p-a-c-i-n-g" space equals 0.05 "0.05"
+
+905
+01:36:35.370 --> 01:36:42.610
+soni underscore sine dot note underscore spacing equals 0.05 just move the notes a little further apart
+
+906
+01:36:42.610 --> 01:36:46.830
+"in 32" soni underscore sine dot sonify
+
+907
+01:36:46.830 --> 01:36:56.490
+"s-o-n-i-line s-i-n-e dot s-o-n-i-f-y"
+
+908
+01:36:56.960 --> 01:37:03.290
+son underscore sign dot sonify "left paren right paren" make those parenthesis "in 33"
+
+909
+01:37:03.710 --> 01:37:12.370
+hit enter sonny underscore sign s-o-n-i-line s-i-n-e dot play
+
+910
+01:37:15.230 --> 01:37:20.310
+and we will do the same business of increasing the volume
+
+911
+01:37:20.870 --> 01:37:26.910
+and turning off nvda "speech mode off" and hitting enter
+
+912
+01:37:26.910 --> 01:37:27.250
+oh
+
+913
+01:37:32.730 --> 01:37:37.210
+that one's a lot more fun right i think that one's a lot more exciting than the straight lines
+
+914
+01:37:37.210 --> 01:37:38.070
+you can hear the
+
+915
+01:37:41.070 --> 01:37:47.490
+as the as that wave goes up and down so as y gets higher and then lower higher and then lower
+
+916
+01:37:47.490 --> 01:37:53.490
+the pitch goes up and down and up and down at regular intervals i'm gonna play that one again
+
+917
+01:37:53.490 --> 01:38:00.290
+actually because i really quite like that one so i'm just typing that same line sonny underscore
+
+918
+01:38:00.290 --> 01:38:17.420
+sign dot play cool that's our sine wave we've played two different lines one going up one
+
+919
+01:38:17.420 --> 01:38:24.760
+going down and we've also played our sine wave let's turn the volume back down "speech mode
+
+920
+01:38:25.760 --> 01:38:33.340
+talk" all right there are just two more functions to sonify here they are our quadratic or our
+
+921
+01:38:33.340 --> 01:38:39.020
+parabola so again that's the curve that starts steep turns over once a little bit smoother at
+
+922
+01:38:39.020 --> 01:38:45.560
+the top and then uh turns back downwards and gets really steep again and then also our absolute
+
+923
+01:38:45.560 --> 01:38:53.220
+value function which um goes up in a straight line very sharply turns back around and goes right back
+
+924
+01:38:53.220 --> 01:38:59.140
+down the goal here is i want to sonify these two i'm going to play them actually side by side so
+
+925
+01:38:59.140 --> 01:39:04.580
+i'm going to make both sonifications wait to play them until they're side by side because i want you
+
+926
+01:39:04.580 --> 01:39:10.520
+guys to learn to hear the difference between a sharp turnaround and a more gradual turnaround
+
+927
+01:39:10.520 --> 01:39:16.200
+so a more gradual turnaround in our parabola which is a smoother curve and then a really sharp
+
+928
+01:39:16.200 --> 01:39:21.260
+turnaround in the absolute value and again we're going to move a little quickly through the code
+
+929
+01:39:21.260 --> 01:39:27.220
+here so feel free to copy and paste or to check the curriculum if you need to so that's so i'm
+
+930
+01:39:27.220 --> 01:39:40.420
+going to call this soni underscore parabola
+
+931
+01:39:41.290 --> 01:39:53.660
+space equals space and then it's Soni Series not forgetting those
+
+932
+01:39:53.660 --> 01:40:06.500
+capital s's open the parenthesis table time underscore col equals, equals x
+
+933
+01:40:06.500 --> 01:40:18.900
+with x in quotation marks another comma space val_col =
+
+934
+01:40:18.900 --> 01:40:28.800
+here it is called 'parabola' is the name of the column
+
+935
+01:40:29.100 --> 01:40:36.140
+"in 36" all right we've made our parabola sauna series we're gonna change the note spacing "s o
+
+936
+01:40:36.140 --> 01:40:52.160
+n i line p a r a b o l a dot n o t e line s p a c i n g" soni underscore parabola dot note underscore
+
+937
+01:40:52.160 --> 01:41:03.780
+spacing space equals space 0.05 "0.05" same as before just doing
+
+938
+01:41:03.780 --> 01:41:08.580
+that because that's what i tested and i think sounds best feel free to change that note spacing
+
+939
+01:41:08.580 --> 01:41:14.340
+make it bigger or smaller and see what you think "in 37" again that's tweaking with uh with the
+
+940
+01:41:14.340 --> 01:41:20.680
+parameters of the sonification to see what you prefer again full of choices then soni underscore
+
+941
+01:41:20.680 --> 01:41:31.780
+parabola "s o n i line p a r a b o l a" dot sonify so make the sound representations
+
+942
+01:41:31.780 --> 01:41:43.520
+and i'm gonna hit enter but i'm not gonna do um soni underscore parabola dot play just yet
+
+943
+01:41:43.520 --> 01:41:49.960
+because again i want to sonify the absolute value thing at the thing function at the same time
+
+944
+01:41:49.960 --> 01:41:56.280
+so let's do that really quick i'm going to call that sonny underscore abs abs because
+
+945
+01:41:56.280 --> 01:42:02.040
+sonny underscore absolute underscore value sounds really painful to type out so abs
+
+946
+01:42:02.040 --> 01:42:15.020
+soni_abs =
+
+947
+01:42:15.020 --> 01:42:24.800
+SoniSeries with the capital s space "s o n i s e r i e s" soni series
+
+948
+01:42:24.800 --> 01:42:39.220
+open the parenthesis tbl comma time_col='x'
+
+949
+01:42:39.220 --> 01:42:42.560
+remembering our quotation marks
+
+950
+01:42:43.320 --> 01:42:56.260
+val_col made a typo there v a l underscore c o l i feel like that's kind
+
+951
+01:42:56.260 --> 01:43:01.960
+of easy to make a typo on equals abs because that's also what the name of that column is
+
+952
+01:43:01.960 --> 01:43:06.040
+because i guess i never wanted to type absolute value so i just called everything abs
+
+953
+01:43:06.280 --> 01:43:16.320
+so soni underscore abs equals sauna series open parenthesis tbl
+
+954
+01:43:16.320 --> 01:43:23.800
+comma time underscore call equals open tick or open quotation mark um x close quotation mark
+
+955
+01:43:23.800 --> 01:43:31.340
+comma val underscore call equals open quotation mark abs close quotation mark close parenthesis
+
+956
+01:43:31.340 --> 01:43:41.700
+"in 39" soni underscore abs dot note spacing we're changing the note spacing s o n i dot a b s
+
+957
+01:43:42.120 --> 01:43:50.560
+nope i did i did soni i did soni dot abs i meant to do soni underscore abs
+
+958
+01:43:50.560 --> 01:43:57.680
+nope i did space i'm gonna do soni underscore abs dot note spacing sorry my brain
+
+959
+01:43:57.680 --> 01:44:07.540
+is apparently leaving me "dot n o t e line s p a c i n g" soni underscore abs dot note underscore
+
+960
+01:44:07.540 --> 01:44:21.380
+spacing equals 0.05 all right importing and then sonny underscore abs
+
+961
+01:44:22.500 --> 01:44:33.100
+dot sonify open and close the parenthesis and now we can play
+
+962
+01:44:33.100 --> 01:44:40.180
+the parabola so that smooth curve going up and then turning around going down next to the
+
+963
+01:44:40.180 --> 01:44:45.820
+absolute value which is that sharp turnaround like the top of a triangle so first i'm going to do
+
+964
+01:44:45.820 --> 01:44:56.100
+the uh i'm going to do the parabola that's soni underscore parabola dot play
+
+965
+01:44:56.100 --> 01:45:05.280
+soni underscore parabola dot play open and close in the parenthesis
+
+966
+01:45:05.280 --> 01:45:18.400
+and again turning off nvda "speech mode off" turning up the volume and hitting enter oh no
+
+967
+01:45:18.400 --> 01:45:33.800
+we have an error "speech mode beeps speech mode talk" this is terrible
+
+968
+01:45:35.480 --> 01:45:46.940
+"line a b s dot p l a left right paren pio warning port midi closed in 43"
+
+969
+01:45:49.500 --> 01:45:55.600
+interesting um i got an error when i tried to play the parabola but the uh the absolute value
+
+970
+01:45:55.600 --> 01:46:06.480
+seems to have played let me try the uh let me try the parabola again...
+
+971
+01:46:06.480 --> 01:46:15.480
+...that's soni underscore parabola dot play open parenthesis
+
+972
+01:46:15.480 --> 01:46:22.380
+close parenthesis i'm going to turn off nvda and hope it works this time "speech mode off"
+
+973
+01:46:28.100 --> 01:46:34.560
+all right i guess it will work this time i guess it was just angry before i'm going to turn nvda
+
+974
+01:46:34.560 --> 01:46:40.740
+back on so i can play the absolute value again "speech mode beeps speech mode talk" that's going
+
+975
+01:46:40.740 --> 01:46:52.560
+to be soni underscore abs "speech mode off"
+
+976
+01:46:52.560 --> 01:46:55.540
+so that's sonny underscore abs dot play
+
+977
+01:47:00.540 --> 01:47:06.380
+you're going up up up up up and then suddenly changing and going back down at a constant rate
+
+978
+01:47:06.380 --> 01:47:10.240
+let me play the parabola one last time so you can hear them side by side again
+
+979
+01:47:16.080 --> 01:47:20.880
+again that's sonny underscore parabola dot play open and close the parenthesis
+
+980
+01:47:25.300 --> 01:47:31.940
+it's a much slower change to the pitch turning and going back down we are literally hearing
+
+981
+01:47:31.940 --> 01:47:37.540
+the difference in those shapes a sharp versus a slow turnaround i encourage you to play that
+
+982
+01:47:37.540 --> 01:47:43.520
+often on your end just until you get that sound for the feeling for it and again play all of the
+
+983
+01:47:43.520 --> 01:47:48.660
+sonifications again and again i'm going to play the sign again sonny underscore sign dot play
+
+984
+01:47:55.720 --> 01:48:01.760
+we can hear that wave pattern going up and down that we don't have in that absolute value or the
+
+985
+01:48:01.760 --> 01:48:07.820
+parabola the there's more turnarounds in the pitch going up and down than we have in those other two
+
+986
+01:48:07.820 --> 01:48:14.580
+shapes so again the goal here is to develop an intuition for what astronomy is doing and how
+
+987
+01:48:14.580 --> 01:48:20.220
+different shapes how different behaviors of our data because again this is all about a representation
+
+988
+01:48:20.220 --> 01:48:27.140
+of the data it's what is this y doing as x changes which we have represented as what is the pitch
+
+989
+01:48:27.140 --> 01:48:33.600
+doing as time changes it's developing this intuition for what is going to happen to our
+
+990
+01:48:33.600 --> 01:48:40.260
+data representation for different types of data behavior that is the goal here that is all about
+
+991
+01:48:40.260 --> 01:48:46.000
+what this education process is about this is what we teach people to do with data visualization for
+
+992
+01:48:46.000 --> 01:48:53.000
+years and what we're just developing an intuition for now this is where i'm going to conclude the
+
+993
+01:48:53.000 --> 01:48:59.700
+fourth tutorial from this non-visual data science tutorial series this is the first of two
+
+994
+01:48:59.700 --> 01:49:06.220
+sonification tutorials and the fourth of five total tutorials so next week we'll pick up with
+
+995
+01:49:06.220 --> 01:49:12.900
+more data sonification using astronomy getting with some more realistic data i'm really excited
+
+996
+01:49:12.900 --> 01:49:18.360
+to see you there i'm excited to do more sonification with you again we are very grateful to pandas and
+
+997
+01:49:18.360 --> 01:49:24.800
+num focus for generously supporting this tutorial series and i encourage you if you have questions
+
+998
+01:49:25.460 --> 01:49:30.880
+to reach out to me or patrick via email or to come to our office hours same zoom link as the
+
+999
+01:49:30.880 --> 01:49:40.080
+tutorials 6 to 8 p.m uk time on zoom and also to check out our curriculum online where all of this
+
+1000
+01:49:40.080 --> 01:49:47.020
+code is hosted yeah thank you so much for coming i'm excited to talk more sonification with you
+
+1001
+01:49:47.020 --> 01:49:52.960
+all next week hopefully in a live recording if the sound permits all right thanks all
+
+1002
+01:49:54.200 --> 01:49:58.060
+i'm just gonna wait a few seconds because i'm worried the recording is gonna like cut off the
+
+1003
+01:49:58.060 --> 01:50:03.000
+last few seconds um and i don't want it to cut off like the actual end so if this is still in
+
+1004
+01:50:03.000 --> 01:50:08.460
+the video sorry for this like awkward few extra seconds where i'll like wave at the camera and
+
+1005
+01:50:08.460 --> 01:50:18.860
+sort of ramble on rambling rambling rambling also crossing my fingers that the recording
+
+1006
+01:50:18.860 --> 01:50:25.040
+worked because if that didn't work i'll be quite sad and i guess sit here for two more hours which
+
+1007
+01:50:25.040 --> 01:50:30.940
+would make me quite sad um so fingers crossed everyone i suppose if you're seeing me still
+
+1008
+01:50:30.940 --> 01:50:37.720
+rambling here then it's worked all right i think that's probably enough time i'm gonna go stop

@@ -1,0 +1,4409 @@
+WEBVTT
+
+1
+00:00:01.220 --> 00:00:07.900
+Hi all, and welcome to the non-visual Python workshop. This is going to be the first workshop
+
+2
+00:00:07.900 --> 00:00:16.560
+of a five-workshop series on non-visual data science in Python. And this workshop series
+
+3
+00:00:16.560 --> 00:00:26.120
+is led by myself, Patrick Smyth, and also Sarah Kane, and it's funded by a grant from
+
+4
+00:00:26.960 --> 00:00:30.220
+NumFocus and Pandas, so thank you very much for supporting that.
+
+5
+00:00:31.520 --> 00:00:39.520
+And so in this workshop series, we'll be learning how to work with data without
+
+6
+00:00:40.400 --> 00:00:51.400
+vision, sight, or using much of the focus of many introductory data science tutorials,
+
+7
+00:00:51.560 --> 00:00:57.080
+workshops, and so on, which is on visualization. So in this workshop series, we'll be working up to
+
+8
+00:00:57.080 --> 00:01:03.640
+creating a sonification of a data set. We'll be putting together that data set,
+
+9
+00:01:03.959 --> 00:01:09.040
+and on the way, we'll be learning for the fundamentals of the Python programming language,
+
+10
+00:01:09.960 --> 00:01:18.220
+some fundamentals of Pandas, which is a data science library or tool that's very widely used,
+
+11
+00:01:18.540 --> 00:01:25.080
+and also for sonification, we'll be using Astronify, which is a library, a tool for
+
+12
+00:01:25.080 --> 00:01:33.240
+sonification.  And so in this workshop series, we'll be using or we'll be demoing for you
+
+13
+00:01:34.280 --> 00:01:42.580
+NVDA, non-visual desktop access, the screen reader, and as we use Python. You can use other
+
+14
+00:01:42.580 --> 00:01:47.120
+screen readers. I've heard, we've heard good reports that JAWS works well with this tutorial
+
+15
+00:01:47.120 --> 00:01:55.060
+with very similar shortcuts, but what you will be seeing and hearing is NVDA.  So
+
+16
+00:01:56.820 --> 00:02:04.200
+just want to explain a little bit about what is Python, what is, and what are the tools that
+
+17
+00:02:04.200 --> 00:02:13.160
+we're going to be using in this workshop series. So the Python is a, it's what's called a high
+
+18
+00:02:13.160 --> 00:02:20.460
+level programming language. So if you imagine that the computer being kind of a stack from high
+
+19
+00:02:20.460 --> 00:02:26.400
+to low, and then on the high end of that stack, there will be languages that are a little closer
+
+20
+00:02:26.400 --> 00:02:32.040
+to how people think, how people talk, and how people would deal with problems.  And on the low
+
+21
+00:02:32.040 --> 00:02:38.260
+end of that is, so a low level language would be how the computer thinks in terms of numbers,
+
+22
+00:02:39.360 --> 00:02:44.880
+data, and so on. So Python is a high level programming language, meaning it's a little
+
+23
+00:02:44.880 --> 00:02:51.420
+closer to how we as people think. The trade-off there of course is in speed.  The computers are
+
+24
+00:02:51.420 --> 00:02:58.080
+so fast these days that often that trade-off is kind of one we're willing to make. So Python is,
+
+25
+00:02:58.140 --> 00:03:03.080
+it's been around for quite a while now. I think it was created in 1989.  It's a programming language
+
+26
+00:03:03.080 --> 00:03:11.580
+that's used widely in industry and the academy. It's used to create applications. It's used to
+
+27
+00:03:11.580 --> 00:03:18.160
+perform what are called scripting tasks, which are essentially automated tasks that you make on
+
+28
+00:03:18.160 --> 00:03:24.420
+your computer, say automating, moving around files and folders and so on.  But for our purposes,
+
+29
+00:03:24.860 --> 00:03:36.760
+it's also used widely for data science. And the very short, data science is an application of
+
+30
+00:03:36.760 --> 00:03:46.720
+technology and statistics for studying data. And it's sort of a, people who are data scientists,
+
+31
+00:03:46.720 --> 00:03:56.140
+they describe them, they do a wide variety of things, but it kind of grew out of the mathematical
+
+32
+00:03:56.140 --> 00:04:02.660
+discipline of statistics and so on.  And these days it's a very technological discipline where
+
+33
+00:04:02.660 --> 00:04:08.540
+often programming and other technical skills are, if not necessary, then incredibly useful.
+
+34
+00:04:11.620 --> 00:04:16.480
+So what are we, how are we going to be accessing Python today? We'll be switching now to,
+
+35
+00:04:16.640 --> 00:04:22.220
+in a second, to the environment that we'll be using to interact with Python, which is
+
+36
+00:04:22.780 --> 00:04:27.060
+called iPython. But for this workshop, you should have installed two pieces of software.
+
+37
+00:04:27.900 --> 00:04:33.720
+The first is NVDA, non-visual desktop access. That's the screen reader we're going to be using
+
+38
+00:04:34.340 --> 00:04:44.560
+to interact with our computer. And then the second is Anaconda, which is a, what's called
+
+39
+00:04:44.560 --> 00:04:52.860
+a distribution of Python.  So Python, you can go to the Python website and download sort of the
+
+40
+00:04:52.860 --> 00:04:59.020
+standard Python installation, which is called CPython. And that comes with a whole bunch of
+
+41
+00:04:59.020 --> 00:05:04.520
+useful tools and so on. It's for a general purpose.  What we're asking you to install is,
+
+42
+00:05:04.580 --> 00:05:11.140
+which is called Anaconda. And you can go to some search engine and type Anaconda download,
+
+43
+00:05:11.300 --> 00:05:15.440
+and it should be the first page that comes up. But what Anaconda is, it's a distribution of Python.
+
+44
+00:05:15.620 --> 00:05:19.180
+So it's basically what you would get if you installed sort of the default Python,
+
+45
+00:05:19.640 --> 00:05:27.400
+plus a bunch of extra tools that are useful for data science specifically. It is a little bit big,
+
+46
+00:05:27.400 --> 00:05:30.940
+so make sure you have a little extra room on your hard drive. I think it's something like a gigabyte,
+
+47
+00:05:31.260 --> 00:05:38.440
+and it can take a little while to install.  But once you have it, you can get a whole bunch of
+
+48
+00:05:38.440 --> 00:05:42.960
+additional functionality, additional tools, specifically related to data science.
+
+49
+00:05:44.580 --> 00:05:50.560
+Unfortunately, not all of the tools that come to Anaconda are accessible to the blind and
+
+50
+00:05:50.560 --> 00:06:02.000
+screen reader users. Notably, Jupyter Notebooks, which are one of the main ways people interact
+
+51
+00:06:02.000 --> 00:06:07.920
+with Python for data science, those are not currently 100% accessible.  There's definitely
+
+52
+00:06:07.920 --> 00:06:14.840
+been improvements over the last couple years in usability for screen reader users, but it's not
+
+53
+00:06:14.840 --> 00:06:19.940
+quite there. It's still a little bit clunky. What we will be using after we install Anaconda
+
+54
+00:06:20.600 --> 00:06:28.860
+is called the Anaconda prompt, and specifically IPython.  So we'll be opening that up in a minute,
+
+55
+00:06:28.960 --> 00:06:39.960
+and you'll see in here what it looks like. But IPython essentially is kind of a fancy
+
+56
+00:06:42.840 --> 00:06:47.320
+program to interact directly with Python, to have a conversation with Python. I'll explain
+
+57
+00:06:47.320 --> 00:06:51.220
+a little bit more about what IPython does over the course of this workshop.
+
+58
+00:06:54.340 --> 00:07:00.200
+Before we move on to the part of the workshop where we actually start writing some code and
+
+59
+00:07:00.200 --> 00:07:06.600
+working with Python, I just want to thank a few people. This is a re-recording due to some
+
+60
+00:07:06.600 --> 00:07:13.520
+technical issues of the workshop we had on February 6th, where we had a number of helpers
+
+61
+00:07:13.520 --> 00:07:20.260
+to facilitate, and so I just want to thank the helpers that were there. So those are Alex Ogden,
+
+62
+00:07:20.540 --> 00:07:26.880
+Elizabeth Sola, Sarah Kane, who is leading this workshop series with me, Stephen Zweibel,
+
+63
+00:07:26.880 --> 00:07:33.660
+Monica Thew, and Paul Alexander-Bloom.  So thank you to our helpers who helped out
+
+64
+00:07:34.260 --> 00:07:44.360
+on February 6th, 2024. And I also really want to thank Patrick Hofler, who sort of supported this
+
+65
+00:07:44.360 --> 00:07:52.160
+initiative from within Pandas. So Patrick is a core developer at Pandas, so I'd just like to thank
+
+66
+00:07:52.800 --> 00:08:04.340
+Patrick. And just to say who I am, I'm Patrick Smyth. I am a teacher, a writer, and a programmer.
+
+67
+00:08:05.040 --> 00:08:12.780
+I am the chief learner at IOTA School, so we're a consultancy where we work with clients on
+
+68
+00:08:12.780 --> 00:08:22.340
+accessibility, documentation, and infrastructure coding.  And you can learn more at IOTASchool.com.
+
+69
+00:08:23.060 --> 00:08:27.920
+And I personally, I'm visually impaired. I'm a visually impaired programmer. I have maybe
+
+70
+00:08:27.920 --> 00:08:33.299
+something like 2% vision remaining.  I have no central vision. I have retinitis pigmentosa.
+
+71
+00:08:35.220 --> 00:08:42.360
+So I have a little residual vision that you may see me, you know, use occasionally,
+
+72
+00:08:42.480 --> 00:08:50.440
+but mostly I'm a screen reader user.  And so I will, the focus of this workshop series is
+
+73
+00:08:50.440 --> 00:08:55.340
+definitely on the screen reader use, but I will, you know, I know there are some low vision people
+
+74
+00:08:55.340 --> 00:09:01.420
+and some sighted people who are following along with these workshops, so I will attempt also to
+
+75
+00:09:01.420 --> 00:09:09.400
+explain some of the low vision and the, you know, sighted ways of doing some of these same things.
+
+76
+00:09:09.920 --> 00:09:18.820
+Okay, so without further ado, let's transition to sort of demo mode here, and we will
+
+77
+00:09:20.220 --> 00:09:25.880
+get to writing a little bit of Python. So I'm here on my Windows desktop,
+
+78
+00:09:27.060 --> 00:09:32.120
+and the first thing we're going to do is, you know, if you haven't already, you should start NVDA.
+
+79
+00:09:32.860 --> 00:09:36.320
+I already have NVDA running. I'm going to turn it off and start it again just
+
+80
+00:09:36.320 --> 00:09:42.120
+for demo purposes. That's the sound of NVDA turning off.  I'm going to press the Windows
+
+81
+00:09:42.120 --> 00:09:50.660
+button and type NVDA and press enter. Excellent. We should have, we're good to go with NVDA.  So
+
+82
+00:09:51.340 --> 00:09:57.720
+the next thing I'm going to do is, I am an eSpeak speech user, so the voice I use is a little
+
+83
+00:09:57.720 --> 00:10:02.000
+scratchy sounding, so I'm going to make it, change the profile to be a little more of a friendly
+
+84
+00:10:02.000 --> 00:10:08.740
+sounding voice, so NVDA menu, NVDA button and N, and I'm going to go to profile.
+
+85
+00:10:13.820 --> 00:10:24.320
+Okay, and change it to a slightly nicer sounding voice, and then you should have
+
+86
+00:10:24.320 --> 00:10:30.720
+Anaconda installed. If not, you can go to, in any search engine type, Anaconda download,
+
+87
+00:10:31.480 --> 00:10:37.180
+and it should be the first result.  Go ahead and install it. You can use the default settings as
+
+88
+00:10:37.180 --> 00:10:45.420
+you install, and once you have Anaconda installed, what we want to use is the Anaconda prompt.
+
+89
+00:10:45.960 --> 00:10:53.040
+So the Anaconda prompt is, essentially it's a command, it opens a command line application
+
+90
+00:10:53.040 --> 00:10:56.960
+that we'll be using throughout this workshop series.  So let's go ahead and open that up.
+
+91
+00:10:57.860 --> 00:11:04.600
+Okay, so press the Windows button. Now we have search, so I'm going to type Anaconda.
+
+92
+00:11:05.880 --> 00:11:10.840
+Okay, so I typed a little
+
+93
+00:11:10.840 --> 00:11:16.040
+bit of the word Anaconda.  I typed a little bit of the word Anaconda, and Anaconda prompt was
+
+94
+00:11:16.040 --> 00:11:23.580
+the first result. What you don't want is what is called the Anaconda navigator. So the Anaconda
+
+95
+00:11:23.580 --> 00:11:29.600
+navigator is something that's only partially accessible.  It's just another part of this
+
+96
+00:11:29.600 --> 00:11:34.440
+Anaconda distribution. We do not want that. What we want is the Anaconda prompt.  Okay,
+
+97
+00:11:34.560 --> 00:11:37.560
+so make sure that that's what you're getting. I'm going to press enter to start that.
+
+98
+00:11:38.500 --> 00:11:43.020
+Okay, and then I'm pausing it. So
+
+99
+00:11:44.360 --> 00:11:51.360
+we have, if you listen now, you'll hear what we have in front of us, or what we're going to hear
+
+100
+00:11:51.360 --> 00:11:58.680
+is essentially a prompt. Basically it's a command line and a prompt, meaning prompt is some text
+
+101
+00:11:58.680 --> 00:12:05.040
+suggesting, oh, type something in here. So listen for what that sounds like. "(base)
+
+102
+00:12:05.040 --> 00:12:11.680
+C:\Users\Patrick>." It said C drive, users, Patrick, greater,
+
+103
+00:12:11.840 --> 00:12:17.580
+and the greater is sort of the prompt.  The greater is kind of a little greater than sign,
+
+104
+00:12:17.660 --> 00:12:21.420
+and that's suggesting, hey, type something in. When they say prompt, it's sort of like
+
+105
+00:12:21.420 --> 00:12:26.140
+encouraging you to type something. So if you hear that, you should be in the right place.
+
+106
+00:12:29.220 --> 00:12:37.380
+And I want to do one thing before we move on, which is if you're using this video and you're
+
+107
+00:12:37.380 --> 00:12:43.640
+totally blind or you're not using your vision for this, it won't be relevant to you. Or if
+
+108
+00:12:43.640 --> 00:12:48.120
+you're sighted, it may not be relevant to you. But for low vision people, I want to give a little
+
+109
+00:12:48.120 --> 00:12:55.920
+advice on making this environment maximally visible for a low vision usage.  So first of all,
+
+110
+00:12:55.920 --> 00:13:00.520
+on Windows, I personally, I invert the colors on the whole OS. So I'm going to do that now.
+
+111
+00:13:01.120 --> 00:13:06.380
+That's using the magnifier.  When the magnifier is activated, and to start the magnifier,
+
+112
+00:13:06.600 --> 00:13:12.420
+you can hold down the Windows button and press the plus key, which will zoom in. But if you
+
+113
+00:13:12.420 --> 00:13:17.500
+don't have it open, it will open magnifier. Once you have magnifier open, Windows magnifier,
+
+114
+00:13:17.500 --> 00:13:23.080
+you can use control alt I, and that will invert the colors on your OS.
+
+115
+00:13:24.960 --> 00:13:31.160
+That can be obviously very useful if you're not using it already. I'm going to maximize this
+
+116
+00:13:31.800 --> 00:13:35.280
+application that we have. So I'm going to hold on Windows, the Windows button and press up.
+
+117
+00:13:36.100 --> 00:13:42.640
+So that kind of maximizes the application automatically using Windows up. And then
+
+118
+00:13:42.640 --> 00:13:51.560
+what I want to do is show you how if you if you would like to make the text extremely large,
+
+119
+00:13:51.720 --> 00:13:57.920
+as I have on my screen. So let's pull down the I think it is control space.
+
+120
+00:13:59.040 --> 00:14:04.780
+Maybe alt space, hold down alt and press space. Yeah, there we go. And then you can
+
+121
+00:14:04.780 --> 00:14:10.380
+press the P button. So it's alt space, then you press the P button to open properties for this
+
+122
+00:14:10.380 --> 00:14:14.900
+application. Or you can go through this menu, "move unavailable, size unavailable, minimize n, maximize unavailable,
+
+123
+00:14:14.900 --> 00:14:20.580
+close C, edit E, defaults D, properties P" properties P or you can just press the P button.
+
+124
+00:14:21.060 --> 00:14:25.380
+But I'm press enter now, ""Anaconda Prompt (Anaconda3)"
+
+125
+00:14:25.380 --> 00:14:29.760
+Properties dialog true type fonts are recommended for high DPI displays as raster
+
+126
+00:14:29.760 --> 00:14:34.980
+font. I'm going to go ahead and pause that. But that is what we're we have open is the properties
+
+127
+00:14:34.980 --> 00:14:42.480
+for our for our Anaconda prompt application.  And essentially, the first of these properties
+
+128
+00:14:42.480 --> 00:14:49.660
+is the font size. So if you press tab "font grouping, size combo box." So what I did was
+
+129
+00:14:49.660 --> 00:14:55.920
+right there was I pressed tab and then I tabbed backward and then you hear it's a combo box for
+
+130
+00:14:55.920 --> 00:15:01.740
+size and you can adjust the size up and down.  And I just maxed it out. So set at minus like 72 or 76
+
+131
+00:15:01.740 --> 00:15:08.000
+or something like that. They maxed it out, made it maximally large.  And if you go a little back,
+
+132
+00:15:08.180 --> 00:15:17.060
+so shift tab backward "tab control tab selected", then you you have a bunch of tabs and one of the
+
+133
+00:15:17.060 --> 00:15:22.040
+other tabs is color. So if you move along in the tabs, "layout tab select colors tab selected",
+
+134
+00:15:22.140 --> 00:15:26.980
+there's a colors tab. So you can also if you're low vision and colors matter to you, then you can
+
+135
+00:15:26.980 --> 00:15:34.180
+adjust the colors.  And in my case, I made it light because I now invert the whole OS. But you know,
+
+136
+00:15:34.320 --> 00:15:37.720
+your mileage may vary, you should pick the colors that work best for you. Okay, so we can increase
+
+137
+00:15:37.720 --> 00:15:42.840
+the font and change the colors.  You can also change the font if that is something that matters to you.
+
+138
+00:15:43.360 --> 00:15:47.800
+So I'm going to go ahead and press escape to close this. Okay,
+
+139
+00:15:47.840 --> 00:15:53.240
+and now we are in you know, we're in the place where we are right after we type Anaconda prompt
+
+140
+00:15:53.240 --> 00:15:59.660
+and and we are our command line prompt.  And essentially what we're in right now is the
+
+141
+00:15:59.660 --> 00:16:06.020
+it's a version of the Windows command line, also known as sometimes as CMD, where
+
+142
+00:16:08.100 --> 00:16:12.020
+but it has a few extra things loaded into it. That's what Anaconda prompt is.
+
+143
+00:16:12.200 --> 00:16:17.200
+It's a version of the default Windows command line with some extra stuff loaded in that is useful
+
+144
+00:16:17.200 --> 00:16:22.160
+for us, especially for like our purposes with data science and learning Python.  And right now
+
+145
+00:16:22.160 --> 00:16:29.060
+we're using the sort of the general CMD command line. So you know, which is it can be useful.
+
+146
+00:16:30.240 --> 00:16:35.400
+But what we actually want is to be talking directly to Python for the next part of this
+
+147
+00:16:35.400 --> 00:16:42.380
+workshop series.  So let's go ahead and we're going to type the letter I and then the word Python.
+
+148
+00:16:42.940 --> 00:16:53.720
+Okay, so letter I and the word Python, just like a big snake. Okay, so I, P, Y, T, H, O, N. So I
+
+149
+00:16:53.720 --> 00:16:58.960
+just have the word IPython. I'm going to press space just so you hear it again.
+
+150
+00:16:58.960 --> 00:17:07.319
+I deleted the space. And then I'm going to press enter. "Python 3.8.8 (
+
+151
+00:17:07.319 --> 00:17:14.920
+default, Apr 13th, 2021. 1:5:08:03." So I'm going to pause that.
+
+152
+00:17:15.099 --> 00:17:21.140
+So there's a bunch of text that gets printed out. But what you want to listen for is the Python
+
+153
+00:17:21.140 --> 00:17:28.340
+version number. Okay.  And the Python version number will sort of tell you, okay, now we're
+
+154
+00:17:28.340 --> 00:17:33.100
+actually talking to Python. Okay. So it's printed out a whole bunch of stuff.  We could resume it
+
+155
+00:17:33.100 --> 00:17:39.160
+and hear the rest, but it's a little long. "[MSC v.1916 64 bit (
+
+156
+00:17:39.160 --> 00:17:43.960
+AMD 64)". It's a whole bunch of information about this specific version of
+
+157
+00:17:43.960 --> 00:17:49.640
+Python that we're running. But what we can do now is I'm going to teach you a shortcut that we'll
+
+158
+00:17:49.640 --> 00:17:55.200
+use a bunch of times in this workshop, and that is to clear the screen.  Okay. Which can be very
+
+159
+00:17:55.200 --> 00:18:00.380
+useful. So, so let's get rid of this extra information that we had printed out when Python
+
+160
+00:18:00.380 --> 00:18:08.780
+starts. We're going to hold down control and press L as in Lima. So control L "In [1
+
+161
+00:18:08.880 --> 00:18:14.880
+]: . And what we heard was in left bracket one, right bracket colon.
+
+162
+00:18:16.820 --> 00:18:22.100
+Can we have it say that again? "Space left bracket one, right bracket colon"
+
+163
+00:18:23.640 --> 00:18:30.860
+in it's in left bracket one, right bracket colon. Okay. And that is basically
+
+164
+00:18:32.100 --> 00:18:37.940
+waiting for us to type some Python in.  And let's, what we're going to do is we're going to type a
+
+165
+00:18:37.940 --> 00:18:43.040
+little Python and then something will happen. Okay. So we're going to type, type something in,
+
+166
+00:18:43.200 --> 00:18:46.920
+and then something will happen.  The obvious thing will happen, but then something else will happen.
+
+167
+00:18:47.340 --> 00:18:50.940
+So I will explain both of these to you, but let's actually just go ahead and do it.
+
+168
+00:18:50.940 --> 00:18:55.580
+So what we're going to do is we're going to do a little math.  Okay. So what I want you to do is type
+
+169
+00:18:55.580 --> 00:18:59.420
+along with me and then I'll do some explaining. And throughout this workshop series, we'll kind
+
+170
+00:18:59.420 --> 00:19:04.560
+of have that pattern a little bit where I will ask you to do something, go ahead and do it,
+
+171
+00:19:04.620 --> 00:19:09.860
+and then I'll do a little explaining.  And just because I feel that it's easier to,
+
+172
+00:19:11.620 --> 00:19:15.760
+to, to understand the explanation or for the explanation to make sense after you've sort of
+
+173
+00:19:15.760 --> 00:19:22.240
+done it and, and, and heard the output or, or experienced the output. So let's go ahead and
+
+174
+00:19:22.240 --> 00:19:36.660
+type in five, the number five, a space, a plus, a space, and another, a six. So it's a five
+
+175
+00:19:36.660 --> 00:19:50.220
+plus space six. So we, we heard, what we heard was "out left bracket one right bracket colon 11".
+
+176
+00:19:50.540 --> 00:19:56.080
+So our output is 11. We typed five plus six and our output is 11.  There's a little extra stuff
+
+177
+00:19:56.080 --> 00:20:03.860
+that appears before we get the output that we want. And I'm going to explain that now. But so,
+
+178
+00:20:03.860 --> 00:20:09.820
+so what happened when we did this? Basically you type something in, in this case it was five plus
+
+179
+00:20:09.820 --> 00:20:17.180
+six, you got an out, some, then something happened.  Python did a random, sort of its own little
+
+180
+00:20:17.180 --> 00:20:24.840
+processes of simplifying the, what we gave it. So five plus six got turned into 11. And then
+
+181
+00:20:25.680 --> 00:20:33.200
+it printed out the results to us or returned the result to us.  And then we got a prompt to
+
+182
+00:20:33.200 --> 00:20:37.220
+given another line to Python. So basically we're doing, what we're doing is we're having a
+
+183
+00:20:37.220 --> 00:20:43.780
+conversation with the machine where we give it code, something happens, and then we get something
+
+184
+00:20:43.780 --> 00:20:50.280
+back. Okay.  And there's a fancy programmer word for this that I'm going to explain to you. And
+
+185
+00:20:50.280 --> 00:20:53.600
+then we're going to use that word from now on when we talk about this process. And that is
+
+186
+00:20:53.600 --> 00:21:00.140
+the fancy word, the fancy term is REPL.  So what we're using here is the Python REPL.
+
+187
+00:21:00.800 --> 00:21:05.280
+And essentially it's a four stage process and that's exactly what I explained to you. So it's
+
+188
+00:21:05.280 --> 00:21:09.620
+read, that is we type something into the computer, the computer reads it in.
+
+189
+00:21:10.660 --> 00:21:16.800
+Evaluate, that's the process of something happens, Python runs a process or it simplifies what we
+
+190
+00:21:16.800 --> 00:21:22.520
+have. That's the evaluation. Then print, that's the computer returning something back to us.
+
+191
+00:21:22.960 --> 00:21:28.820
+And then loop, that's the process of the prompt happening again or waiting for
+
+192
+00:21:30.140 --> 00:21:37.560
+our input again. Okay. So read, eval, print, loop, that is our four stage process.  It's the
+
+193
+00:21:37.560 --> 00:21:43.260
+REPL. Okay. And another way you use the word REPL is, oh, I'm going to open the Python REPL.
+
+194
+00:21:43.540 --> 00:21:49.320
+So when we typed IPython a little while ago, we started the Python REPL. So this process
+
+195
+00:21:49.320 --> 00:21:58.760
+where we talk to Python, that is a REPL. Okay.  And now what I want to do is now explore
+
+196
+00:21:59.320 --> 00:22:04.320
+and explain a little bit of the structure of this input and output that we've done. So
+
+197
+00:22:04.860 --> 00:22:11.320
+let's, before we do that, let's type in one more line of math. And then we're going to talk about
+
+198
+00:22:11.320 --> 00:22:17.600
+how we can move around using NVDA and explore our input and output that we did.  So let's do,
+
+199
+00:22:17.980 --> 00:22:26.540
+we did five plus six. Let's do another plus. So let's do two space plus space two.
+
+200
+00:22:26.540 --> 00:22:34.620
+Two. So I typed two space plus space two. So let's run it. Two plus two.
+
+201
+00:22:34.940 --> 00:22:42.780
+Out left bracket two right bracket colon four.  So you heard, what you heard was out left bracket
+
+202
+00:22:42.780 --> 00:22:50.940
+two right bracket colon four. So we typed in two plus two and our result is four. But we always
+
+203
+00:22:50.940 --> 00:22:59.920
+hear this OUT before we get our result. Okay. So now what we've run so far is we had five plus six,
+
+204
+00:23:00.420 --> 00:23:08.920
+it did in one, five plus six, and then out one, 11. So five plus six, we got the output was 11.
+
+205
+00:23:09.260 --> 00:23:15.660
+And then we did another input output pair. We did in two, so the second input output pair.
+
+206
+00:23:16.300 --> 00:23:24.340
+And then we said two plus two.  And then we got out two, four. Okay. So we have two input output
+
+207
+00:23:24.340 --> 00:23:31.880
+pairs so far.  And there's a kind of a term for this. And we can use the word cell. So a pairing
+
+208
+00:23:31.880 --> 00:23:39.100
+of input and output, we can use the term cell.  So a cell is a combination of an input and an output
+
+209
+00:23:39.600 --> 00:23:47.960
+in this IPython environment. And it's language commonly used in the Jupyter notebook environment.
+
+210
+00:23:48.420 --> 00:23:53.340
+So if you have sighted colleagues who use Jupyter notebooks, and you hear them talking about cells,
+
+211
+00:23:53.540 --> 00:23:57.700
+that's essentially what they're talking about.  It's one of these pairings of input and output.
+
+212
+00:23:58.140 --> 00:24:06.180
+Okay. So what I want to do now is go backward and use the NVDA review functionality to travel
+
+213
+00:24:06.180 --> 00:24:14.880
+backward in what we've done and review the inputs and outputs.  So you can hear what the
+
+214
+00:24:14.880 --> 00:24:20.860
+structure is using NVDA. Okay. So I'm going to hold down NVDA and press up.
+
+215
+00:24:21.780 --> 00:24:26.040
+"Top. In left bracket, one right bracket, colon, five plus six."
+
+216
+00:24:26.280 --> 00:24:34.020
+So we're actually at the very top.  So we're hearing in one, colon, five plus six. And
+
+217
+00:24:34.020 --> 00:24:42.360
+now we're going to move down. So we're going to do NVDA button and then down.  And we should hear
+
+218
+00:24:42.360 --> 00:24:46.520
+our output from five plus six. "Out left bracket, one right bracket, colon, 11."
+
+219
+00:24:47.040 --> 00:24:55.620
+Okay.  So I'm hitting NVDA down. Okay. And I just want to say I'm using the laptop hotkeys
+
+220
+00:24:56.340 --> 00:25:01.340
+for NVDA, and I will mostly be using the laptop hotkeys throughout this
+
+221
+00:25:03.540 --> 00:25:09.580
+tutorial.  However, if you're using the desktop hotkeys in NVDA, which are actually the default,
+
+222
+00:25:10.140 --> 00:25:18.040
+then what you want to do is use the numpad for navigating backward and forward. And I believe,
+
+223
+00:25:18.860 --> 00:25:24.720
+I'll double check this, but I believe the hotkeys for that are holding down the NVDA button
+
+224
+00:25:24.720 --> 00:25:31.560
+and typing either, I think it's seven for moving backward and nine for moving forward by line.
+
+225
+00:25:32.260 --> 00:25:36.700
+But essentially what the numpad, the numpad, it's divided into nine keys.
+
+226
+00:25:37.900 --> 00:25:44.100
+And there are three keys for moving, three of the keys are for moving line by line. Three of the
+
+227
+00:25:44.100 --> 00:25:49.320
+keys are moving from word for word. And three of the keys are for moving character by character.
+
+228
+00:25:49.320 --> 00:25:56.880
+And then each of those three is divided into going backward, reading what you're currently on,
+
+229
+00:25:57.000 --> 00:26:01.680
+and moving forward. Okay. And it's actually, it's fairly intuitive when you get using it.
+
+230
+00:26:02.080 --> 00:26:07.060
+If it's not working and you know you're on NVDA desktop mode and you have a numpad,
+
+231
+00:26:07.960 --> 00:26:11.540
+then remember the numpad is the numbers that are sort of on the right, if you have a large
+
+232
+00:26:11.540 --> 00:26:17.340
+keyboard on the right, not the numbers that are on the top of your alphabetical keys,
+
+233
+00:26:17.340 --> 00:26:22.120
+but the numbers that are on the right of your keyboard, then you make sure, I think you have
+
+234
+00:26:22.120 --> 00:26:26.880
+to make sure, sometimes your numpad, your numlock being on and off can matter in that. So you might
+
+235
+00:26:26.880 --> 00:26:33.500
+want to experiment with that. Okay.  So if you're using the desktop and you, or you have a numpad,
+
+236
+00:26:33.860 --> 00:26:40.480
+you might want to experiment with your holding on the NVDA button and using the numpad to move
+
+237
+00:26:40.480 --> 00:26:47.080
+around, to review. But I'm using the laptop, so I am, I'm holding on NVDA, pressing up and down
+
+238
+00:26:47.080 --> 00:26:56.580
+to move line by line. Okay.  And then let's keep reviewing. So we just heard out, one, and 11.
+
+239
+00:26:57.380 --> 00:27:02.480
+And I'm going to move down one more. "Blank". And I heard blank. So now there's a blank line.
+
+240
+00:27:02.720 --> 00:27:08.240
+There's a blank line separating each cell input output pairing has a blank line to separate it.
+
+241
+00:27:08.240 --> 00:27:14.620
+So it's in out, and then you have a blank line. Then we have in out and a blank line and so on.
+
+242
+00:27:14.720 --> 00:27:19.400
+Okay. That's the general structure. So let's quickly go through the next cell. "In left bracket
+
+243
+00:27:19.400 --> 00:27:24.780
+to right bracket, colon two plus two." Okay. I'm navigating by line still, NVDA down. "Out left
+
+244
+00:27:24.780 --> 00:27:31.040
+bracket to right bracket, colon four blank. And there's our blank." Okay. So there's, there should
+
+245
+00:27:31.040 --> 00:27:36.540
+be a input output blank, input output blank. That's the structure that we're working with here.
+
+246
+00:27:36.540 --> 00:27:43.200
+Each cell input output pairs is separated by a blank line.  Okay. And now we should be,
+
+247
+00:27:43.740 --> 00:27:48.760
+have one more. In left bracket three, right bracket, colon. And then that should be the end. "Blank.
+
+248
+00:27:50.240 --> 00:27:55.020
+Blank. Bottom." Yeah. So there's actually some blank lines and then the bottom. But basically
+
+249
+00:27:55.020 --> 00:28:02.160
+the end is here. In left bracket three, right bracket, colon. And it's in left bracket three,
+
+250
+00:28:02.300 --> 00:28:06.040
+right bracket, colon.  It's waiting for us. This is the third cell. It's waiting for the
+
+251
+00:28:06.040 --> 00:28:10.360
+input for the third cell.  Okay. It's waiting for our third piece of input before it gives us some
+
+252
+00:28:10.360 --> 00:28:16.040
+output. Okay.  So that's the structure. Now I recommend, you know, at this point in the workshop,
+
+253
+00:28:16.240 --> 00:28:23.240
+I give a little time for reviewing. You know, so I would say, you know, pause this video,
+
+254
+00:28:23.600 --> 00:28:28.160
+take a few minutes to now practice your reviewing, moving around in this command line environment
+
+255
+00:28:28.160 --> 00:28:34.160
+before things get too complicated.  And a few other useful hockey. So you will probably also
+
+256
+00:28:34.160 --> 00:28:41.540
+want to move character by character. So you can kind of really get a sense of what the lines are.
+
+257
+00:28:42.060 --> 00:28:45.880
+So for example, if we go to this output line, "blank out, left bracket, two, right bracket,
+
+258
+00:28:46.420 --> 00:28:54.300
+four." That's our output from the second cell. And we can move using the NVDA right. We can move
+
+259
+00:28:54.300 --> 00:29:12.480
+character by character. So that beep was capital O. So it's out, two, and then that four is the
+
+260
+00:29:12.480 --> 00:29:18.460
+output from two plus two. Okay.  So you can move character by character. So go ahead and practice
+
+261
+00:29:18.460 --> 00:29:25.020
+reviewing in this so you get a hang of it. And then, you know, pause the video and then come
+
+262
+00:29:25.020 --> 00:29:30.480
+back when you're ready.  So let's do, you know, hopefully you're ready. You've practiced your
+
+263
+00:29:30.480 --> 00:29:37.160
+reviewing. Let's go ahead and do a little more math.  Okay. So let's do, we only have learned
+
+264
+00:29:37.620 --> 00:29:43.140
+the plus. So let's learn the other four.  And then I'll talk a little bit about, you know,
+
+265
+00:29:43.180 --> 00:29:48.140
+we put some spaces in. I want to talk about spacing and so on in Python after that. So let's
+
+266
+00:29:48.140 --> 00:30:00.720
+go ahead and do, let's do ten space, minus, I'm sorry, minus, dash. And that's
+
+267
+00:30:00.720 --> 00:30:08.280
+the same as a hyphen. And then I'm going to do ten minus three. "left bracket,
+
+268
+00:30:08.380 --> 00:30:14.420
+three, right bracket, colon, seven." So ten minus three is seven. And, you know, remember you're
+
+269
+00:30:14.420 --> 00:30:21.860
+once you type your line of Python, you hit enter and you'll get some output.  Okay. So the hyphen or
+
+270
+00:30:21.860 --> 00:30:30.840
+minus is subtraction. Now let's do multiplication.  Let's do three times four. So we're going to do
+
+271
+00:30:30.840 --> 00:30:40.900
+three, space. And then we'll do, it's an asterisk or star, which is you have to hold down shift and
+
+272
+00:30:40.900 --> 00:30:48.160
+press eight. So asterisk or star. And then do a space. And let's do four. So
+
+273
+00:30:48.160 --> 00:30:52.860
+three times four. And it's star or asterisk is multiplication. "Out, left bracket, four, right
+
+274
+00:30:52.860 --> 00:31:02.020
+bracket, colon, 12." And the answer is 12. That's our output. And then we have our current line in
+
+275
+00:31:02.020 --> 00:31:08.960
+five. So it's waiting for our input. "Out, left blank. In left bracket, five, right bracket, colon."
+
+276
+00:31:09.520 --> 00:31:15.140
+In five. It's waiting for our input. So now let's finally do division.  So let's do, why don't we go
+
+277
+00:31:15.140 --> 00:31:27.920
+ahead and do 24 divided by four. And then let's use forward slash. So it's
+
+278
+00:31:27.920 --> 00:31:33.960
+the slash on the bottom right of your keyboard. Not backslash, forward slash. 24
+
+279
+00:31:33.960 --> 00:31:41.180
+divided by four. "Out, left bracket, five, right bracket, colon, 6.0. And our output was 6.0."
+
+280
+00:31:41.300 --> 00:31:45.500
+And I'll explain a little bit about why that output is a little bit different in a minute.
+
+281
+00:31:47.020 --> 00:31:53.700
+Okay. So why do we, now we did addition, multiplication, subtraction, and addition.
+
+282
+00:31:54.340 --> 00:31:59.100
+And there's one thing I said a little earlier. I said, oh, when we type in, something will happen.
+
+283
+00:31:59.100 --> 00:32:04.120
+So we typed, we've typed a few lines of code and we've, and something has obviously happened.  We
+
+284
+00:32:04.120 --> 00:32:09.040
+get some output back. Okay. Some, some, when we run, we run code, some process happens and we
+
+285
+00:32:09.040 --> 00:32:12.660
+get output back.  That's the obvious thing that happened. But when you ran your first line of code
+
+286
+00:32:12.660 --> 00:32:18.980
+there, when you ran, when you write six, five plus six, something else happened. Okay.  And that is
+
+287
+00:32:18.980 --> 00:32:26.080
+that you became a programmer. Okay. So you can't take it back now.  You ran some code, you know,
+
+288
+00:32:26.080 --> 00:32:31.100
+so you, you, I now have the right to call yourself, you don't have to call yourself a
+
+289
+00:32:31.100 --> 00:32:35.140
+programmer, but you have the right to call yourself a programmer. Okay. A programmer is,
+
+290
+00:32:35.340 --> 00:32:40.500
+is someone who writes code, you know, and, and you've written some code.  So you're now a
+
+291
+00:32:40.500 --> 00:32:46.180
+programmer. Okay. And you can't take it back. Okay. So I kind of tricked you guys. When you've
+
+292
+00:32:46.180 --> 00:32:51.260
+written code, now you're a programmer.  So you, you know, don't let anyone say you're not a programmer.
+
+293
+00:32:51.260 --> 00:32:56.760
+Okay. So, you know, we've written our first few lines of code.  I want to explain just a couple
+
+294
+00:32:56.760 --> 00:33:04.520
+of things about the ins and outs of that. So one is that we put some spaces in when we wrote,
+
+295
+00:33:04.520 --> 00:33:13.280
+wrote this code. And it, now the question is, are the spaces necessary? And Python is very
+
+296
+00:33:13.280 --> 00:33:18.360
+heavy on spaces and annotation and making new lines and stuff like that.
+
+297
+00:33:19.860 --> 00:33:25.760
+And a lot of it is designed to make things more readable for sighted people. Some of it
+
+298
+00:33:25.760 --> 00:33:31.600
+is necessary for the, even the computer to parse what you've written. And some of it is actually
+
+299
+00:33:31.600 --> 00:33:39.140
+just to make things a little easier to read for sighted and some low vision people.  It,
+
+300
+00:33:39.280 --> 00:33:44.740
+it generally will work if you don't put spaces in. So let's try two plus two without spaces.
+
+301
+00:33:44.740 --> 00:33:54.740
+I just typed in, sorry, it's a little too fast.
+
+302
+00:33:54.980 --> 00:33:59.920
+And I didn't put any spaces in. Out left bracket six right bracket colon four. So we have four.
+
+303
+00:34:00.200 --> 00:34:04.820
+Okay. And it worked just as well. So why do we bother putting the spaces in? The spaces
+
+304
+00:34:04.820 --> 00:34:11.580
+make things more readable.  Now you would basically have to decide readable for sighted people. So you
+
+305
+00:34:11.580 --> 00:34:16.739
+basically have to decide if you, how much you care about that. So if you think you'd be working,
+
+306
+00:34:17.199 --> 00:34:21.780
+you know, in a professional capacity with sighted people, if you think you'll be putting your code
+
+307
+00:34:21.780 --> 00:34:27.060
+online and looking for people to contribute to it or maybe you'd be looking for a job or something
+
+308
+00:34:27.060 --> 00:34:31.159
+like that, you want your code to look professional, then I would get in the habit of you putting in
+
+309
+00:34:31.159 --> 00:34:35.800
+those spaces now because it will make your code look more professional.  It will, you know, it's
+
+310
+00:34:35.800 --> 00:34:41.020
+the quote unquote correct way to code is to put in those spaces. However, if you feel like you're
+
+311
+00:34:41.020 --> 00:34:45.219
+going to be working on your own project, you're not going to be collaborating or you're going to be
+
+312
+00:34:45.219 --> 00:34:49.679
+collaborating mainly with other blind developers, you may not care as much about putting in spaces.
+
+313
+00:34:49.920 --> 00:34:54.900
+So your mileage may totally vary.  I do know blind programmers who don't bother with the spaces
+
+314
+00:34:54.900 --> 00:35:01.360
+because they kind of find them, you know, not useful or annoying. If you want the best of
+
+315
+00:35:01.360 --> 00:35:06.380
+both worlds, you can not put the spaces in and you can run programs that are called linters
+
+316
+00:35:06.380 --> 00:35:12.260
+after the fact, which basically will make your code like all fancy and nice, but you don't have
+
+317
+00:35:12.260 --> 00:35:16.000
+to write it that way. It will kind of go through your code and clean everything up and put the
+
+318
+00:35:16.000 --> 00:35:21.760
+spaces in where Python thinks there should be spaces and so on.  So that's if you really want
+
+319
+00:35:21.760 --> 00:35:27.700
+the best of both worlds, you can look into linters. One I like is called Black, and that is a
+
+320
+00:35:27.700 --> 00:35:35.020
+linter that will take Python code and tidy it up, make it look kind of fancy or whatever.
+
+321
+00:35:36.320 --> 00:35:42.200
+So that spaces, they're more a style thing than something that's actually super necessary, okay?
+
+322
+00:35:43.740 --> 00:35:56.970
+All right, so we have done our little bit of math here.  Now let's talk about what are called
+
+323
+00:35:56.970 --> 00:36:02.170
+data types. So these are, we're going to learn five data types in this introductory Python
+
+324
+00:36:03.510 --> 00:36:10.730
+workshop, and these data types will also, a lot of this becomes very useful when we move on in
+
+325
+00:36:10.730 --> 00:36:17.110
+the next session to pandas and to, you know, to the data science context. These are data types
+
+326
+00:36:17.110 --> 00:36:24.290
+that are all going to be quite critical in that data science context.  So let's go ahead and learn
+
+327
+00:36:24.290 --> 00:36:30.010
+the five data types, and let's do that thing, like I said before, we're going to run some code,
+
+328
+00:36:30.370 --> 00:36:33.790
+I'm going to tell you what to type, you're going to get some output, and then after we're done,
+
+329
+00:36:33.890 --> 00:36:43.010
+I'll explain it, okay? So I'm going to clear my screen, control L, "In [7]:"
+
+330
+00:36:43.230 --> 00:36:49.250
+we're all ready to, we're on our seventh cell, we're ready to type some new code in, and what
+
+331
+00:36:49.250 --> 00:36:55.110
+I want you to enter is, follow along after me, and we're going to enter the word type, t-y-p-e,
+
+332
+00:36:56.050 --> 00:37:03.030
+and then open parenthesis or a left parenthesis. Well, I might say those words
+
+333
+00:37:03.610 --> 00:37:13.610
+interchangeably, but I want you to use left paren, type, and then I'm going to
+
+334
+00:37:13.610 --> 00:37:21.850
+have you just enter the number five, and then a right paren. So it's type, left paren, five,
+
+335
+00:37:22.030 --> 00:37:33.910
+right paren, okay? Type, left paren, five, right paren.  Int is the output that we got from that.
+
+336
+00:37:33.910 --> 00:37:46.290
+So let's do a couple more. So let's do type, left parenthesis, left paren,
+
+337
+00:37:46.490 --> 00:37:56.030
+and then let's, now let's do 5.0, right paren, space, "out left bracket,
+
+338
+00:37:56.130 --> 00:38:00.890
+eight right bracket, colon, float." So I put a space on the end there, but it wasn't necessary, so,
+
+339
+00:38:00.890 --> 00:38:07.090
+but what we got back was float. "Blank, out left bracket, eight right bracket, colon,
+
+340
+00:38:07.490 --> 00:38:13.430
+float." There we go. "Blank, in left bracket, nine right bracket, colon." So we got float, which is
+
+341
+00:38:13.430 --> 00:38:18.410
+short for floating point number. We'll explain what that is in a minute, but let's do our other
+
+342
+00:38:18.410 --> 00:38:28.530
+ones.  So we did int, five was int, 5.0 was float. Now let's do type, t-y-p-e, left parenthesis,
+
+343
+00:38:29.170 --> 00:38:40.730
+double quotes, hello, double quote, right paren. Okay,
+
+344
+00:38:40.830 --> 00:38:49.310
+so it's type, left parenthesis, double quotes, h-e-l-l-o, hello, double quote, right parenthesis.
+
+345
+00:38:49.690 --> 00:38:57.780
+Okay, and let's hit enter. "Out left bracket, nine right bracket, colon, s-t-r, in left bracket,
+
+346
+00:38:57.780 --> 00:39:04.940
+ten right bracket, colon." We got out, our output was s-t-r, short for string. Okay,
+
+347
+00:39:05.360 --> 00:39:10.900
+we're going to do two more, so that's three. We did integer, float, string. We're going to do
+
+348
+00:39:10.900 --> 00:39:18.940
+two more. Let's do type, t-y-p-e, left paren, left parenthesis,
+
+349
+00:39:18.940 --> 00:39:27.780
+and let's do capital T, true, and that beep was me putting in the capital. "True,
+
+350
+00:39:28.380 --> 00:39:32.880
+right paren." And there's a right paren, enter. "Out left bracket, ten right bracket, colon,
+
+351
+00:39:33.280 --> 00:39:39.160
+bool, in left bracket." Boolean or bool was what we got for that. So we did type,
+
+352
+00:39:39.900 --> 00:39:47.060
+left paren, capital T, true, right paren, and that result was boolean.  Okay, and then let's
+
+353
+00:39:47.060 --> 00:39:50.740
+do one more, and then I'm going to explain what all of these are. Okay, so let's do last one,
+
+354
+00:39:51.100 --> 00:39:58.460
+type. This is the most complicated one, so I'll go slow. "Type, left parenthesis,
+
+355
+00:39:59.320 --> 00:40:06.080
+and then let's do right square bracket, or sorry, left square bracket, left
+
+356
+00:40:06.080 --> 00:40:12.900
+bracket. Okay, and that is, it's a row down from your number row on your keyboard, number row down,
+
+357
+00:40:12.900 --> 00:40:19.360
+and it's over toward the right. Okay, so from my keyboard, it's the third from the right on the
+
+358
+00:40:19.360 --> 00:40:30.760
+second row from the top.  It's near the backspace key, and then let's type in one, comma, two,
+
+359
+00:40:31.700 --> 00:40:40.580
+comma, three, and then I'm going to do right square bracket, right bracket,
+
+360
+00:40:40.580 --> 00:40:49.320
+right parenthesis. So that's type, left square bracket, I'm sorry, start again, type,
+
+361
+00:40:50.100 --> 00:41:00.280
+left parenthesis, left square bracket, one, comma, two, comma, three, right square bracket,
+
+362
+00:41:00.640 --> 00:41:07.620
+and then right parenthesis. Let's run that.  And that's a list, so
+
+363
+00:41:07.620 --> 00:41:13.920
+. Our type there, or the object we gave it,
+
+364
+00:41:14.280 --> 00:41:20.000
+we'll talk about objects in a minute, but was a left square bracket, and then a bunch of other
+
+365
+00:41:21.080 --> 00:41:25.860
+objects, so in this case, one, two, and three, separated by commas. Okay, so a list,
+
+366
+00:41:27.000 --> 00:41:32.200
+that's how a list, you create a list in Python.  So what are all these data types? Let's go over
+
+367
+00:41:32.200 --> 00:41:40.600
+them, and we won't really be using any other data types in this, with one exception, which we'll get
+
+368
+00:41:40.600 --> 00:41:48.240
+to at the end. So let's talk about integers and floats. So integers and floats, that's what we
+
+369
+00:41:48.240 --> 00:41:53.800
+started with when we did our math, we used integers, and integers are numbers without decimals,
+
+370
+00:41:53.940 --> 00:42:00.400
+they're whole numbers.  Floats are floating point numbers, they're numbers with decimals.
+
+371
+00:42:00.400 --> 00:42:05.340
+And I guess an obvious question here is, why does Python keep track of these differently,
+
+372
+00:42:05.520 --> 00:42:12.860
+or why can't we just have decimals on all our numbers? The short answer is that decimal points
+
+373
+00:42:13.440 --> 00:42:19.960
+sometimes make things a little bit tricky. Numbers with decimals can be computationally
+
+374
+00:42:19.960 --> 00:42:24.960
+intensive, and then you have to make some decisions about where to cut off, like if you do certain
+
+375
+00:42:24.960 --> 00:42:29.120
+kinds of division and stuff, where do you cut off decimals, say if you have three, three, three, three, three,
+
+376
+00:42:29.120 --> 00:42:37.120
+if you do, you know, certain kinds of division, and then maybe you don't know exactly where to
+
+377
+00:42:37.120 --> 00:42:44.440
+cut off. So if you do, say, for example, 10 divided by three, three, "out left bracket, 12 right bracket, colon
+
+378
+00:42:44.440 --> 00:42:52.900
+3.33333333333333335." So you have to make, that could
+
+379
+00:42:52.900 --> 00:42:56.900
+have been different, we could have, they could have decided to add a couple extra threes, and so on.
+
+380
+00:42:56.900 --> 00:43:02.940
+So because decimals are always sort of, by definition, sort of imprecise, and because
+
+381
+00:43:02.940 --> 00:43:07.400
+they can be kind of computationally intensive, programmers often keep track of them
+
+382
+00:43:07.400 --> 00:43:12.700
+separately. However, you often won't have to think, unless you're working with extremely large numbers,
+
+383
+00:43:12.760 --> 00:43:17.920
+or unless precision matters a lot, you won't have to think about this too much, okay? Because Python
+
+384
+00:43:17.920 --> 00:43:22.720
+is pretty sensible in how it handles math, but what you just need to know is that there are two kinds of
+
+385
+00:43:22.720 --> 00:43:26.800
+numbers that you're going to encounter frequently.  There's actually other kinds of number data types,
+
+386
+00:43:27.020 --> 00:43:32.500
+but we won't talk about those in this workshop. But you just need to know that there are
+
+387
+00:43:32.500 --> 00:43:36.880
+different number data types, and that the behavior is a little bit different between them, okay?
+
+388
+00:43:37.240 --> 00:43:42.000
+So integers and floats are both numbers. Then we had one which is a little bit close to my heart,
+
+389
+00:43:42.060 --> 00:43:47.080
+because I have a humanities background, I have a PhD in English, and you know, I'm very into,
+
+390
+00:43:47.080 --> 00:43:56.100
+you know, books and text, and this data type is basically text, and it's called a string.
+
+391
+00:43:56.540 --> 00:44:04.160
+So a string is a sequence of characters, okay? And people often say an arbitrary sequence of
+
+392
+00:44:04.160 --> 00:44:08.660
+characters, arbitrary from the computer's perspective, because the computer generally
+
+393
+00:44:08.660 --> 00:44:13.460
+doesn't care what is in a string. It's humans who care what's in the string, but it's arbitrary from
+
+394
+00:44:13.460 --> 00:44:20.040
+the computer's perspective, and so it can really be any kind of text characters. It can be
+
+395
+00:44:20.640 --> 00:44:29.740
+text in the form of alphanumeric characters, so it could be letters, numbers, or also special symbols,
+
+396
+00:44:30.040 --> 00:44:36.680
+okay? Or also white space.  These are all valid things to have in a string, okay? And a string
+
+397
+00:44:36.680 --> 00:44:42.420
+could be, you know, a whole novel can be contained in a string. So strings are very humanities data
+
+398
+00:44:42.420 --> 00:44:48.940
+type. And then let's talk about Boolean.  So that's a much more philosophical data type. So it's
+
+399
+00:44:49.620 --> 00:44:57.640
+either true or false. So Booleans are, there's only two Booleans.  So there's capital T, true,
+
+400
+00:44:57.800 --> 00:45:05.460
+and capital F, false. And true represents truthiness, or statements that are true,
+
+401
+00:45:05.840 --> 00:45:10.800
+and false represents falsiness, statements that are false, okay? And we'll get into this a little
+
+402
+00:45:10.800 --> 00:45:17.740
+bit more later in the workshop, but, you know, for now, you know, true represents true, false
+
+403
+00:45:17.740 --> 00:45:23.720
+represents false. We'll get a little more into why that's useful later.  And the last one, which is
+
+404
+00:45:23.720 --> 00:45:27.400
+going to be very important in this workshop series, is the list, because it's going to be how we store
+
+405
+00:45:27.400 --> 00:45:33.700
+a lot of our data. We're going to store our data in lists like objects, not necessarily lists,
+
+406
+00:45:33.700 --> 00:45:41.560
+but things similar to lists. And the list is a sequence of other data types.  So in a list,
+
+407
+00:45:41.660 --> 00:45:46.760
+you can have numbers, you can have strings, you can have, you know, in numbers in the form of
+
+408
+00:45:46.760 --> 00:45:51.740
+integers and floats, you can have Booleans, or you can even have other lists. And in fact,
+
+409
+00:45:52.260 --> 00:45:56.640
+that is a frequent technique is to have a list full of lists, which sounds confusing,
+
+410
+00:45:56.720 --> 00:46:03.220
+but it's actually quite useful. So those are our five data types.  And we'll be working with
+
+411
+00:46:03.220 --> 00:46:06.800
+them all more, and we're going to learn more about each of them as we move on in this workshop.
+
+412
+00:46:07.120 --> 00:46:11.300
+So and we're going to learn one more data type at the end, but it's kind of a special case. So
+
+413
+00:46:12.760 --> 00:46:20.660
+okay, so those are our data types.  So the other thing I want to explain here is what did we do
+
+414
+00:46:20.660 --> 00:46:26.080
+when we did type, we typed the word type, or we entered the word type, and then we did a left
+
+415
+00:46:26.080 --> 00:46:31.340
+paren, and then we put something in it, in the parenthesis, and then we close the parenthesis.
+
+416
+00:46:31.340 --> 00:46:36.560
+So we did type, left paren, say five, and then a right paren. And then what we got back was
+
+417
+00:46:36.560 --> 00:46:42.200
+integer.  And what were we doing with when we did that whole type thing? What we're doing there is
+
+418
+00:46:42.200 --> 00:46:49.420
+using a function. And a function is a really critical part of, of using Python. And there's
+
+419
+00:46:49.420 --> 00:46:55.260
+three ways to think about functions, or I'll give you three definitions of functions.  And you for
+
+420
+00:46:55.260 --> 00:47:00.240
+now just pick the one that makes the most sense to you and stick with that. And I'll tell them
+
+421
+00:47:00.240 --> 00:47:05.060
+they're kind of each a little more accurate, maybe, or a little more complete part of the
+
+422
+00:47:05.060 --> 00:47:09.800
+puzzle. So the first way of thinking about a function is that it's a way of doing something
+
+423
+00:47:09.800 --> 00:47:16.220
+in Python.  You can kind of think about it as a verb. And, you know, so we did type, and then we
+
+424
+00:47:16.220 --> 00:47:22.160
+gave it a five, and then we said, and then it's, it came back with integer. So type is a way of
+
+425
+00:47:22.160 --> 00:47:27.780
+saying, hey, tell me the type of this object.  Okay, every, all of these things that we're doing
+
+426
+00:47:27.780 --> 00:47:31.040
+using in Python are objects. So it's a very general word that I'm using. We'll talk about
+
+427
+00:47:31.040 --> 00:47:39.200
+objects more later as well.  And so it's a verb. And then inside the parenthesis is sort of the
+
+428
+00:47:39.200 --> 00:47:44.040
+thing that the verb acts on. So you can think about it if you're, you know, into grammar,
+
+429
+00:47:44.300 --> 00:47:47.640
+it's the direct object or whatever.  But if you're not into grammar, don't worry about it. But it's
+
+430
+00:47:47.640 --> 00:47:52.920
+the thing the verb acts on. Okay, that's one way of thinking about functions.  Another way of
+
+431
+00:47:52.920 --> 00:48:00.200
+thinking about functions is, it's a way of, that you can save code to run later. Okay, so you give
+
+432
+00:48:00.200 --> 00:48:06.040
+some, a name to some code, and they can run it again later. Okay, and another word for that type
+
+433
+00:48:06.040 --> 00:48:12.600
+of function or thinking about functions that way is a, it's a routine, or a subroutine.  Those are
+
+434
+00:48:13.120 --> 00:48:16.520
+kind of old fashioned words, because they're not used as often anymore.
+
+435
+00:48:16.520 --> 00:48:23.720
+They're, because they apply more readily to programming languages that were programming
+
+436
+00:48:23.720 --> 00:48:29.240
+languages that were a lot more limited than Python, or modern programming languages, but
+
+437
+00:48:29.240 --> 00:48:36.440
+it's still accurate. So a function is a routine.  So it means you can store some code and use it later.
+
+438
+00:48:37.260 --> 00:48:41.000
+And then the last way, which is maybe the most accurate way of thinking about a function is
+
+439
+00:48:41.000 --> 00:48:49.800
+that it is a, it is an, it takes, it's something that takes an input, it runs a process,
+
+440
+00:48:50.740 --> 00:48:57.160
+and then it gives you an output. Okay, so it takes an input, it runs a process, and it gives an output.
+
+441
+00:48:57.260 --> 00:49:01.580
+And I often think about it in my mind, I think about it as a box. Okay, so a function is a box
+
+442
+00:49:01.580 --> 00:49:05.740
+with a hole in the top and a hole in the bottom. So you put things in the hole in the top,
+
+443
+00:49:05.740 --> 00:49:11.220
+and then you turn the box on, it's a machine, you know, machine type box, you turn it on,
+
+444
+00:49:11.300 --> 00:49:15.300
+you press the on button, and it goes beep, beep, boop, boop.  And then something comes out the
+
+445
+00:49:15.300 --> 00:49:21.660
+bottom. Okay, that's one way of thinking about a function. So for example, one function could be
+
+446
+00:49:21.660 --> 00:49:28.640
+like, if you imagine in real life, a pinkifier.  So imagine you're a big machine, say 10, you know,
+
+447
+00:49:28.700 --> 00:49:33.640
+a couple feet tall, and there's a hole in the top and a slot in the bottom. And you can put things
+
+448
+00:49:34.040 --> 00:49:41.840
+in the top. And you say I take my favorite mug, which is green, my favorite color is green,
+
+449
+00:49:42.080 --> 00:49:47.040
+and I put it in the pinkifier.  And then I turn it on, it goes beep, beep, boop, boop. And then
+
+450
+00:49:47.040 --> 00:49:53.180
+out the bottom comes my mug, but now it's pink. Okay, the pinkifier.  Okay, so that's the kind
+
+451
+00:49:53.180 --> 00:49:59.160
+of things that functions do. It takes something, often it transforms it, but an accurate way to
+
+452
+00:49:59.160 --> 00:50:03.020
+think about it is it does something, because it doesn't always transform it. And then it returns
+
+453
+00:50:03.020 --> 00:50:08.240
+something back output, as an output.  Sometimes the thing it returns is it says nothing, but
+
+454
+00:50:08.820 --> 00:50:14.620
+that's also an output in Python. So those are the three ways of thinking about functions. Okay,
+
+455
+00:50:15.320 --> 00:50:19.120
+and we'll be learning a few more functions as we go on in this workshop, at least,
+
+456
+00:50:19.440 --> 00:50:26.680
+you know, three, four, five more functions in this workshop.  All right, so, you know,
+
+457
+00:50:26.860 --> 00:50:31.240
+if this is, if you're following along with me at home, this might be a good time to,
+
+458
+00:50:31.240 --> 00:50:37.160
+you know, let your brain cool, go get a cup of coffee, go get a tea. I'm going to be pushing
+
+459
+00:50:37.160 --> 00:50:45.980
+on here. But our next topic is we're going to talk about variables.  And variables, you know,
+
+460
+00:50:46.080 --> 00:50:49.300
+since we're moving on to another topic, I'm going to clear the screen. So I'm going to hold down
+
+461
+00:50:49.300 --> 00:50:56.900
+control and press L. Okay, we're going to have a nice clear screen. It's waiting for our input.
+
+462
+00:50:56.900 --> 00:51:03.540
+And we're going to do, we're going to talk about variables. So let's do the thing where
+
+463
+00:51:03.540 --> 00:51:09.500
+I tell you something, and then we do it, and then I'll explain it afterward. So I'm going to type,
+
+464
+00:51:09.840 --> 00:51:12.160
+I'm going to tell, I'm going to type the word greeting.
+
+465
+00:51:13.940 --> 00:51:24.080
+"g-r-e-e-t-i-n-g, greeting". I did a space, sorry. I did a space. And then I pressed equals,
+
+466
+00:51:24.080 --> 00:51:30.180
+And then I do a space. And then I'm going to do a quote, double quote,
+
+467
+00:51:30.500 --> 00:51:33.140
+and then I'm going to type, hello.
+
+468
+00:51:38.120 --> 00:51:47.540
+So I did greeting equals double quote, hello, double quote. Okay, greeting equals double
+
+469
+00:51:47.540 --> 00:51:54.060
+quote, hello, double quote. And I'm pressing enter.  Now notice something funny there.
+
+470
+00:51:54.080 --> 00:52:01.640
+You notice something missing? We didn't get a line with output. I just got in again. So "blank,
+
+471
+00:52:01.880 --> 00:52:09.060
+blank, blank, blank, blank, blank, blank, in left bracket 14, right bracket blank,
+
+472
+00:52:09.420 --> 00:52:13.120
+in left bracket 13, right bracket colon, greeting equals quote, hello quote."
+
+473
+00:52:13.680 --> 00:52:18.220
+Okay, and then a blank line. And then the next one is input again.
+
+474
+00:52:18.240 --> 00:52:19.980
+"In left bracket 14, right bracket colon."
+
+475
+00:52:19.980 --> 00:52:27.140
+There's no output. And the way to think about this is, what we did was,
+
+476
+00:52:27.820 --> 00:52:34.700
+we typed greeting equals quote, hello quote.  And basically what that did is, we take a piece of
+
+477
+00:52:34.700 --> 00:52:42.220
+data, which is our string, hello, and we assign it to a variable. So basically, the best way to
+
+478
+00:52:42.220 --> 00:52:47.240
+think about it is, you give it a name. So we take that piece of data and we gave it a name,
+
+479
+00:52:47.240 --> 00:52:56.920
+which in our case is greeting.  So hello gets the name greeting. And we get no output because
+
+480
+00:52:57.480 --> 00:53:05.520
+instead the iPython likes to return sort of the last piece of data that we give it. And
+
+481
+00:53:06.420 --> 00:53:14.280
+in this case, the data sort of goes, instead of coming back to us in the REPL and us getting
+
+482
+00:53:14.280 --> 00:53:21.340
+the output, the data is going into the variable.  You can think about it as being stored in the
+
+483
+00:53:21.340 --> 00:53:27.020
+variable. So when you save a variable, or when you assign a variable, that's the correct
+
+484
+00:53:27.020 --> 00:53:32.620
+technical or programming term in Python, when you assign the variable, you won't get output.
+
+485
+00:53:32.980 --> 00:53:38.720
+And you can think about it as that data going into the variable or being stored in the variable
+
+486
+00:53:38.720 --> 00:53:44.020
+and not coming back to us.  So let's do one, assign more and more variables. So let's call it say
+
+487
+00:53:44.020 --> 00:53:55.660
+parting. Space. Equals. Space.
+
+488
+00:53:55.660 --> 00:54:02.400
+Double quote. And then goodbye.
+
+489
+00:54:06.820 --> 00:54:14.980
+And then a double quote. So it's parting. Space.  Equals. Space. Double quote.  Goodbye. Double quote.
+
+490
+00:54:15.280 --> 00:54:22.800
+And I'm going to press enter.  Again, no output. We just heard our in waiting for a line again.
+
+491
+00:54:22.800 --> 00:54:30.740
+So there's no output on these cells that assign a variable.  So now we have two variables,
+
+492
+00:54:31.900 --> 00:54:36.460
+greeting and parting. So let's try putting greeting on a line by itself and running that.
+
+493
+00:54:36.820 --> 00:54:46.140
+"G-R-E." Now I started typing this and suddenly I'm like, man, I typed G-R-E and it's so much work
+
+494
+00:54:46.140 --> 00:54:52.200
+to type the rest. It's just really tiring me out. And something I always say is programmers
+
+495
+00:54:52.200 --> 00:54:57.920
+are lazy.  Programmers don't like to do things more than once. So I already typed in greeting
+
+496
+00:54:57.920 --> 00:55:03.580
+once and I really don't want to do it again. I want to make the computer do the work.  So
+
+497
+00:55:03.580 --> 00:55:09.320
+programmers, whenever possible, hate to repeat themselves or ourselves, because like I said
+
+498
+00:55:09.320 --> 00:55:14.440
+before, you're now a programmer. And they hate to repeat themselves. You hate to repeat yourself.
+
+499
+00:55:14.860 --> 00:55:21.320
+And they also are really lazy. Okay. And they like to make the computer do the work.  So I typed
+
+500
+00:55:21.320 --> 00:55:29.640
+G-R-E. And I want the computer to fill in the rest. So go ahead and
+
+501
+00:55:29.640 --> 00:55:38.240
+hit the tab button. "Edding." And you heard it say edding. And that was it. It said we already had
+
+502
+00:55:38.240 --> 00:55:43.380
+G-R-E and the edding was it filling in the rest of greeting.  So it's greeting now. So if I press
+
+503
+00:55:43.380 --> 00:55:48.620
+space, you'll hear. "Space." Oh, you should have heard greeting, but it didn't do it.
+
+504
+00:55:49.260 --> 00:55:53.840
+But we have greeting on this line. And I'm going to hit enter. "Out left bracket 15 right bracket
+
+505
+00:55:53.840 --> 00:56:01.460
+colon. Hello." Okay. "In left bracket 16 right bracket colon." So I typed in greeting and I let
+
+506
+00:56:01.460 --> 00:56:06.640
+the computer fill in the rest, because I'm lazy. And when greeting was on a line by itself, the
+
+507
+00:56:06.640 --> 00:56:14.920
+input line, I pressed enter. And then what I got back was quote hello quote.  And in fact it blank
+
+508
+00:56:14.920 --> 00:56:20.580
+"in left bracket 13 right bracket colon. Greeting equals quote hello quote." Yeah. Quote hello quote.
+
+509
+00:56:20.840 --> 00:56:24.800
+"Blank in left bracket 14 right bracket colon equals quote goodbye quote.
+
+510
+00:56:25.680 --> 00:56:31.000
+Blank in left bracket out left bracket 15 blank in left blank bottom." Sorry, I'm going all the way
+
+511
+00:56:31.000 --> 00:56:41.220
+to the bottom again. And so we have our output, which is hello.  So when you type a variable by
+
+512
+00:56:41.220 --> 00:56:47.240
+itself, you put it in a line by itself, what you get back is what the fancy programmer term is a
+
+513
+00:56:47.240 --> 00:56:53.040
+representation of that variable. But basically what you're getting back is it tells you what
+
+514
+00:56:53.040 --> 00:56:58.760
+that variable, what data is in that variable or what data is assigned to that variable. So we
+
+515
+00:56:58.760 --> 00:57:03.800
+typed in greeting and we got hello, because that's the data we say we, you know, quote unquote saved,
+
+516
+00:57:03.800 --> 00:57:12.940
+we assigned to the variable. Okay. And let's do parting. "P-A-R-T." And then I'm going to press
+
+517
+00:57:12.940 --> 00:57:19.960
+tab to finish the rest. P-A-R-T in. Parting.  You know, get used to using that tab button,
+
+518
+00:57:20.180 --> 00:57:24.880
+because it comes in very useful and it'll prevent you from making typos. Because if you let the
+
+519
+00:57:24.880 --> 00:57:29.980
+computer do the work, you know, we as humans tend to do typos because, you know, we have fingers and
+
+520
+00:57:29.980 --> 00:57:35.520
+all this complicated stuff that we have going on. The computer tends to get things like this a
+
+521
+00:57:35.520 --> 00:57:40.780
+little more right where it just fills things in.  So go ahead and use that tab a lot. Okay.
+
+522
+00:57:41.260 --> 00:57:50.420
+"Out left bracket 16 right bracket colon goodbye." Goodbye. So parting is assigned to or the goodbye
+
+523
+00:57:50.420 --> 00:57:56.360
+string is assigned to parting. Okay.  All right. So let's also do something. Let's do greeting
+
+524
+00:57:57.100 --> 00:58:05.360
+space parting.  Sorry, greeting space plus space parting. So it's greeting plus parting.
+
+525
+00:58:05.800 --> 00:58:16.780
+"G-R-E-E-T-I-N-G space plus space P-A-R-T-I-N-G." So you're hearing only a part of it because I'm
+
+526
+00:58:16.780 --> 00:58:23.020
+filling it in with tab. Greeting plus parting. Out left bracket 17 right bracket colon hello
+
+527
+00:58:23.020 --> 00:58:29.900
+goodbye.  Hello goodbye. So when you add strings together, it actually combines them together,
+
+528
+00:58:30.020 --> 00:58:34.480
+which is cool. The fancy word is concatenates them.  It combines them together. So greeting
+
+529
+00:58:34.480 --> 00:58:39.680
+plus parting. And then the output was hello goodbye.  And there's no space between them.
+
+530
+00:58:39.780 --> 00:58:45.440
+So if you wanted a space, you could, you know, add one to the end of hello or the beginning of
+
+531
+00:58:45.440 --> 00:58:53.100
+goodbye. But we didn't do that.  So so variables. And then, of course, they don't need to be full
+
+532
+00:58:53.100 --> 00:59:02.000
+words. So you can totally say X X equals five "in left bracket 19 right bracket
+
+533
+00:59:02.000 --> 00:59:05.880
+colon." And there's no output. Right. Remember when we assign a variable, there's no output.
+
+534
+00:59:06.020 --> 00:59:12.460
+And then we could say Y equals 10 "in left bracket 20 right bracket colon."
+
+535
+00:59:13.200 --> 00:59:20.320
+And then we can do X plus Y"out left bracket 20 right bracket colon 15."
+
+536
+00:59:20.960 --> 00:59:29.680
+So the output was 15. And or we could do X times Y "X star space Y out left bracket 21 right bracket
+
+537
+00:59:29.680 --> 00:59:40.280
+colon 50". So, you know, five five times 10 is 50. You know, X times Y five times 10 is 50.
+
+538
+00:59:40.280 --> 00:59:49.300
+Or you could do Y times Y. So be Y. Remember, Y is 10. So we could do Y times Y
+
+539
+00:59:49.300 --> 00:59:55.500
+"out left bracket 22 right bracket colon 100. So 100." I cut it off there a little early,
+
+540
+00:59:55.640 --> 01:00:03.600
+but the answer with the output was 100. So variables can be long or short. What you the
+
+541
+01:00:03.600 --> 01:00:07.860
+only rules with variables is you can't you have to start with a letter.  You can't start with a number
+
+542
+01:00:07.860 --> 01:00:13.160
+or space or something. And well, you can't use spaces at all. And there's only a few special
+
+543
+01:00:13.160 --> 01:00:20.660
+symbols you're allowed to use.  You're allowed to use, for example, underscores. But you so variables
+
+544
+01:00:20.660 --> 01:00:26.720
+in general should be lowercase. And if you have more than one word, you should use underscores.
+
+545
+01:00:26.900 --> 01:00:30.420
+There are exceptions to that, but we're not going to get into them in this workshop.
+
+546
+01:00:31.920 --> 01:00:37.400
+Now, there's certain conditions where you use all uppercase or starting with an uppercase
+
+547
+01:00:37.400 --> 01:00:42.760
+or some other types of variable names. But we won't get into them in this workshop.  You can
+
+548
+01:00:42.760 --> 01:00:47.320
+look those up if you if you're interested. But you shouldn't start your variables with numbers.
+
+549
+01:00:48.800 --> 01:00:53.360
+And I would also say, in general, you should make your variables as descriptive as possible.
+
+550
+01:00:53.660 --> 01:00:59.220
+So we will be using some short variable names in the next workshop. They're sort of also a
+
+551
+01:00:59.220 --> 01:01:03.740
+little bit exceptional. But broadly speaking, you should make your variables descriptive
+
+552
+01:01:03.740 --> 01:01:10.860
+and easy to understand rather than making them all x or z or whatever.  Okay, that's fine in some
+
+553
+01:01:10.860 --> 01:01:15.860
+very specific circumstances, but mostly try to err on the side of making them more understandable.
+
+554
+01:01:16.300 --> 01:01:26.170
+Okay. All right, so we've done variables.  So we did variables. And now we're going to do
+
+555
+01:01:28.250 --> 01:01:32.050
+the we're going to talk a little bit about first, I'm going to
+
+556
+01:01:32.050 --> 01:01:36.630
+I'm answer a common question that I get at this point, which is about double quotes,
+
+557
+01:01:36.730 --> 01:01:42.090
+and we have to use double quotes. And then we'll get a little into errors and how we deal with
+
+558
+01:01:42.090 --> 01:01:50.750
+errors in Python.  So, so okay, so first of all, double quotes. So in this workshop, I'm almost
+
+559
+01:01:50.750 --> 01:01:56.330
+exclusively going to use double quotes, because it's less confusing. However, you can totally
+
+560
+01:01:56.330 --> 01:02:02.990
+use single quotes to when you're creating strings.  Okay. So for example, you can do
+
+561
+01:02:03.610 --> 01:02:15.750
+we did greeting, parting. I'll make one called exclamation, "e, x, c, l, a, m, a, t, i, o, n,
+
+562
+01:02:16.490 --> 01:02:23.570
+exclamation equals equals space quote, quote, tick." So you heard the word you heard the character
+
+563
+01:02:23.570 --> 01:02:31.430
+tick there, I used a single quote, tick. And then I'll say yee haw, "y, e, e, a, a, w." So it's
+
+564
+01:02:32.250 --> 01:02:41.370
+"yee haw, tick." I put another tick. So that is exclamation, space equals space, tick,
+
+565
+01:02:41.730 --> 01:02:49.170
+which is a single quote, yee haw, tick. Okay, and this will work just as well "in left bracket 24,
+
+566
+01:02:49.170 --> 01:02:53.030
+right bracket colon." Okay, and so we didn't get any output there. But now we can do
+
+567
+01:02:53.030 --> 01:02:57.570
+e, x, c, I typed in e, x, c, I'm going to let it fill in the rest, lamation,
+
+568
+01:02:59.110 --> 01:03:04.470
+lamation, exclamation. Let's press enter. "Out left bracket 24, right bracket colon,
+
+569
+01:03:04.930 --> 01:03:13.350
+yee haw." There's yee haw. And, and that worked fine. But what you can do is mix double quotes
+
+570
+01:03:13.350 --> 01:03:18.690
+and single quotes.  Okay. So stick to one or the other, you can have use single quotes,
+
+571
+01:03:18.690 --> 01:03:26.310
+you can use double quotes, but you can't use both. Okay.  One thing. So now, I'm going to have
+
+572
+01:03:26.310 --> 01:03:32.870
+you go ahead and mix and match a single and a double quote, because I want to get an error.
+
+573
+01:03:33.250 --> 01:03:39.390
+And then I want to talk about how you can deal with errors in Python.  Okay. So let's go ahead.
+
+574
+01:03:39.450 --> 01:03:44.670
+And this is going to be our first of two main kinds of errors.  Okay. So we're going to learn
+
+575
+01:03:44.670 --> 01:03:50.190
+about two kinds of errors that are very different. And, and we'll get an example of each.  So this is
+
+576
+01:03:50.190 --> 01:03:54.190
+going to be the first kind of error. I'll explain it. But let's go ahead and write a line of code
+
+577
+01:03:54.190 --> 01:04:01.930
+that will give us an error.  So let's type in, we did exclamation. Let's just go ahead and do
+
+578
+01:04:01.930 --> 01:04:11.490
+exclamation again. "E, x, c, l, a, m, a, t, i, o, n. Exclamation." Exclamation. Equals.
+
+579
+01:04:12.250 --> 01:04:20.730
+Space. And I'm going to do double quote. Yeehaw. And then let's do single quote.
+
+580
+01:04:21.170 --> 01:04:28.210
+"Yeehaw. Tick." There's the tick. Okay. So exclamation equals double quote yeehaw tick.
+
+581
+01:04:30.730 --> 01:04:38.710
+"File quote lesson Python dash input dash 25 dash c 0 1 d 42 39 0 5 6 greater quote line 1
+
+582
+01:04:39.350 --> 01:04:45.530
+exclamation equals quote yeehaw carrot syntax error colon eol while scanning strin
+
+583
+01:04:46.270 --> 01:04:54.230
+g literal in left bracket 26 right bracket colon." Okay. So that's a lot of output. Not as bad as
+
+584
+01:04:54.230 --> 01:05:00.450
+some other programming languages, but basically what this is, it's our error. And let's go up.
+
+585
+01:05:00.490 --> 01:05:06.810
+And the last thing that gets printed out is kind of usually the most descriptive. And the rest of
+
+586
+01:05:06.810 --> 01:05:18.870
+it is trying to tell you where the error happened. So let's review and try to find our description
+
+587
+01:05:18.870 --> 01:05:24.190
+of the error. Bottom. So we're at the bottom. "Bracket 26 right bracket colon." Let's move up.
+
+588
+01:05:24.370 --> 01:05:31.610
+"Blank blank g literal syntax error colon eol while scanning string literal." So and it's
+
+589
+01:05:31.610 --> 01:05:38.390
+cut off there because I made the text so big that it cuts off after a pretty short line.
+
+590
+01:05:39.370 --> 01:05:44.570
+If you didn't make the text huge like I did, you shouldn't have this problem the same way.
+
+591
+01:05:45.250 --> 01:05:52.250
+But it said "syntax error colon eol while scanning string literal." So it's syntax error eol,
+
+592
+01:05:52.630 --> 01:05:57.890
+which is short for end of line while scanning string literal, which sounds complicated.
+
+593
+01:05:57.890 --> 01:06:04.870
+But the most important part here is syntax error. And the syntax error, it's one of the main types
+
+594
+01:06:04.870 --> 01:06:09.350
+of errors in Python. It's one of the two big categories of error.  And basically it means
+
+595
+01:06:09.970 --> 01:06:15.650
+a syntax error happens even before your code gets run. So you type in your code and then there's a
+
+596
+01:06:15.650 --> 01:06:21.890
+process that happens before it gets run, which is a checker. And it checks that your code is valid
+
+597
+01:06:21.890 --> 01:06:27.030
+Python, that it's correct Python.  And if it breaks a fundamental rule of Python,
+
+598
+01:06:29.130 --> 01:06:36.590
+then it gives you a syntax error. So and basically it's saying, hey, the code they
+
+599
+01:06:36.590 --> 01:06:43.330
+wrote, it's not even really Python because it broke a rule. So even before your code gets run,
+
+600
+01:06:43.550 --> 01:06:52.610
+if there's okay, I had someone calling me very loudly there had to pause for a second.  But
+
+601
+01:06:53.350 --> 01:06:59.570
+so the syntax error, it happens before your code gets run. And if it doesn't pass that check,
+
+602
+01:06:59.670 --> 01:07:04.050
+you get a syntax error. And typically the syntax error is with some piece of grammar.
+
+603
+01:07:04.570 --> 01:07:10.910
+So it's often with quotes, for example, this quote mismatch with maybe you left off a parenthesis,
+
+604
+01:07:10.910 --> 01:07:17.070
+that's a very common one. Something is messed up with the spacing, or something that's wrong
+
+605
+01:07:17.070 --> 01:07:21.550
+with say like a comma, a square bracket, something like that. It's most common source of a syntax
+
+606
+01:07:21.550 --> 01:07:26.650
+error.  So those are what you should check first in your line, when you get a syntax error.
+
+607
+01:07:28.810 --> 01:07:39.010
+Now, the stuff before this, where it says syntax error is trying to tell us where the syntax error
+
+608
+01:07:40.030 --> 01:07:45.530
+originates. And so let's go back and review that really quick.  But unfortunately, it's not,
+
+609
+01:07:46.170 --> 01:07:50.430
+a lot of Python is actually pretty accessible. This part is a little bit annoying,
+
+610
+01:07:50.430 --> 01:07:55.990
+especially the syntax error, because it tries to point out where our error is. And it does it in
+
+611
+01:07:55.990 --> 01:08:00.510
+a somewhat visual way, which is annoying. But let's review backward "syntax error colon caret."
+
+612
+01:08:01.390 --> 01:08:07.030
+So okay, you heard caret. And that's where the problematic thing is that caret is trying to tell
+
+613
+01:08:07.030 --> 01:08:12.350
+us in the line above where the syntax error happened. So if we move up one line, "exclamation
+
+614
+01:08:12.350 --> 01:08:21.350
+equals quote yeehaw." Yeehaw. So there's the caret is on the line below, and it's trying to point up
+
+615
+01:08:21.350 --> 01:08:28.069
+to where the error happened.  But the only way to get that as a blind person is so if you go to that
+
+616
+01:08:28.069 --> 01:08:34.890
+caret line, and then you have to count over, so you have to go "space, space, space, space, space,
+
+617
+01:08:34.950 --> 01:08:42.390
+space, space, space, space, space, space, space, space, space, space, space, space, space, space,
+
+618
+01:08:42.390 --> 01:08:42.830
+space, space, space, space, space, space, space, space, space, space, space, space, space, space,
+
+619
+01:08:42.830 --> 01:08:51.069
+caret." That was 26 characters over, I believe. Okay. So and then you could go up to the line
+
+620
+01:08:51.069 --> 01:08:56.870
+above and count 26 over, which is pretty annoying. But let's just do it just for to show you the
+
+621
+01:08:56.870 --> 01:09:01.330
+technique. "Exclamation equals quote yeehaw." Okay. So I'm going to quickly try to type in
+
+622
+01:09:04.090 --> 01:09:08.590
+NVDA write, write 26 times to try to move all the way over.
+
+623
+01:09:16.569 --> 01:09:25.830
+And that's, it was, I moved one a little too far there, but it was under, it's under the, it's
+
+624
+01:09:25.830 --> 01:09:32.850
+trying to tell us in this annoying somewhat sighted way, that by putting a caret underneath
+
+625
+01:09:32.850 --> 01:09:40.729
+it visually, that, that the tick is the problem, that the, the quotes are mismatched.  So that,
+
+626
+01:09:40.870 --> 01:09:46.830
+so this is definitely something you can do. You can count where the caret is by moving manually
+
+627
+01:09:46.830 --> 01:09:51.630
+and then going up. But really, when you get a little bit more used to using Python, you often
+
+628
+01:09:51.630 --> 01:09:56.230
+really won't need to do this only in kind of like a bad situation when you have to resort to
+
+629
+01:09:56.230 --> 01:10:00.150
+something like this, because when you become more experienced in Python, the syntax errors, they
+
+630
+01:10:00.150 --> 01:10:05.470
+often become a little more obvious to you when you review the line.  Okay. Because there's only
+
+631
+01:10:05.470 --> 01:10:10.490
+a limited number of ways to trigger a syntax error. So, and especially as, if you're a beginning
+
+632
+01:10:10.490 --> 01:10:16.530
+programmer, you'll encounter syntax errors a lot.  As you become more experienced, they will become
+
+633
+01:10:16.530 --> 01:10:21.870
+less frequent, and also you'll become pretty handy at identifying them. And you won't necessarily
+
+634
+01:10:21.870 --> 01:10:25.270
+need to do all this counting. But it's good to know that that's a technique you can do,
+
+635
+01:10:25.450 --> 01:10:29.950
+which is to count where the caret is, how many characters the caret is, and then go up one line,
+
+636
+01:10:30.350 --> 01:10:34.530
+count the same number of characters over, and that will be where it's trying to tell you where the
+
+637
+01:10:34.530 --> 01:10:41.050
+syntax error is.  Another useful thing is, and I'm going to teach you this, this is mainly useful
+
+638
+01:10:41.050 --> 01:10:47.430
+for us screen reader users. I haven't seen that many sighted people do this, but IPython provides
+
+639
+01:10:47.430 --> 01:10:56.210
+a special command to make the output of errors a little more minimal. So I'm going to teach you
+
+640
+01:10:56.210 --> 01:11:01.670
+how to do that now, and then we'll switch it back to the way it is now.  Okay. So let's go ahead and
+
+641
+01:11:01.670 --> 01:11:07.570
+do that together. So it's going to be percent, the percent symbol, which is above the five on
+
+642
+01:11:07.570 --> 01:11:23.770
+your keyboard, and then we type xmode, x-m-o-d-e. And then that's percent xmode, and then we type
+
+643
+01:11:23.770 --> 01:11:35.170
+minimal. I typed and deleted the space just so you'd hear the word. Okay.  So it's percent xmod
+
+644
+01:11:35.170 --> 01:11:45.350
+minimal. And it said it changed the "exception reporting mode to minimal." So if we run our
+
+645
+01:11:45.350 --> 01:11:50.950
+line again to get the exception, and this is, I'm going to teach you one more useful thing,
+
+646
+01:11:50.990 --> 01:11:56.570
+is that you can press, just press the up key by itself, no NVDA or anything, just up key by itself,
+
+647
+01:11:56.610 --> 01:12:01.730
+and you can go back through lines that you entered before.  So let's enter the line. We got the error
+
+648
+01:12:27.990 --> 01:12:31.410
+again. That's, it's doing, it's not actually doing the minimal thing,
+
+649
+01:12:31.410 --> 01:12:47.550
+so let's try one more time.  Minimal and then, and then let's do
+
+650
+01:12:54.410 --> 01:13:01.330
+quote. Okay. So actually I misapprehended there. This xmode only
+
+651
+01:13:01.330 --> 01:13:06.210
+works on this second time type of error that I'm going to teach you now. It doesn't work
+
+652
+01:13:06.210 --> 01:13:14.050
+on syntax errors, so that's actually something I'm learning. So let's go ahead and set the xmode
+
+653
+01:13:14.050 --> 01:13:31.210
+back to verbose.  So I typed percent xmod verbose, and then I will, we'll use it again when I
+
+654
+01:13:31.210 --> 01:13:35.210
+show you the second kind of error. Okay, so okay, so we've learned a little about syntax errors. I
+
+655
+01:13:35.210 --> 01:13:39.090
+want to show you the second kind of error, which is the error, eventually it's the error that you're
+
+656
+01:13:39.090 --> 01:13:44.470
+going to see the most often, which is kind of why I was even not even thinking about it with xmode,
+
+657
+01:13:44.530 --> 01:13:50.670
+because this is the error that I tend to see the most often, which is, it's called a traceback
+
+658
+01:13:50.670 --> 01:13:56.170
+error.  Basically what happens with the traceback error is Python, you know, it passes the syntax
+
+659
+01:13:56.170 --> 01:14:02.310
+check, and your Python, your code runs, but then sometime during your code running some kind of
+
+660
+01:14:02.310 --> 01:14:09.630
+logical inconsistency or problem occurs. Okay, so let's go ahead and try to create a
+
+661
+01:14:11.710 --> 01:14:17.330
+one of these traceback errors. So let's do one which is to divide by zero.  So that's a
+
+662
+01:14:18.040 --> 01:14:29.170
+we could try to do 10 divided by zero. And then forward slash. So I did 10 space forward slash
+
+663
+01:14:29.890 --> 01:14:34.350
+space zero.  10 divided by zero.
+
+664
+01:14:59.310 --> 01:15:03.810
+So what you heard there was it said what the error was at the beginning, the type of error,
+
+665
+01:15:03.950 --> 01:15:08.790
+division by zero error. Then what it tried to do was tell us where the error happened.
+
+666
+01:15:09.750 --> 01:15:13.490
+Now it's pretty clear where the error happened because we only typed in one line, but often
+
+667
+01:15:13.490 --> 01:15:18.010
+you're running Python code that's more than one line, so it tries to explain where the error
+
+668
+01:15:18.010 --> 01:15:22.750
+happened. So it said, okay, you know, it's this 10 divided by zero. And then at the end,
+
+669
+01:15:22.830 --> 01:15:38.350
+it says the full version of the error, which is.  I'm reviewing down. Zero division error colon,
+
+670
+01:15:38.350 --> 01:15:44.470
+division by zero. That's the name of the error.  So the structure here is the beginning part is
+
+671
+01:15:44.470 --> 01:15:50.410
+mostly about telling you where the error happened. And then at the very end, you hear what type of
+
+672
+01:15:50.410 --> 01:15:55.210
+error it is, which is actually usually the most useful information. And this is where the X mode
+
+673
+01:15:55.210 --> 01:15:59.270
+that I just wanted to show you before that I didn't work with syntax error comes in.  So if we
+
+674
+01:15:59.270 --> 01:16:07.810
+turn it on now, again, "percent sign X mode, percent, X, M, O, D, E, space, mode, space,
+
+675
+01:16:08.190 --> 01:16:15.930
+minimal, M, I, N, I, M, A, L, minimal, space." I typed in minimal just so you'd hear the word. So
+
+676
+01:16:15.930 --> 01:16:23.250
+percent, X mode, space, minimal, "exception reporting mode, colon, minimal." So it turned
+
+677
+01:16:23.250 --> 01:16:29.550
+on the minimal exception reporting. And then now let's run our line that got us an error again,
+
+678
+01:16:29.630 --> 01:16:37.330
+the division by zero, 10 divided by zero. One, zero, 10, slash, space, zero.  10, space,
+
+679
+01:16:37.470 --> 01:16:42.730
+slash, space, zero. 10 divided by zero. "Zero division error colon, division by zero."
+
+680
+01:16:43.110 --> 01:16:47.050
+Okay. So when minimal is on, we just hear the error, which is actually really nice.
+
+681
+01:16:47.230 --> 01:16:51.230
+Okay.  So you can play around with that a little bit. And often I'll turn it on and off pretty
+
+682
+01:16:51.230 --> 01:16:58.870
+frequently. And then let's go ahead and turn it back to verbose. Okay. So we could do "percent,
+
+683
+01:16:59.210 --> 01:17:08.270
+X, M, O, D, E, mode, V, E, R, V, O, S, E, verbose, exception reporting mode, colon, verbose."
+
+684
+01:17:08.890 --> 01:17:12.910
+So, okay.  We turned it back to what it is originally, which is verbose. Okay. So
+
+685
+01:17:13.570 --> 01:17:17.810
+that's a useful technique for screen reader users because often we don't want to hear all of that
+
+686
+01:17:17.810 --> 01:17:23.810
+output about where the error was.  We just want to hear what the error is. Okay. And then, you know,
+
+687
+01:17:23.890 --> 01:17:27.450
+you can often, you can switch things.  If you want more information, you can switch it back to verbose.
+
+688
+01:17:27.590 --> 01:17:32.190
+Okay. So it's percent X mode.  And what that percent symbol is, it's a special, it's not
+
+689
+01:17:32.650 --> 01:17:36.550
+regular Python. So it might not work in a, if you're writing Python in another program,
+
+690
+01:17:36.630 --> 01:17:43.110
+but it's a special command related to IPython, you know, this special REPL that comes with Anaconda.
+
+691
+01:17:43.110 --> 01:17:49.470
+Okay.  And it's called a magic. It's a IPython magic command. Okay.  That gives us a little bit
+
+692
+01:17:49.470 --> 01:17:53.610
+of control over the environment that we're programming in right here. All right. So that
+
+693
+01:17:53.610 --> 01:17:58.390
+is a little bit on error.  So there's two kinds of errors. The first one happens before you run the,
+
+694
+01:17:58.590 --> 01:18:03.690
+before the program runs. And it's basically, oh, something didn't pass muster in terms of like the
+
+695
+01:18:03.690 --> 01:18:09.670
+rules about what makes a valid Python.  And what you want to do in those situations is check for
+
+696
+01:18:11.710 --> 01:18:20.410
+error problems with the syntax. So things like quotes, parentheses, square brackets, and so on.
+
+697
+01:18:20.670 --> 01:18:26.870
+Okay.  Then the other kind of error is that your program is running, but it gets into some kind of
+
+698
+01:18:26.870 --> 01:18:33.390
+state where there's a logical inconsistency. And in those, you want to often, what you want to look
+
+699
+01:18:33.390 --> 01:18:38.830
+at is what is the error that it gave us. So that last thing in the error output.  And in our case,
+
+700
+01:18:38.830 --> 01:18:42.830
+it said division by zero. And that's a pretty straightforward error. That means we divided by
+
+701
+01:18:42.830 --> 01:18:47.630
+zero.  That's not allowed. It's a logical inconsistency. And a lot of errors are like
+
+702
+01:18:47.630 --> 01:18:51.710
+that.  A very common error you might get is a name error. So if you type in a variable that isn't
+
+703
+01:18:51.710 --> 01:19:01.130
+assigned, you haven't created yet. Like if I just type in my name, Patrick, without, and we haven't
+
+704
+01:19:01.130 --> 01:19:12.130
+assigned anything to it.  And press enter. I'm just going to use reviewing to get to the error here.
+
+705
+01:19:16.090 --> 01:19:20.950
+Name error.  Name Patrick is not defined. And that's straightforward enough. It's a name error,
+
+706
+01:19:21.150 --> 01:19:25.050
+and the variable Patrick doesn't exist.  We tried to access a variable. It isn't assigned.
+
+707
+01:19:25.050 --> 01:19:32.450
+So those are the two kinds of errors.  They're syntax errors and traceback errors. And as you
+
+708
+01:19:32.450 --> 01:19:36.050
+get more advanced in programming, you're going to see the traceback error type more often.
+
+709
+01:19:38.250 --> 01:19:42.690
+So those are errors.  And now what we're going to do is we're going to clear our screen.
+
+710
+01:19:43.130 --> 01:19:49.750
+We're starting a new section. And then we're all ready to start a new section here.
+
+711
+01:19:49.750 --> 01:19:57.810
+What we're going to do is we're going to learn a little more about lists. So lists
+
+712
+01:19:57.810 --> 01:20:05.130
+are going to be really critical for what we do in the next section, in the section on pandas.
+
+713
+01:20:05.710 --> 01:20:11.870
+So let's learn to work with them a little bit more.  And let's create a list that we'll be
+
+714
+01:20:11.870 --> 01:20:17.670
+working with in this section. And so we're going to write a variable name. So it's going to be
+
+715
+01:20:17.670 --> 01:20:30.470
+flowers.  And let's do a space. Equals. And now let's start our list.  So it's going to be
+
+716
+01:20:30.470 --> 01:20:38.230
+left square bracket, double quote. And I'm going to go slow here because it can get confusing.
+
+717
+01:20:39.210 --> 01:20:49.570
+And let's say rose, like the flower rose.  Double quote. And then let's do a comma.
+
+718
+01:20:50.930 --> 01:21:00.650
+Space.  Now let's do another one. Double quote. That's a violet.
+
+719
+01:21:00.650 --> 01:21:16.230
+Violet. Comma. Space.  Double quote. Buttercup. B-U-T-T-E-R-C-U-P.  Buttercup.
+
+720
+01:21:17.170 --> 01:21:23.530
+And then a double quote. And then now we have our rose, violet, buttercup.  Let's do a right
+
+721
+01:21:23.530 --> 01:21:29.470
+parenthesis. And now what we did was we wrote the word flowers. That's our variable
+
+722
+01:21:29.470 --> 01:21:36.590
+name. Flowers. And then we did equals.  And then we do left parenthesis. I mean, sorry. Left square
+
+723
+01:21:36.590 --> 01:21:47.010
+bracket.  Then double quote. Then the word rose. Then a double quote.  Then a comma. Then a double
+
+724
+01:21:47.010 --> 01:21:54.890
+quote. Then the word violet.  V-I-O-L-E-T. Then a double quote. Then a comma.  Then we did a double
+
+725
+01:21:54.890 --> 01:22:03.850
+quote. We did the word buttercup. B-U-T-T-E-R-C-U-P.  Then we did a double quote. Then we do a right
+
+726
+01:22:03.850 --> 01:22:10.010
+bracket. And so another way of thinking about this is there's three strings.  Rose, violet,
+
+727
+01:22:10.210 --> 01:22:16.350
+buttercup. You know, they're words surrounded by double quotes. And then they're separated
+
+728
+01:22:16.350 --> 01:22:22.990
+by commas.  So it's rose, comma, violet, comma, buttercup. And then we surround that with square
+
+729
+01:22:22.990 --> 01:22:29.510
+brackets. So left square bracket, right square bracket.  And then we assign that to flowers. So
+
+730
+01:22:29.510 --> 01:22:34.770
+it's flowers equals all of that list. That's another way of thinking about it.  So let's go
+
+731
+01:22:34.770 --> 01:22:43.310
+ahead and press enter. And remember, when we save a variable, we don't actually get any output. So
+
+732
+01:22:43.310 --> 01:22:51.210
+it was flowers equals left square bracket, rose, violet, buttercup.  Each is a string.
+
+733
+01:22:51.210 --> 01:22:56.330
+And then right square bracket. So we should have our variable.  Let's type flowers by itself. So I'm
+
+734
+01:22:56.330 --> 01:23:21.010
+going to type flow. And then let it finish it by pressing tab.  It's pronouncing buttercup a little
+
+735
+01:23:21.010 --> 01:23:26.010
+because the line is cut off. So there's a hard return in the middle of buttercup because I've
+
+736
+01:23:26.010 --> 01:23:31.930
+made the text so big. That's why it's pronouncing buttercup a little bit funny.  But when we type in
+
+737
+01:23:31.930 --> 01:23:39.010
+flowers, we get to hear our list. Our rose, violet, buttercup. So let's try to do a few things with
+
+738
+01:23:39.010 --> 01:23:51.130
+the list.  So if we type in flowers, the variable name. And now no space. Don't make a space.  We
+
+739
+01:23:51.130 --> 01:24:03.590
+want a left square bracket. And then type the number zero. So it's flowers, left bracket, zero,
+
+740
+01:24:03.590 --> 01:24:19.010
+right bracket.  And no spaces. So our output was rose. So we did flowers, left bracket, zero,
+
+741
+01:24:19.230 --> 01:24:24.810
+right bracket.  And our output was rose. And so what we're doing here is a technique in Python
+
+742
+01:24:24.810 --> 01:24:31.670
+called slicing. And what slicing does is it allows you to pull out parts of a list.  So if you want
+
+743
+01:24:31.670 --> 01:24:36.250
+the first item in a list, and this is a little confusing in programming, then you start counting
+
+744
+01:24:36.250 --> 01:24:43.230
+from zero. So it's flowers, left bracket, zero, right bracket. That's the first item in our flowers
+
+745
+01:24:43.230 --> 01:24:50.310
+list.  So in programming, counting always starts from zero. So in this case, the first item in the
+
+746
+01:24:50.310 --> 01:24:57.990
+list is rose. So it's flowers.  The zeroth item is rose. So our output is rose. Now what if we want
+
+747
+01:24:57.990 --> 01:25:02.590
+the second item? Well, if the first item is zero, the second item is one.  I know that's confusing.
+
+748
+01:25:03.530 --> 01:25:07.210
+Programmers are weird. They start counting from zero.  They say things like the zeroth item.
+
+749
+01:25:07.810 --> 01:25:13.770
+But you do get used to it a little bit. So let's do flowers, and then a left bracket for our slicing
+
+750
+01:25:13.770 --> 01:25:18.570
+syntax.  And then we do type the number one, and then we do a right bracket. So it's flowers,
+
+751
+01:25:18.570 --> 01:25:28.310
+"F-L-O-W," and I'll do tab, "E-R-S, right bracket, I meant left bracket,
+
+752
+01:25:29.330 --> 01:25:37.450
+one, right bracket." So it's flowers, left bracket, one, right bracket. "Out, left bracket, 39,
+
+753
+01:25:37.590 --> 01:25:41.770
+right bracket, colon, violet." And then we had violet. So that's the second item in the list,
+
+754
+01:25:41.910 --> 01:25:47.370
+or the first if we want to do it the way programmers.  The zeroth is rose. The first is
+
+755
+01:25:47.370 --> 01:25:53.870
+violet. The second is buttercup.  Or as a normal person would say it, the first is rose, second
+
+756
+01:25:53.870 --> 01:26:00.110
+violet, third buttercup. But in programming, counting starts from zero. And you can also
+
+757
+01:26:00.970 --> 01:26:09.410
+put in a range.  So let's try that now. So let's do flowers, F-L-O-W-E-R-S,
+
+758
+01:26:09.990 --> 01:26:23.780
+left bracket. And let's do zero, zero, colon, two, two, right bracket.
+
+759
+01:26:24.100 --> 01:26:30.540
+So we did flowers, left bracket, zero, colon, and then a two, and then a right bracket. And let's
+
+760
+01:26:30.540 --> 01:26:35.780
+see how many we get. "Out, left bracket, 40, right bracket, colon. Out, left bracket, 40, right bracket,
+
+761
+01:26:35.780 --> 01:26:42.940
+colon, left bracket, rose, violet, right bracket." So it's rose and violet. And this does get a
+
+762
+01:26:42.940 --> 01:26:49.100
+little confusing.  So we asked for this from the zeroth to the second. And it's a little confusing,
+
+763
+01:26:49.400 --> 01:26:55.360
+but basically the second number has to be one higher than you in some case you think it should
+
+764
+01:26:55.360 --> 01:27:01.420
+be, which is a little hard to get used to. But basically, we wanted the first two items.  So I
+
+765
+01:27:01.420 --> 01:27:09.200
+flowers, left bracket, zero, colon, two, right bracket. And that sliced the first two items in
+
+766
+01:27:09.200 --> 01:27:15.260
+the list. So using colon, you put two numbers, the first number, then a colon, then a second number.
+
+767
+01:27:15.740 --> 01:27:19.960
+And then it gives you the range of those two numbers. But you do have to make the second
+
+768
+01:27:19.960 --> 01:27:26.620
+number one higher than maybe you think it should be, which is also confusing. And this is, believe
+
+769
+01:27:26.620 --> 01:27:32.000
+me, even very experienced programmers get confused by the counting from zero and things
+
+770
+01:27:32.000 --> 01:27:36.760
+like the second numbers being higher.  There are good reasons why things are the way they are.
+
+771
+01:27:40.260 --> 01:27:46.280
+But suffice to say, it is confusing and it's unintuitive. And so there's a very common type
+
+772
+01:27:46.280 --> 01:27:50.700
+of error in programming called an off by one error, maybe the most common, one of the most
+
+773
+01:27:50.700 --> 01:27:55.840
+common errors.  And it basically just means you tried to pull out some data and you're off by
+
+774
+01:27:55.840 --> 01:28:01.000
+one. You missed one. So this is something to keep an eye out for.  It's very common to mess that
+
+775
+01:28:01.000 --> 01:28:05.380
+little part up. But you can always go back and fix things just as long as you look out for that
+
+776
+01:28:05.380 --> 01:28:13.040
+type of error. So we learned how to slice from a list.  And I want to show you one other thing
+
+777
+01:28:13.040 --> 01:28:16.480
+that's going to come in useful when we start working with pandas. And it's going to be our
+
+778
+01:28:16.480 --> 01:28:20.540
+second function that we learned. We only learned one function so far that's type.  We're going to
+
+779
+01:28:20.540 --> 01:28:24.940
+learn another function. It's going to be called len. So let's go ahead and use it.
+
+780
+01:28:29.360 --> 01:28:36.160
+So we're typing len, left parenthesis. And now let's give it our flowers variable.
+
+781
+01:28:41.280 --> 01:28:46.420
+So it's len, l-e-n, left parenthesis, flowers, right parenthesis.
+
+782
+01:28:52.860 --> 01:28:57.860
+So the output was three. So what len does, it's short for a length.
+
+783
+01:28:58.180 --> 01:29:04.320
+And we get the length of a list or whatever else we pass into that function.  And that's
+
+784
+01:29:04.320 --> 01:29:09.040
+the programmer term when you kind of give something to a function by putting it in the parenthesis.
+
+785
+01:29:09.340 --> 01:29:14.680
+We say we passed it into the function. And then there's also another fancy programmer term, which
+
+786
+01:29:14.680 --> 01:29:19.180
+I'm sorry, I apologize for using these terms.  But it is useful to learn some of the vocabulary
+
+787
+01:29:19.180 --> 01:29:23.800
+because then it helps you to look things up or to sound smart when you're talking to people.
+
+788
+01:29:24.220 --> 01:29:32.560
+That's one of the main reasons. But the word, when you pass something into a function,
+
+789
+01:29:32.700 --> 01:29:40.240
+when you pass an object into a function, like for example, we gave len our flowers variable.
+
+790
+01:29:41.100 --> 01:29:47.640
+When you pass that object into the function, we call that object an argument. So the thing you
+
+791
+01:29:47.640 --> 01:29:53.880
+give to a function is an argument. So that's a fancy programmer word for something you pass into
+
+792
+01:29:53.880 --> 01:30:01.540
+a function.  So our flowers is the argument to len. And then we get back three, because there's
+
+793
+01:30:01.540 --> 01:30:10.660
+three items in our list. And that does work on other types of objects.  So the only other type of
+
+794
+01:30:10.660 --> 01:30:17.240
+object that we've learned so far or type data type that we've learned so far that len will work on
+
+795
+01:30:17.240 --> 01:30:21.880
+is a string. So we can do len and pass it our greeting variable that we defined earlier.
+
+796
+01:30:23.560 --> 01:30:30.740
+And then the argument will be greeting.  So we did len, left parenthesis, and let's give it greeting.
+
+797
+01:30:36.580 --> 01:30:39.940
+So it's len, left paren, greeting, right paren.
+
+798
+01:30:47.860 --> 01:30:52.180
+It didn't, blank, let's review to get it, "out left bracket 42 right bracket colon
+
+799
+01:30:52.580 --> 01:30:57.980
+five." Five is the output. For some reason it didn't, it skipped over our output there. Five
+
+800
+01:30:57.980 --> 01:31:01.940
+is the output because, and what it does with strings is it counts how many characters are in
+
+801
+01:31:01.940 --> 01:31:08.020
+the string.  So greeting is hello, h-e-l-l-o, that's five characters. So it told us how many characters
+
+802
+01:31:08.020 --> 01:31:11.820
+is in the string, which can be pretty useful in some contexts. It tells you how long the string is.
+
+803
+01:31:13.760 --> 01:31:20.320
+There's one other thing I want to teach you about lists, but we're going to learn it in a minute.
+
+804
+01:31:20.780 --> 01:31:24.400
+I want to kind of come back around and we're going to learn about, we said we talk about objects.
+
+805
+01:31:25.420 --> 01:31:29.600
+So let's go ahead, we've learned the basics of lists.  We'll do a little more with them in a
+
+806
+01:31:29.600 --> 01:31:32.980
+minute, but I want to teach you one little thing. We'll take a little break from lists, come right
+
+807
+01:31:32.980 --> 01:31:38.200
+back to it. And then, so we're going to learn this next thing, which is about true and false
+
+808
+01:31:38.200 --> 01:31:44.340
+and called conditionals.  Then we're going to learn a little more about objects and how to
+
+809
+01:31:44.340 --> 01:31:49.440
+look inside them and finish off learning about lists. And then we're going to take 10 minutes
+
+810
+01:31:49.440 --> 01:31:53.520
+and make a little application just to pull together all the things that we've learned.
+
+811
+01:31:53.740 --> 01:31:58.360
+And then we'll be, that'll be the end of, more or less the end of our lesson.  And that last bit,
+
+812
+01:31:58.680 --> 01:32:03.720
+when we make the application, I'm going to teach you the most important, or maybe the most powerful,
+
+813
+01:32:03.720 --> 01:32:10.240
+let's say, little bit of functionality in Python. And kind of the coolest in a way,
+
+814
+01:32:10.740 --> 01:32:15.840
+just to give you a little roadmap of what's coming up. So let's clear our screen.
+
+815
+01:32:18.800 --> 01:32:27.100
+We're up to our 40, 43rd cell. So we've have entered 42 lines of Python so far.
+
+816
+01:32:28.200 --> 01:32:36.560
+So very auspicious.  So let's talk just very briefly about true and false and how those
+
+817
+01:32:36.560 --> 01:32:41.880
+are useful, because we're going to be using those a bunch in the pandas workshop. So
+
+818
+01:32:44.320 --> 01:32:48.700
+the two variables that we're going to be using here are true and false. But we're going to be
+
+819
+01:32:48.700 --> 01:32:55.540
+using them not so much to type them in directly, but we'll be seeing them as output from certain
+
+820
+01:32:55.540 --> 01:33:00.740
+kinds of lines of Python that we're writing in, certain kinds of Python statements that we're
+
+821
+01:33:00.740 --> 01:33:06.780
+writing in.  So let's do the thing where we try it, and then I'll explain it. So let's try this. 10
+
+822
+01:33:10.640 --> 01:33:18.440
+is greater than 5. 10 is greater than 5. I use the greater than symbol.
+
+823
+01:33:19.340 --> 01:33:21.180
+That's near the bottom right of your keyboard.
+
+824
+01:33:25.540 --> 01:33:37.700
+So I said 10 greater than 5, and the output was true. Okay, now let's try this.  11 greater than
+
+825
+01:33:40.180 --> 01:33:52.920
+40. 11 is greater than 40. False. Okay, so I wrote 11 is greater than 40. False. Okay,
+
+826
+01:33:52.920 --> 01:34:05.200
+let's try a less than.  Let's do 0 is less than 3. Now think about that. Is 0 less than 3?
+
+827
+01:34:06.280 --> 01:34:19.080
+Let's get our output. True.  So 0 is less than 3. Okay, so let's do one last one. Let's do 10.
+
+828
+01:34:22.920 --> 01:34:34.640
+Equals equals. Equals equals. That's two equal signs. Space. 10. So 10 equals equals 10.
+
+829
+01:34:35.020 --> 01:34:41.820
+"Out left bracket 46 right bracket colon. True. In left bracket 47 right bracket colon." So 10
+
+830
+01:34:41.820 --> 01:34:50.460
+is equal to 10. So we got true, and let's do one last one. "1 0 10, space equals equals space
+
+831
+01:34:51.500 --> 01:34:58.380
+1 1 11. Space." I did a space just so you can hear the 11. Out left bracket 47 right bracket
+
+832
+01:34:58.380 --> 01:35:05.780
+colon. False.  False. 10 is not equal to 11. Okay, so what are we using here? These are statements.
+
+833
+01:35:06.280 --> 01:35:10.880
+So a statement is a word, and it's a like a little phrase in Python, or a line of Python
+
+834
+01:35:10.880 --> 01:35:15.760
+is a statement. Okay, it's actually smaller than a line. You can have multiple statements in a line,
+
+835
+01:35:15.760 --> 01:35:23.240
+but a state Python statement is a little piece of Python.  Okay, so that Python can evaluate,
+
+836
+01:35:23.860 --> 01:35:31.000
+so or simplify. So what we've written here are a couple of little Python statements.
+
+837
+01:35:31.560 --> 01:35:40.960
+So they are, you know, for example 10 is greater than 11.  False. So Python is evaluating those.
+
+838
+01:35:40.960 --> 01:35:45.820
+Remember it's doing that process that Python does of simplification.  It's evaluating them,
+
+839
+01:35:45.980 --> 01:35:52.980
+and then it says, is this true or is this false? And if it's true, it returns the Boolean data type
+
+840
+01:35:52.980 --> 01:36:02.320
+true. If it's false, it returns the Boolean data type false. Okay, and then finally also the one
+
+841
+01:36:02.320 --> 01:36:06.680
+that's probably the most used is equals equals.  That checks if something is equal to something
+
+842
+01:36:06.680 --> 01:36:14.240
+else. So 10 equals equals 10. Is 10 equal to 10? And the result of that you could probably get is
+
+843
+01:36:14.240 --> 01:36:22.820
+true.  10 is equal to 10. Or if you do 10 equals equals 11, then you get false because 10 is not
+
+844
+01:36:22.820 --> 01:36:29.320
+equal to 11. And why is it equals equals and not just equals? Why can't it just be 10 equals 10?
+
+845
+01:36:29.920 --> 01:36:34.560
+The answer is because we already used equals for something.  We used it for assigning variables.
+
+846
+01:36:34.560 --> 01:36:41.180
+Remember we said greeting equals hello, or we did flowers equals blah blah blah, rose, violet,
+
+847
+01:36:41.240 --> 01:36:46.040
+buttercup. That is assignment, okay? It assigns a variable, so it gives something a name.
+
+848
+01:36:46.940 --> 01:36:51.400
+This is not giving a name, it's checking if something is equal to something else, okay?
+
+849
+01:36:51.640 --> 01:36:56.180
+So the reason we use two equals for this is because the one equals is already taken and
+
+850
+01:36:56.180 --> 01:37:03.160
+it does something else. These are called conditionals, and basically they are a way
+
+851
+01:37:03.160 --> 01:37:09.280
+of checking for truth and false. Truth or falsehood in Python.  In some kinds of programming,
+
+852
+01:37:09.600 --> 01:37:15.200
+you can build up, hold elaborate programs using true and false. So you can check if a whole bunch
+
+853
+01:37:15.200 --> 01:37:20.400
+of things are true or false, and then go through and be like, okay, is this true? Then do this. If
+
+854
+01:37:20.400 --> 01:37:24.880
+this is true, then do this.  If this is true, then do this. We're not going to go into that in this
+
+855
+01:37:24.880 --> 01:37:30.040
+workshop, mainly because that's more something you would do if you're developing applications.
+
+856
+01:37:30.720 --> 01:37:36.180
+It definitely is something you could do in advanced data science, but we're not really
+
+857
+01:37:36.180 --> 01:37:42.060
+getting to that point in this workshop series.  We will, however, be using these equality or
+
+858
+01:37:43.600 --> 01:37:47.480
+comparison, these conditional statements, these true and false type statements,
+
+859
+01:37:48.600 --> 01:37:55.180
+in our data science to check when we work with our data sets, okay? So we will be using this
+
+860
+01:37:55.180 --> 01:38:00.880
+extensively. But if you're like, well, why is this useful? Well, you'll see in the next workshop,
+
+861
+01:38:01.700 --> 01:38:05.360
+and it's also very useful when you're building applications and you need the application to
+
+862
+01:38:05.360 --> 01:38:10.580
+do different things based on different kinds of behavior, okay? So those are conditionals.
+
+863
+01:38:10.860 --> 01:38:14.400
+We're not going to use them anymore in this workshop, but we will be using them pretty
+
+864
+01:38:14.400 --> 01:38:21.680
+soon after starting Pandas in the next workshop, okay? Now, we're going to now talk about
+
+865
+01:38:22.260 --> 01:38:29.840
+objects and how to look inside them.  Once we're finished with objects and working with them,
+
+866
+01:38:30.140 --> 01:38:33.720
+we're going to make a little application, pull everything together, and that application is
+
+867
+01:38:33.720 --> 01:38:37.440
+going to motivate you for the next workshop series, okay? So we're kind of coming up
+
+868
+01:38:37.440 --> 01:38:51.660
+close to the end here. Let's talk about objects. So we're going to clear the screen.  This is a
+
+869
+01:38:51.660 --> 01:38:58.400
+great time to talk about objects. So far in Python, everything we've used, all the integers,
+
+870
+01:39:01.420 --> 01:39:08.660
+floats, booleans, lists, and strings, those have all been objects. And actually, even our functions
+
+871
+01:39:08.660 --> 01:39:12.260
+that we've used, type and so on, those are objects.  So everything in Python is an object.
+
+872
+01:39:12.980 --> 01:39:18.100
+And an object is really, it's a container, okay? It's a container, and it has a bunch of stuff
+
+873
+01:39:18.100 --> 01:39:29.080
+inside of it. Now, I'm going to tell you about the two types of things that can be inside objects
+
+874
+01:39:30.020 --> 01:39:35.260
+very briefly, and then we're going to use some stuff.  We're going to reach into an object and
+
+875
+01:39:35.260 --> 01:39:40.200
+use some stuff that's in it, and maybe that'll, and then I'll do a few more complicated explanations,
+
+876
+01:39:40.770 --> 01:39:48.320
+but okay. An object, you can think of it as a box that contains other data and functions,
+
+877
+01:39:48.760 --> 01:39:54.280
+okay? So it's a box, every object, and that's everything in Python, every integer, every float,
+
+878
+01:39:54.440 --> 01:40:01.760
+every string, is a box that has a bunch of other stuff inside of it, okay? So who knew, right?
+
+879
+01:40:03.540 --> 01:40:11.120
+So the two types of things you're going to find in inside an object are, one, functions, okay?
+
+880
+01:40:11.420 --> 01:40:16.880
+And then two, other things that aren't functions, but you can kind of think of those as like
+
+881
+01:40:16.880 --> 01:40:24.140
+variables, they're other data, okay? So functions and other data. And there's special words,
+
+882
+01:40:24.700 --> 01:40:32.540
+programmery words we use when we talk about functions and other data that are inside objects.
+
+883
+01:40:33.260 --> 01:40:37.120
+So, and those, let me try to teach you those special words and then I'll use them as much
+
+884
+01:40:37.120 --> 01:40:44.260
+as possible so you get a hang, an ear for those words as we move forward. So in an object,
+
+885
+01:40:44.560 --> 01:40:49.400
+if you have a function in the object, we use a special word, that's a method,
+
+886
+01:40:49.400 --> 01:40:58.020
+okay? So a method is a function inside an object. And then if you have other data in an object,
+
+887
+01:40:58.260 --> 01:41:04.520
+then we use a special word, attribute.  So methods and attributes, those are the two types of things
+
+888
+01:41:04.520 --> 01:41:09.620
+that you find inside an object, okay? And they're really just fancy words, a method is a function
+
+889
+01:41:09.620 --> 01:41:15.080
+inside an object, an attribute is other data inside an object, okay? And you can kind of think
+
+890
+01:41:15.080 --> 01:41:19.940
+of it as a variable inside an object, but that is not a correct way to say it, but you can think
+
+891
+01:41:19.940 --> 01:41:26.700
+of it that way. Alright, so what we're going to do is we're going to use a method on an object
+
+892
+01:41:28.760 --> 01:41:37.080
+and we're going to add a flower to our flowers list, okay? So every list has a bunch of methods
+
+893
+01:41:37.080 --> 01:41:41.240
+inside of it, okay? And we're going to learn just one of those methods, okay?
+
+894
+01:41:41.800 --> 01:41:52.000
+So let's type the flowers variable, "f-l-o-w-e-r-s", and you could use tab for that, you probably should.
+
+895
+01:41:53.000 --> 01:42:00.800
+And now we wrote flowers, f-l-o-w-e-r-s, and now don't put a space, just do a dot, period,
+
+896
+01:42:01.140 --> 01:42:06.120
+full stop, however you say that, wherever you are, you know, a period or full stop. "Flowers,
+
+897
+01:42:07.000 --> 01:42:16.540
+dot." Dot, okay? And then now type append, a-p-p-e-n-d. "A-p-p-e-n-d."
+
+898
+01:42:17.260 --> 01:42:23.140
+And now a left parenthesis, because this is a method, it's like a function inside of our
+
+899
+01:42:23.140 --> 01:42:30.040
+flowers list. "Append, left paren." And now let's put, give it another quote quote. So let's type
+
+900
+01:42:30.040 --> 01:42:38.700
+in a double quote. And when I, during the workshop, when I asked for a suggestion for
+
+901
+01:42:38.700 --> 01:42:45.440
+flowers, people suggested some flowers, but, but I heard someone said Lily. And I have a newborn
+
+902
+01:42:45.440 --> 01:42:49.680
+baby here at home, and her name is Lily, so I was very excited about that.  So let's go with Lily
+
+903
+01:42:49.680 --> 01:42:59.560
+for our last flower. "L-I-L-Y, Lily, quote." And then let's do a right parenthesis. "Right
+
+904
+01:42:59.560 --> 01:43:07.500
+paren." So that's flowers, dot, append, left parenthesis, quote, Lily, quote, right parenthesis.
+
+905
+01:43:07.860 --> 01:43:13.960
+"In left bracket, 49 right bracket, colon." And there was no output, but if we look at our flowers
+
+906
+01:43:13.960 --> 01:43:21.300
+variable, "F-L-O-W-E-R-S, out left bracket, 49 right bracket, colon, left bracket, rose, violet,
+
+907
+01:43:21.300 --> 01:43:29.780
+butter cu, p, lily, right bracket." Rose, violet, buttercup, and lily. Okay, it was on another line,
+
+908
+01:43:29.880 --> 01:43:35.740
+that's why there was a little pause there.  So, so we appended to the end of the list, or we added
+
+909
+01:43:35.740 --> 01:43:43.600
+to the end of the list, the new, a new, a new object, which is a string, lily. So now we have
+
+910
+01:43:43.600 --> 01:43:49.900
+rose, violet, buttercup. And if we did len on the list now, L-E-N, and we gave it the list. "L-E-N,
+
+911
+01:43:49.900 --> 01:44:01.560
+len, left paren, F-L-O, float, W-E-R-S, right paren. Len flowers, out left bracket, 50 right bracket,
+
+912
+01:44:01.660 --> 01:44:06.600
+colon, four." We have, we get four. We have now four items in the list, instead of three,
+
+913
+01:44:06.980 --> 01:44:12.580
+because we appended something to the end of it. So we, we, if we want to use a method in an object,
+
+914
+01:44:12.580 --> 01:44:19.480
+we use that dot syntax, okay. So we do flowers dot whatever, flowers dot append,
+
+915
+01:44:20.600 --> 01:44:30.460
+we'll add something to the end of the flowers list, okay.  So, and methods often work on the object
+
+916
+01:44:30.460 --> 01:44:37.760
+that they're contained in. So the lists and lists have a number of methods that are quite useful.
+
+917
+01:44:38.310 --> 01:44:44.880
+And so let's, I'm going to teach you one more function, and it, it will tell you what,
+
+918
+01:44:46.220 --> 01:44:51.200
+what attributes and methods are inside a list.  So what are inside an object. So it will look
+
+919
+01:44:51.200 --> 01:44:57.420
+inside an object, and it will tell you, give you a big long list of what is inside it. And I will
+
+920
+01:44:57.420 --> 01:45:04.460
+say this, the output from this function is very long.  So you may get a little overwhelmed. So I
+
+921
+01:45:04.460 --> 01:45:09.980
+would say, use the review functionality to tell what's inside it. Don't listen to the whole output.
+
+922
+01:45:10.560 --> 01:45:13.480
+So the new function, we, this is the third function we learned. We learned type,
+
+923
+01:45:14.060 --> 01:45:23.640
+we learned len. Now let's learn dir, dir, d, for directory, dir, left parenthesis,
+
+924
+01:45:24.040 --> 01:45:30.820
+and let's just use our flowers again, f-l-o-w-e-r-s, flowers.  I press tab to fill it in.
+
+925
+01:45:30.820 --> 01:45:39.060
+So it's d-i-r, left parenthesis, flowers, right parenthesis. Did I type the right parenthesis?
+
+926
+01:45:39.300 --> 01:45:48.980
+No I didn't. "Copy. Count. Extend. Index." So we're hearing some of the, the,
+
+927
+01:45:49.760 --> 01:45:56.340
+the methods inside the list. So the things you can do with the list. Copy. Index. Extend. "Insert.
+
+928
+01:45:57.060 --> 01:46:04.320
+Pop. Remove. Reverse" So I heard some interesting ones there. Pop is an interesting one. We won't
+
+929
+01:46:04.320 --> 01:46:09.120
+go into that one, but it pops something off the end of the list. But let's try reverse.
+
+930
+01:46:09.480 --> 01:46:14.320
+That's an interesting one. So I just heard it. It sounds interesting.  Let's try it. Let's do
+
+931
+01:46:15.180 --> 01:46:22.160
+flowers.reverse, "f-l-o-w," and let's use filling it in, the tab, press tab to fill in, "e-r-s,"
+
+932
+01:46:23.620 --> 01:46:30.200
+flowers, dot, reverse, "r-e-v," and you can actually fill this in too. I typed in r-e-v.
+
+933
+01:46:30.340 --> 01:46:36.340
+Let's see if we can fill it in. Reverse. So it's flowers.reverse, left parenthesis,
+
+934
+01:46:36.620 --> 01:46:40.840
+and then it doesn't take any arguments, okay? There's nothing that goes
+
+935
+01:46:40.840 --> 01:46:44.300
+inside the parenthesis. So it's just going to be left paren, right paren,
+
+936
+01:46:45.240 --> 01:46:50.180
+in left bracket 53, right bracket colon, and there's no output. But if we check our list,
+
+937
+01:46:50.180 --> 01:46:57.220
+"f-l-o-w-e-r-s, flowers, out left bracket 53, right bracket colon, left bracket lily,
+
+938
+01:46:57.580 --> 01:47:04.320
+buttercup, violet, t, rose, right bracket." So it's lily, buttercup, violet, rose. It reversed
+
+939
+01:47:04.320 --> 01:47:10.580
+our list. So that's kind of cool.  So methods are functions that live inside of objects
+
+940
+01:47:11.140 --> 01:47:16.260
+and allow you to do something with that object. Usually they will work upon that object,
+
+941
+01:47:16.260 --> 01:47:27.420
+not always, but often they will work upon that object. Every object has methods and attributes
+
+942
+01:47:27.420 --> 01:47:34.940
+in it, or let's say almost every object.  But in practice, every object has methods and attributes
+
+943
+01:47:34.940 --> 01:47:42.100
+inside it. Methods and attributes are different for different data types. So integers will have
+
+944
+01:47:42.100 --> 01:47:47.480
+different methods and attributes than lists will have different methods and attributes from
+
+945
+01:47:47.480 --> 01:47:54.220
+strings.  And strings, for example, will have methods to allow you to find strings inside of
+
+946
+01:47:54.220 --> 01:47:59.720
+strings, or to uppercase the string, or to do things like that, to do things that are useful
+
+947
+01:47:59.720 --> 01:48:06.980
+for strings. So you can kind of think of methods as useful tools in the toolbox that is that object.
+
+948
+01:48:06.980 --> 01:48:14.540
+They allow you to do things with the object.  So we're kind of coming up to the end of this
+
+949
+01:48:14.540 --> 01:48:20.900
+workshop. We're just going to do two more things. We're going to make a little very small application
+
+950
+01:48:20.900 --> 01:48:27.960
+that will inspire you to come to the next workshop, or check out the next workshop,
+
+951
+01:48:28.260 --> 01:48:33.200
+and to inspire you or motivate you to do more Python, the little motivational quotes.
+
+952
+01:48:33.200 --> 01:48:39.700
+And then I'll show you how to save your IPython session. And then that will be the end of our
+
+953
+01:48:39.700 --> 01:48:45.000
+non-visual Python, the first workshop in this series. So let's create our little application.
+
+954
+01:48:45.260 --> 01:48:49.660
+And to do that, I'm going to teach you maybe the coolest feature of Python, or maybe the most
+
+955
+01:48:49.660 --> 01:48:55.300
+powerful feature of Python. So let's clear our screen to kind of clear our heads. And we're in
+
+956
+01:48:55.300 --> 01:48:59.460
+a new mode here. We're going to be creating our little application. "In left bracket 54,
+
+957
+01:48:59.460 --> 01:49:05.160
+right bracket colon." OK, we're all ready. I hit control L to clear the screen. And now let's type
+
+958
+01:49:05.160 --> 01:49:16.700
+this. Type this, and I'll explain what it is. Type import. "I-M-P-O-R-T. Import. Space. R-A-N-D-O-M.
+
+959
+01:49:17.800 --> 01:49:23.100
+Random. Space." So it was import random. And I did space there just so you'd hear the word random.
+
+960
+01:49:23.100 --> 01:49:31.280
+Import random. And again, there's no output. But something happened behind the scenes.
+
+961
+01:49:31.840 --> 01:49:37.740
+And that is that there's a new object that we have now, random. It's an object called random.
+
+962
+01:49:38.560 --> 01:49:43.500
+And let's just use our type function on it just to see what it is now.
+
+963
+01:49:46.080 --> 01:49:49.920
+I filled it in with tab, but you didn't hear it. So I'm going to try it again.
+
+964
+01:49:53.200 --> 01:50:01.300
+"Left paren. R-A-N-D-O-M. Random. Right paren." So type, left paren, random, right paren. Let's
+
+965
+01:50:01.300 --> 01:50:06.220
+see what data type this is. "Out left bracket 55, right bracket colon, module." It's a module, OK?
+
+966
+01:50:06.600 --> 01:50:11.180
+So what we did when we did import random is we imported what Python calls a module.
+
+967
+01:50:11.660 --> 01:50:17.420
+And a more general word for it that programmers use is a library. And when we do that, basically
+
+968
+01:50:17.420 --> 01:50:22.380
+we pull in a whole bunch of code that somebody else, someone usually pretty on the ball and who
+
+969
+01:50:22.380 --> 01:50:28.680
+knows what they're doing, wrote to allow you to do something specific.  In this case, when we
+
+970
+01:50:28.680 --> 01:50:36.020
+import random, we imported a whole toolbox of tools that is dedicated to working with randomness
+
+971
+01:50:36.020 --> 01:50:41.740
+and to create random numbers and to choose random things and so on, which is a pretty cool library
+
+972
+01:50:41.740 --> 01:50:47.880
+or module that comes with regular vanilla CPython, not even an Anaconda module. But we have it
+
+973
+01:50:47.880 --> 01:50:55.960
+available to us here. And it's just an object like any other.  And you use the dot syntax that we
+
+974
+01:50:55.960 --> 01:51:04.000
+learned the same way we did flowers.append to use that method. We use random dot whatever
+
+975
+01:51:04.920 --> 01:51:10.940
+to access functions inside of this module object. And a module is really just an object to contain
+
+976
+01:51:10.940 --> 01:51:16.260
+a whole bunch of functions and other objects and stuff that we can use in our own code to pull
+
+977
+01:51:16.260 --> 01:51:21.620
+stuff into our own code.  So you can kind of think about it as a toolbox object. So really
+
+978
+01:51:21.620 --> 01:51:28.080
+the module data type, it's kind of the sixth data type that I mentioned early in the lesson.
+
+979
+01:51:28.160 --> 01:51:31.760
+So it's kind of that special data type that I was talking about.  But you can kind of think about it
+
+980
+01:51:31.760 --> 01:51:38.880
+as a grab bag toolbox data type. And we can reach into it. And we don't call them methods.  When we
+
+981
+01:51:38.880 --> 01:51:43.860
+reach into a module and we do things, we do still call them functions and so on, which is
+
+982
+01:51:43.860 --> 01:51:48.660
+confusing. But in this case, if we use a function that's in a module, we do still call it a function.
+
+983
+01:51:49.160 --> 01:51:55.460
+So make of that what you will.  But let's go ahead and write our little application.
+
+984
+01:51:55.960 --> 01:52:02.320
+So what we're going to do is we'll create a blank list, an empty list. And then we're going to use
+
+985
+01:52:02.320 --> 01:52:09.240
+the append method to add three motivational sayings to the list.  And then we're going to use
+
+986
+01:52:09.240 --> 01:52:15.340
+the random module to pull a random motivational saying out. So let's go ahead and do that now.
+
+987
+01:52:15.760 --> 01:52:19.700
+So we already imported our random module.  Let's now create an empty list.
+
+988
+01:52:20.700 --> 01:52:26.140
+So I cleared, which I didn't necessarily need to do. But let's do, let's type,
+
+989
+01:52:28.440 --> 01:52:33.180
+I'm going to make the variable name motivational quotes, which I know is a long variable name.
+
+990
+01:52:33.180 --> 01:52:43.560
+But there's nothing wrong with a long variable name, motivational line. And where you heard line
+
+991
+01:52:43.560 --> 01:52:47.200
+there, that was me doing an underscore. So it's going to be motivational underscore quotes.
+
+992
+01:52:49.180 --> 01:52:53.220
+And if you want to have a space in your variable name, then you want to use an underscore.
+
+993
+01:52:53.380 --> 01:52:56.560
+A space is not going to work. You can't have a space in your variable name.  You can have
+
+994
+01:52:56.560 --> 01:53:05.560
+an underscore. Okay, motivational quotes equals. And then just do left square bracket,
+
+995
+01:53:05.640 --> 01:53:12.280
+right square bracket.  So a list with nothing in it. So it's motivational underscore quotes,
+
+996
+01:53:12.480 --> 01:53:20.320
+space, equals, space, left bracket, right bracket. And press enter.  And now we have
+
+997
+01:53:20.320 --> 01:53:23.860
+a variable called motivational quotes. If we type it in by itself on a line,
+
+998
+01:53:24.500 --> 01:53:30.760
+"M-O-T-I," and I'll let it fill in. "In left bracket 57 right bracket colon motivational line quotes.
+
+999
+01:53:31.180 --> 01:53:36.480
+Out left bracket 57 right bracket colon left bracket right bracket. Left bracket right bracket."
+
+1000
+01:53:36.620 --> 01:53:41.220
+That was the output.  So it's an empty list. That's a left bracket right bracket with nothing in it.
+
+1001
+01:53:41.580 --> 01:53:47.140
+Okay, and so we now have a motivational, an empty list assigned to the motivational underscore
+
+1002
+01:53:47.140 --> 01:53:54.180
+quotes variable.  So now let's add three items to the list using our append method.
+
+1003
+01:53:54.440 --> 01:53:59.680
+So we're going to do motivational underscore quotes dot append. And then we're going to pass
+
+1004
+01:53:59.680 --> 01:54:04.220
+it, you know, we're going to do our parentheses.  We'll pass it a string with our motivational
+
+1005
+01:54:04.220 --> 01:54:11.380
+quote. So let's "M-O-T-I" motivational "in left bracket 58 right bracket colon motivational
+
+1006
+01:54:11.380 --> 01:54:22.940
+line quotes" motivational quotes dot append left parenthesis. And now
+
+1007
+01:54:22.940 --> 01:54:28.440
+let's do a double quote.  Sorry I talked over that. So it's motivational underscore quotes
+
+1008
+01:54:29.110 --> 01:54:39.180
+left parenthesis double quote. And now let's type a quote. So let I'll do Hey I am getting the hang of this Python skill!
+
+1009
+01:54:41.820 --> 01:54:48.980
+getting the hang of
+
+1010
+01:54:56.440 --> 01:55:01.800
+hey I am getting the hang of this python stuff exclamation mark stuff and then do a double quote
+
+1011
+01:55:01.800 --> 01:55:07.860
+and then do a left sorry a right parenthesis. So it should be motivational
+
+1012
+01:55:07.860 --> 01:55:13.660
+underscore quotes dot append left parenthesis double quote type your quote whatever you want
+
+1013
+01:55:13.660 --> 01:55:19.620
+then another double quote then the right parenthesis. Okay so we're appending a string
+
+1014
+01:55:19.620 --> 01:55:26.680
+to the end of our empty list. I got a I got an error I
+
+1015
+01:55:26.680 --> 01:55:32.720
+mistyped something. Let's type it I'm going to just type it again
+
+1016
+01:55:32.720 --> 01:55:34.880
+motivational quotes dot append
+
+1017
+01:55:42.070 --> 01:55:47.810
+just typing it fast.
+
+1018
+01:55:48.790 --> 01:55:54.870
+Okay so uh I and now we can check the list. "M-O-T in left bracket 60 right bracket colon
+
+1019
+01:55:54.870 --> 01:55:59.050
+motivational line quotes." We're just checking what's in the list by putting motivational
+
+1020
+01:55:59.050 --> 01:56:04.610
+quotes the variable name on a line by itself "left bracket 60 right bracket colon out left bracket 60
+
+1021
+01:56:04.610 --> 01:56:11.470
+right bracket colon left bracket hey I am getting the hang of this python stuff right bracket." Okay
+
+1022
+01:56:11.470 --> 01:56:17.830
+so we have one item in let's add two more really quick so let's do
+
+1023
+01:56:17.830 --> 01:56:27.590
+motivational quotes dot append quote and I'll say um uh I eat bugs for breakfast
+
+1024
+01:56:30.900 --> 01:56:35.130
+but not those kinds of bugs
+
+1025
+01:56:38.110 --> 01:56:44.270
+so I did motivational quotes dot append
+
+1026
+01:56:44.870 --> 01:56:49.930
+open parenthesis quote I eat bugs for breakfast but not those kinds of bugs
+
+1027
+01:56:49.930 --> 01:56:55.310
+close quote close parenthesis and let's add one more
+
+1028
+01:56:55.310 --> 01:56:58.950
+motivational quotes dot append
+
+1029
+01:57:04.920 --> 01:57:11.360
+space um and let's say um when does the data science stuff start
+
+1030
+01:57:16.620 --> 01:57:21.180
+I don't know how motivational that is but the answer is next week
+
+1031
+01:57:21.180 --> 01:57:27.920
+"in left bracket 63 right bracket colon" okay so now we have three um strings appended to our list
+
+1032
+01:57:27.920 --> 01:57:33.920
+three strings in the motivational quotes list so we have our you know three phrases or whatever
+
+1033
+01:57:33.920 --> 01:57:41.960
+now let's pick a random phrase from the list okay so let's do we're going to use random
+
+1034
+01:57:42.440 --> 01:57:59.380
+the library random dot choose it's choice sorry random dot choice
+
+1035
+01:57:59.380 --> 01:58:08.000
+so it's random dot choice and then we'll do it sounded like I spelled
+
+1036
+01:58:08.000 --> 01:58:17.120
+something wrong so let's start again random dot choice left parenthesis and then let's give it our
+
+1037
+01:58:17.120 --> 01:58:26.300
+motivational quotes list so it's random dot choice
+
+1038
+01:58:26.300 --> 01:58:32.320
+left parent motivational quotes variable right parenthesis "out left bracket 63 right bracket
+
+1039
+01:58:32.820 --> 01:58:40.000
+I eat bugs for breakfast b-u-t not those kinds of bugs" I eat bugs for breakfast but not those kinds
+
+1040
+01:58:40.000 --> 01:58:45.640
+of bugs so every time we run that line random dot choice left parent motivational quotes right
+
+1041
+01:58:45.640 --> 01:58:50.460
+parent it should pick out a random quote from our list so we've got a little almost like a little
+
+1042
+01:58:50.460 --> 01:58:55.580
+app so every time we you can now run that line over and over but you can press the up button
+
+1043
+01:58:55.580 --> 01:59:01.640
+"colon quotes right parent in left bracket 64 right bracket colon random dot choice left
+
+1044
+01:59:01.640 --> 01:59:05.940
+paren motivational line" so when you press up it fills in the line that we previously ran
+
+1045
+01:59:05.940 --> 01:59:11.840
+and then you press enter "out left bracket 64 right bracket colon out left bracket 64 right bracket
+
+1046
+01:59:11.840 --> 01:59:17.980
+colon when does the data science stuff start when does the data science stuff start" so every time
+
+1047
+01:59:17.980 --> 01:59:22.940
+we run this line it'll pick out a new one probably it'll be the same one
+
+1048
+01:59:22.940 --> 01:59:29.760
+"out left bracket 65 right bracket colon when does the data science stuff" so every time
+
+1049
+01:59:29.760 --> 01:59:36.400
+we run the line it will print out a new random motivational quote from our list so hopefully
+
+1050
+01:59:36.400 --> 01:59:39.940
+you know you can put something a little motivational for yourself in there and it's a
+
+1051
+01:59:39.940 --> 01:59:44.640
+little application they've written for yourself and you might be say to yourself uh Patrick is
+
+1052
+01:59:44.640 --> 01:59:50.600
+this really an application and I would say the answer is you know most applications are
+
+1053
+01:59:51.240 --> 01:59:56.020
+what programmers call crud applications which stands for create read update delete
+
+1054
+01:59:56.020 --> 01:59:59.660
+which basically means they just stick stuff in a database and then they pull it out
+
+1055
+01:59:59.660 --> 02:00:03.740
+and basically what we did here was we created a database with three items in it and now we're
+
+1056
+02:00:03.740 --> 02:00:08.220
+randomly pulling them out and so really what we've done here is we've created a crud application
+
+1057
+02:00:08.220 --> 02:00:14.180
+which is what 95 percent of applications are so yes you have created an application here it's
+
+1058
+02:00:14.180 --> 02:00:20.280
+it's not the most complicated application in the world but it is an application so so you know you
+
+1059
+02:00:20.280 --> 02:00:27.820
+can kind of pat yourself on the back a little bit there all right so this really is the end of the
+
+1060
+02:00:27.820 --> 02:00:36.500
+workshop so I hope that you have you know enjoyed spending a little time in the beginning of you know
+
+1061
+02:00:36.500 --> 02:00:42.120
+stages of python remember you are a programmer now and I just want to say you know we talked
+
+1062
+02:00:42.120 --> 02:00:45.900
+about motivational quotes you've created your motivational quotes I just want to very briefly
+
+1063
+02:00:45.900 --> 02:00:51.960
+give you a few words of motivation myself which is to say you know my background is 10 years ago
+
+1064
+02:00:51.960 --> 02:00:59.660
+I started my journey of learning python and you know I'm visually impaired at that time I had a
+
+1065
+02:00:59.660 --> 02:01:05.680
+little more vision but I you know still you know very limited vision and I had always my entire
+
+1066
+02:01:05.680 --> 02:01:10.780
+life felt like I was like struggling with computers because computers are really they
+
+1067
+02:01:10.780 --> 02:01:15.500
+felt like they were made for other people they weren't made for me they didn't allow me to do
+
+1068
+02:01:15.500 --> 02:01:19.200
+they weren't built for people with a visual impairment and they didn't make things easy
+
+1069
+02:01:19.200 --> 02:01:24.660
+they you know like they didn't make things the you know like with lots of hotkeys or however I or
+
+1070
+02:01:24.660 --> 02:01:29.680
+with uh like large text or with screen reader support or whatever they just weren't built for
+
+1071
+02:01:29.680 --> 02:01:34.240
+people like me that's how it felt for a long time and when I started learning programming I found
+
+1072
+02:01:34.240 --> 02:01:41.400
+that I could make functionality the way I want I needed it or I wanted it and that was very empowering
+
+1073
+02:01:41.400 --> 02:01:50.340
+and and really allowed me to completely change my my relationship with the computer and you know I
+
+1074
+02:01:50.340 --> 02:01:56.700
+was I for example the first one of the first real quote-unquote things I did with python after I
+
+1075
+02:01:56.700 --> 02:02:03.280
+started learning it was that I used a website that had audio books on it audio files and I
+
+1076
+02:02:03.590 --> 02:02:11.420
+and it was very difficult to access very inaccessible website and I found that when I
+
+1077
+02:02:11.980 --> 02:02:20.820
+I could write a piece of a little program in python that would access the website download
+
+1078
+02:02:20.820 --> 02:02:26.140
+all the data go through the data from the website and then pull out what I needed and I could run it
+
+1079
+02:02:26.140 --> 02:02:31.880
+every day and pull out the new information and it was very empowering to have it be able to
+
+1080
+02:02:31.880 --> 02:02:36.480
+parse that data and I didn't need to access the website in the sighted way at all I could just
+
+1081
+02:02:37.000 --> 02:02:46.040
+just access it the way I wanted to access it and so I just want to show you one other thing
+
+1082
+02:02:46.040 --> 02:02:53.180
+which you know and so basically that's the essentially end of our workshop but I will say
+
+1083
+02:02:53.180 --> 02:02:57.380
+you know do think about seriously about becoming a programmer because I think there should be more
+
+1084
+02:02:57.380 --> 02:03:02.760
+programmers in the world we it helps us make applications more accessible it makes us more
+
+1085
+02:03:02.760 --> 02:03:09.340
+visible and it empowers us to to do new cool things okay so I just want to show you one last
+
+1086
+02:03:09.340 --> 02:03:20.040
+thing which is how to save data in the in your it's to save this session that we've done together
+
+1087
+02:03:20.040 --> 02:03:25.480
+okay and we have a crying baby in the background so so this will definitely be the last thing
+
+1088
+02:03:25.480 --> 02:03:38.620
+so we'll do percent save and we have to check what our last line was so you need to
+
+1089
+02:03:38.620 --> 02:03:45.400
+know what the last line was that we entered "in left bracket 66" so it was 66 so we subtract
+
+1090
+02:03:45.400 --> 02:03:50.160
+one from that you wanted to get 65 so you'll need to know that for this so we do percent percent
+
+1091
+02:03:50.160 --> 02:03:58.860
+save save and I'll call this um non-visual underscore session so it's percent safe
+
+1092
+02:03:58.860 --> 02:04:12.780
+then a file name um percent save space non-visual underscore session session and then space and then
+
+1093
+02:04:12.780 --> 02:04:17.920
+you have to enter the number of lines you want to save so we're going to do one one hyphen 65
+
+1094
+02:04:17.920 --> 02:04:23.680
+and I'm going to press enter motivational line quotes and now that should have saved
+
+1095
+02:04:23.680 --> 02:04:30.600
+in your home folder so users forward slash your name your entire session that you've had today
+
+1096
+02:04:30.600 --> 02:04:39.020
+so it's percent save space a file name space and then one to the last line okay so we had 66
+
+1097
+02:04:39.630 --> 02:04:47.140
+we were on 66 there so we had entered 65 lines so I did one to 65 okay um that's the end of our
+
+1098
+02:04:47.140 --> 02:04:54.940
+session um thank you and I'm looking forward to seeing you all in the Python session um next week
+
+1099
+02:04:54.940 --> 02:05:00.140
+or you know whenever if you're watching the recording so have a great um have a great time
+
+1100
+02:05:00.140 --> 02:05:06.640
+playing around with Python and remember I'm Patrick Smyth um at iotaschool, iotaschool.com
+
+1101
+02:05:06.640 --> 02:05:11.060
+you can send an email to me at patrick@iotaschool.com if you have any questions thank you
+
+1102
+02:05:11.060 --> 02:05:11.500
+very much
